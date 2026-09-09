@@ -1,0 +1,218 @@
+{
+  "manifest_id": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_2",
+  "purpose": "Successor recovery/authority pointer to v4.1 that adopts Ω DNA Distribution v1.4.0 after exact-byte self-lineage, host validation, GitHub CI, Google Project Bootstrap runtime qualification, and tamper-negative evidence; no change to core genome, signed trusted head, host assurance head, or field claims.",
+  "authority_order": [
+    "OMEGA_CANONICAL_GOVERNING_BASELINE_FREEZE_SPEC_v1",
+    "OMEGA_INHERITABLE_ASSURANCE_DNA_v1.0.0",
+    "MAIN_SIGNED_TRUSTED_EXECUTABLE_BASELINE_v0.8.0",
+    "HOST_ASSURANCE_HEAD_v0.9H.1_WHEN_PHYSICAL_TARGET_NOT_REQUIRED",
+    "GOOGLE_CONTROL_PLANE_WHEN_GOOGLE_PRODUCT_OR_PROJECT_IS_INVOLVED",
+    "EXTERNAL_GENOME_REGISTRY_GITHUB_HAKIM_OMEGA",
+    "FIELD_RELEASE_CANDIDATE_ONLY_WHEN_FIELD_EVIDENCE_IS_MATERIALLY_REQUIRED",
+    "RELEVANT_SPECIALIST_SOURCES",
+    "CURRENT_TASK_CONTRACT"
+  ],
+  "canonical_spec": {
+    "path": "/HAKIM_CANONICAL/OMEGA_CANONICAL_GOVERNING_BASELINE_FREEZE_SPEC_v1.md",
+    "status": "FREEZE_SPEC",
+    "rule": "RECOVER_FIRST_PROTECT_APPLY_RELEVANT_PROFILE_FAIL_CLOSED"
+  },
+  "trusted_executable_baseline": {
+    "version": "0.8.0",
+    "trusted_head_sequence": "8",
+    "payload_sha256": "35e563c8183df45fbec55eba8aaff3879bee3f2dcc96f17d66715b563930ba26",
+    "status": "PROVEN_BASELINE_WITHIN_DECLARED_POE",
+    "adoption_evidence_path": "/HAKIM_CANONICAL/omega_assurance_v0.8_cryptographic_adoption.json",
+    "release_report_path": "/HAKIM_CANONICAL/omega_assurance_v0.8_release_report.json",
+    "qualification_path": "/HAKIM_CANONICAL/omega_assurance_v0.8_font_diverse_dual_renderer_qualification.json",
+    "external_raster_parity_path": "/HAKIM_CANONICAL/omega_assurance_v0.8_external_raster_parity.json"
+  },
+  "protected_invariants": [
+    "PREVENT_FIRST",
+    "FAIL_CLOSED",
+    "DEFENCE_IN_DEPTH",
+    "EVIDENCE_BASED_RELEASE",
+    "LOSSLESS_CONTRACT",
+    "PROVEN_SUCCESS_FROZEN_BY_DEFAULT",
+    "ACTUAL_OUTPUT_REQUIRED",
+    "UPSTREAM_PASS_NEVER_OVERRIDES_DOWNSTREAM_P0_FAIL",
+    "PROMPT_COMPLIANCE_NOT_EXECUTABLE_ENFORCEMENT",
+    "PALESTINIAN_ARABIC_STUDENT_EYE_P0",
+    "EASTERN_ARABIC_DIGITS_STUDENT_FACING",
+    "SEMANTIC_MATH_SEPARATE_FROM_GLYPHS_AND_BIDI",
+    "DETERMINISTIC_MATH_SLOTS_AND_GEOMETRY",
+    "TESTED_ARTIFACT_EQUALS_DELIVERED_ARTIFACT",
+    "NO_THEORETICAL_EXPANSION_WITHOUT_TRIGGER"
+  ],
+  "automatic_runtime_directive": "For every materially relevant task/output/project: RECOVER manifest v4.2 + canonical spec + Ω DNA; protect main v0.8 signed baseline; use host head v0.9H.1 when physical evidence is not required; recover platform registry v1.4.0; if Google is involved recover Google Control Plane and qualified Project Bootstrap. Before release create/update lineage for every material artifact/project. New lineage starts UNPROVEN and PASS never propagates by ancestry. Execute end-to-end, verify actual output, bind exact tested=delivered identity, attach retained evidence, run applicable fail-closed gate, then release or NO_GO and update provider registry. Never let unavailable phone block host work; never infer enforcement on unintegrated platforms; never promote host evidence into field/physical/aviation/nuclear claims.",
+  "promotion_policy": {
+    "do_not_promote_rc1_until": [
+      "AUTHORIZED_PHYSICAL_TARGET_ONLINE",
+      "DEVICE_FINGERPRINT_COMPLETE",
+      "DEVICE_ARTIFACT_IDENTITY_132_OF_132",
+      "AT_LEAST_TWO_PHYSICAL_PDF_VIEWERS_QUALIFIED",
+      "VISUAL_SCREENSHOT_EVIDENCE_COMPLETE",
+      "OFFLINE_AND_REBOOT_RESILIENCE_EVIDENCE_COMPLETE",
+      "PHYSICAL_PRINTER_QUALIFIED",
+      "HARDWARE_BACKED_KEYSTORE_OR_EQUIVALENT_PROVEN",
+      "FIELD_GATE_PASS"
+    ],
+    "on_failure": "KEEP_TRUSTED_HEAD_AT_0.8.0_AND_ROOT_CAUSE_REPAIR_RETEST",
+    "on_pass": "CREATE_SIGNED_V0.9_RELEASE_THEN_ATOMIC_TRUSTED_HEAD_ADOPTION",
+    "scope_note": "This physical promotion policy applies only to FIELD branch and no longer blocks HOST branch."
+  },
+  "claims_forbidden_without_new_retained_evidence": [
+    "PHYSICAL_ANDROID_QUALIFIED",
+    "PHYSICAL_PRINTER_QUALIFIED",
+    "HARDWARE_BACKED_TRUST",
+    "ORGANIZATIONALLY_INDEPENDENT_IVV",
+    "FIELD_PROVEN",
+    "AVIATION_NUCLEAR_EQUIVALENT",
+    "ZERO_DEFECT"
+  ],
+  "reopen_triggers_only": [
+    "VERIFIED_FAILURE",
+    "GOVERNING_STANDARD_CHANGE",
+    "SECURITY_FINDING",
+    "PLATFORM_OR_TOOL_CHANGE",
+    "USER_SOVEREIGN_REQUIREMENT",
+    "PROVEN_HIGH_VALUE_IMPROVEMENT"
+  ],
+  "rollback_rule": "Never replace a trusted baseline merely because a newer candidate exists. Preserve prior signed evidence and rollback path. Promotion requires explicit gate pass and atomic adoption evidence.",
+  "updated_at": "2026-09-09T10:19:21+03:00",
+  "host_assurance_head": {
+    "version": "0.9H.1",
+    "status": "PASS_WITHIN_DECLARED_HOST_ONLY_POE",
+    "role": "DEFAULT_EXECUTABLE_ASSURANCE_HEAD_FOR_HOST_ONLY_APPLICABLE_TASKS",
+    "main_trusted_head_action": "UNCHANGED",
+    "release_package_path": "/HAKIM_CANONICAL/omega_assurance_v0_9H_1.zip",
+    "release_report_path": "/HAKIM_CANONICAL/omega_assurance_v0.9H.1_release_report.json",
+    "host_matrix_path": "/HAKIM_CANONICAL/omega_assurance_v0.9H.1_host_matrix.json",
+    "host_release_gate_path": "/HAKIM_CANONICAL/omega_assurance_v0.9H.1_host_release_gate_result.json",
+    "negative_tests_path": "/HAKIM_CANONICAL/omega_assurance_v0.9H.1_negative_tests.json",
+    "sha256_zip": "e467d0459341954eaab9daf94529a6c2c0ffcf77b263ec43c9d9996eff6a565a",
+    "proven": [
+      "GO_IVV_132_OF_132",
+      "TESTED_DELIVERED_132_OF_132",
+      "EXTERNAL_CONTRACT_132_OF_132",
+      "STRUCTURAL_PARSE_132_OF_132",
+      "FOUR_RENDER_ENGINE_MATRIX_132_OF_132",
+      "VIRTUAL_PRINT_VISUAL_GEOMETRY_132_OF_132",
+      "HOST_NEGATIVE_TESTS_8_OF_8",
+      "HOST_GATE_SELF_TESTS_8_OF_8",
+      "STATIC_CHECKS_PASS"
+    ],
+    "limitations": [
+      "HOST_OS_COMMON_CAUSE_REMAINS",
+      "NO_PHYSICAL_DEVICE_OR_PRINTER_CLAIM",
+      "NO_HARDWARE_BACKED_TRUST_CLAIM",
+      "NO_ORGANIZATIONAL_IVV_CLAIM",
+      "NO_AVIATION_NUCLEAR_EQUIVALENCE_CLAIM"
+    ]
+  },
+  "field_release_candidate": {
+    "version": "0.9.0-RC1",
+    "status": "HOST_PREQUALIFICATION_PASS_FIELD_BLOCKED",
+    "trusted_head_action": "UNCHANGED_FAIL_CLOSED",
+    "release_report_path": "/HAKIM_CANONICAL/omega_assurance_v0.9_rc1_release_report.json",
+    "go_ivv_path": "/HAKIM_CANONICAL/omega_assurance_v0.9_go_independent_ivv.json",
+    "field_gate_result_path": "/HAKIM_CANONICAL/omega_assurance_v0.9_current_field_gate_result.json",
+    "field_contract_path": "/HAKIM_CANONICAL/omega_field_qualification_contract_v1.json",
+    "role": "OPTIONAL_FIELD_BRANCH; NEVER_BLOCK_HOST_ONLY_EXECUTION"
+  },
+  "no_local_phone_dependency_rule": "LOCAL_PHONE_OR_REMOTE_TARGET_MUST_NOT_BLOCK_OR_DELAY_HOST-EXECUTABLE_WORK. Do not request or wait for a phone unless the user explicitly requires physical-device behavior or the acceptance contract cannot be proven without a physical target.",
+  "branch_promotion_policy": {
+    "host_branch": "May advance independently after host-specific gate/evidence PASS; must not mutate or imply promotion of the main signed head.",
+    "main_signed_branch": "Remains v0.8.0/sequence8 until a correctly scoped signed successor is available under its trust chain.",
+    "field_branch": "Physical/field claims remain fail-closed and optional; lack of field evidence does not invalidate host-qualified claims."
+  },
+  "claims_allowed_at_host_head": [
+    "HOST_RUNTIME_QUALIFIED_WITHIN_DECLARED_POE",
+    "FOUR_ENGINE_RENDER_MATRIX_PASS",
+    "VIRTUAL_PRINT_VISUAL_GEOMETRY_PASS",
+    "TECHNICALLY_INDEPENDENT_GO_IVV_PASS"
+  ],
+  "dna_genome": {
+    "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+    "genome_version": "1.0.0",
+    "genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312",
+    "library_path": "/HAKIM_CANONICAL/OMEGA_DNA_GENOME_v1.json",
+    "package_path": "/HAKIM_CANONICAL/OMEGA_INHERITABLE_DNA_v1_1.zip",
+    "inheritance_rule": "Every materially relevant artifact/project/workflow inherits genome+parent+profiles+evidence+gate. Newly stamped artifacts start UNPROVEN; missing lineage or P0 evidence => NO_RELEASE.",
+    "artifact_sidecar_rule": "Use <artifact>.omega.json or native-provider equivalent immutable lineage metadata.",
+    "tamper_rule": "Artifact/genome hash mismatch => NO_GO.",
+    "distribution_package_version": "1.4.0",
+    "distribution_package_path": "/HAKIM_CANONICAL/OMEGA_INHERITABLE_DNA_v1_4_0.zip",
+    "distribution_package_sha256": "502f9d5675062ffc48e765b5426425802e0e5347d68cd980b666566f0e528df0",
+    "distribution_features": [
+      "portable lineage sidecar",
+      "centralized GitHub release@main action: stamp -> bind real evidence -> fail-closed gate",
+      "platform propagation registry v1.4.0 with explicit enforcement modes",
+      "Google Apps Script core adapter preserved",
+      "Google Project Bootstrap extension: child inherits DNA but starts UNPROVEN",
+      "Google Project Bootstrap runtime qualification in CI",
+      "Google Workspace revision/export identity policy",
+      "Gemini/Gems runtime projection with no self-certification",
+      "Make webhook transport contract",
+      "daily GitHub CI integrity audit"
+    ],
+    "distribution_lineage_sidecar_path": "/HAKIM_CANONICAL/OMEGA_INHERITABLE_DNA_v1_4_0.zip.omega.json",
+    "distribution_evidence_path": "/HAKIM_CANONICAL/OMEGA_INHERITABLE_DNA_v1_4_0.evidence.json",
+    "distribution_adoption_evidence_path": "/HAKIM_CANONICAL/OMEGA_DNA_v1_4_0_ADOPTION_EVIDENCE.json"
+  },
+  "google_control_plane": {
+    "folder_id": "1Y_W6xwAKxbYKhuqZiNZLOPJpw5LfC-17",
+    "folder_title": "HAKIM Ω DNA — Google Control Plane",
+    "governing_doc_id": "1S48_cV5Ej4BL1AIpOuqSbkosegqu3HYxT5Tko0JD9D4",
+    "registry_sheet_id": "1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU",
+    "gemini_projection_doc_id": "1dWNBF9DrX78hJwkvfscX-8LAbg21_b4y0Lim_a-r6VY",
+    "adapter_folder_id": "1WHsqdMFEwu3Ry46HDZ5Oe67_d3ulXmbc",
+    "apps_script_adapter": "github:smileeyes1/HAKIM-Omega/adapters/google/apps-script/OmegaDNA.gs + ProjectBootstrap.gs",
+    "default_rule": "For material Google tasks recover Google control plane + DNA; native files use file/revision identity; exported bytes get child SHA-256 lineage; Gemini/Gems remain generative projections and cannot self-certify.",
+    "governing_doc_revision_id": "ANLCKQnd89w8ZUJdelYQ_4U9GnY3ghX_IumbLrMv_By-X0DV0up9Ksn1fMwBBXzXuYwESt6K1MIFRyqL_bL29mwGg7PehSs25a8C8E009YI",
+    "distribution_head": "OMEGA_INHERITABLE_DNA v1.4.0 / SHA256 502f9d5675062ffc48e765b5426425802e0e5347d68cd980b666566f0e528df0",
+    "project_bootstrap_template_id": "1u2K5jNi4JXSEPLNAkIBwRHjW3XqpwYAwIGxFU9nw21A",
+    "project_bootstrap_qualification_copy_id": "190FAdtYmomIB-6wGk8mkeft91PUg3GHc1OZFtU5sAfA",
+    "project_bootstrap_rule": "Copy qualified template; set project ID + parent + profiles; inherited child remains UNPROVEN until native revision/export identity plus real evidence plus fail-closed gate PASS."
+  },
+  "external_genome_registry": {
+    "provider": "GitHub",
+    "repository": "smileeyes1/HAKIM-Omega",
+    "default_branch": "main",
+    "ci_workflow": "Omega DNA Fail-Closed Gate",
+    "portable_inherit_action": "smileeyes1/HAKIM-Omega/inherit@main",
+    "portable_release_gate": "smileeyes1/HAKIM-Omega/gate@main",
+    "ci_last_verified": "PASS on commit bd117de06813349d9cc1be072b60d68de18f83e0; workflow run 34322889264/job 102373349050 completed success with DNA validation, Google adapter, Google Project Bootstrap runtime qualification, platform registry v1.4.0, centralized release end-to-end, and post-release tamper rejection.",
+    "daily_audit": "GitHub Actions schedule cron 17 3 * * * on default branch.",
+    "central_release_action": "smileeyes1/HAKIM-Omega/release@main",
+    "platform_registry": "platforms/platform-registry.json",
+    "runtime_release_test_evidence_path": "/HAKIM_CANONICAL/OMEGA_DNA_GITHUB_V1_4_RUNTIME_EVIDENCE_2026-09-09.json",
+    "runtime_release_test_evidence_sha256": "7eeb8ddb0facdedb6a558833ad851b3d2b9e112c7b135e0ff2972e28b6786a4c",
+    "runtime_release_test_status": "PASS_HOST_ONLY_CI_RUNTIME_V1_4"
+  },
+  "make_distribution": {
+    "scenario_id": 7316226,
+    "name": "Ω DNA Inheritance Gateway v1",
+    "status": "CONFIGURED_INACTIVE_BLOCKED_BY_ACTIVE_SCENARIO_PLAN_LIMIT",
+    "rule": "Do not disable unrelated active scenarios silently. Make transport is optional; receiving data never equals PASS."
+  },
+  "inheritance_scope_rule": "Default scope is all materially relevant products, files, projects, automations, and exported child artifacts created or materially modified through connected/integrated paths. Lineage is mandatory before Ω-qualified release, starts UNPROVEN, and becomes PASS only from retained actual evidence. For unintegrated external platforms mark PROPAGATION_NOT_ENFORCED; legacy items remain LEGACY_UNPROVEN until individually requalified.",
+  "platform_propagation": {
+    "registry_path": "/HAKIM_CANONICAL/OMEGA_DNA_PLATFORM_REGISTRY_v1_4.json",
+    "registry_id": "OMEGA_PLATFORM_PROPAGATION_REGISTRY",
+    "registry_version": "1.4.0",
+    "default_rule": "ENFORCED only where a real adapter/gate is wired. Google Apps Script ProjectBootstrap is HOST_PREQUALIFIED adapter-ready, not field-qualified. ADAPTER_READY or PROJECTION_ONLY is not executable enforcement. Unintegrated outputs are PROPAGATION_NOT_ENFORCED and cannot claim inherited PASS.",
+    "new_material_artifact_rule": "Before release, create lineage with parent+genome+profiles+identity and state UNPROVEN; after actual validators PASS, bind evidence and tested=delivered; then gate; then release/NO_GO.",
+    "legacy_rule": "Existing artifacts/projects that predate DNA are LEGACY_UNPROVEN until individually adopted and revalidated; never backfill PASS by metadata alone."
+  },
+  "default_artifact_inheritance": {
+    "chatgpt_generated_files": "Create/retain <artifact>.omega.json when materially relevant and tool path permits; store artifact+sidecar+evidence in Library when persistent value exists.",
+    "github_products": "Prefer smileeyes1/HAKIM-Omega/release@main with caller-generated real evidence; no evidence means NO_GO.",
+    "google_native": "Register file identity and bind release to revision ID or deterministic export SHA-256; every exported binary is a child artifact with its own lineage.",
+    "gemini_gems": "Projection-only. Require external artifact validator/gate for material release.",
+    "make": "Transport-only until active gateway/validator is actually wired; RECEIVED != PASS.",
+    "other_integrated_platform": "Use portable sidecar or immutable equivalent envelope and fail-closed gate.",
+    "unintegrated_platform": "PROPAGATION_NOT_ENFORCED; do not claim automatic inheritance.",
+    "google_projects": "Use qualified Google Project Bootstrap when connector path permits; child inherits Genome/Parent/Profile but gate remains UNPROVEN until project-specific evidence proves release."
+  }
+}
