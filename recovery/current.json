@@ -1,0 +1,17 @@
+{
+  "pointer_id": "OMEGA_AUTORECOVER_CURRENT",
+  "status": "PASS",
+  "effective_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+  "effective_head_path": "/HAKIM_CANONICAL/OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3.json",
+  "effective_head_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+  "external_loop_evidence_path": "/HAKIM_CANONICAL/OMEGA_AUTORECOVER_v4_3_EXTERNAL_LOOP_CLOSURE_EVIDENCE.json",
+  "fallback_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_2",
+  "fallback_sha256": "ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a",
+  "production_reference": {
+    "head": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM v1.0.0",
+    "scope_id": "PAL_G1_ADDITION_WITHIN_10_RESULT_UNKNOWN_EQUATION_CARD_PDF_HOST_ONLY",
+    "use_rule": "EXACT_SCOPE_MATCH_ONLY_CHILD_STARTS_UNPROVEN"
+  },
+  "default_recovery": "READ_CURRENT_POINTER -> VERIFY_EFFECTIVE_HEAD_SHA256 -> READ_EXTERNAL_LOOP_EVIDENCE -> RECOVER_EFFECTIVE_HEAD -> PROTECT_CANONICAL_AND_HEADS -> EXECUTE_APPLICABLE_PIPELINE -> PRODUCT_INSTANCE_GATE",
+  "fail_closed": "If current pointer, head hash, external-loop evidence, or required platform state fails verification, use fallback v4.2 or NO_GO; never silently promote or generalize scope."
+}
