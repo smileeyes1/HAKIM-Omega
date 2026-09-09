@@ -1,0 +1,21 @@
+{
+  "pointer_id": "OMEGA_SUSTAINABILITY_CURRENT",
+  "status": "PASS_PROVIDER_VERIFIED",
+  "sustainability_manifest": "OMEGA_SUSTAINABILITY_MANIFEST_v1",
+  "autorecover_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+  "autorecover_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+  "fallback_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_2",
+  "fallback_sha256": "ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a",
+  "production_head": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM v1.0.0",
+  "production_sha256": "0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf",
+  "provider_closure": {
+    "commit": "f96a8c696a982ecb8bbb767ead3281e105eb1d8f",
+    "run_id": 34347186555,
+    "job_id": 102451469153,
+    "conclusion": "success"
+  },
+  "daily_ci_schedule": "17 3 * * * UTC",
+  "operational_evidence_policy": "MONOTONIC_APPEND_ONLY",
+  "pass_inheritance": "FORBIDDEN",
+  "failure_policy": "FAIL_CLOSED_PRESERVE_LAST_KNOWN_GOOD_AND_USE_EXACT_VERIFIED_FALLBACK_WHERE_APPLICABLE"
+}
