@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const p=JSON.parse(fs.readFileSync(new URL('../platforms/platform-registry.json', import.meta.url),'utf8'));
-if(p.registry_version!=='1.3.0') throw new Error('REGISTRY_VERSION');
+if(!['1.3.0','1.4.0'].includes(p.registry_version)) throw new Error('REGISTRY_VERSION');
 const ids=new Set();
 for(const x of p.platforms){
   if(!x.id||!x.mode) throw new Error('MALFORMED_PLATFORM');
