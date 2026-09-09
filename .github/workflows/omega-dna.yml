@@ -23,3 +23,29 @@ jobs:
         run: node runtime/validate-platform-registry.mjs
       - name: Syntax-check centralized release binder
         run: node --check release/merge-evidence.mjs
+      - name: Build release-action positive fixture and evidence
+        shell: bash
+        run: |
+          mkdir -p .omega-fixture
+          printf 'omega-fixture-v1\n' > .omega-fixture/product.bin
+          HASH=$(sha256sum .omega-fixture/product.bin | awk '{print $1}')
+          cat > .omega-fixture/evidence.json <<EOF
+          {"result":"PASS","tested_artifact_sha256":"$HASH","evidence_ids":["FIXTURE_VALIDATOR_PASS"],"scope":"HOST_ONLY","claims":[],"limitations":["TEST_FIXTURE_ONLY"]}
+          EOF
+      - name: Execute centralized Omega release action end-to-end
+        uses: ./release
+        with:
+          artifact: .omega-fixture/product.bin
+          artifact-id: CI_RELEASE_FIXTURE_V1
+          parent-id: OMEGA_DNA_CI_CONTRACT
+          profiles: host_assurance
+          evidence-file: .omega-fixture/evidence.json
+      - name: Verify tamper is killed after release
+        shell: bash
+        run: |
+          printf 'tamper\n' >> .omega-fixture/product.bin
+          if node gate/verify.mjs .omega-fixture/product.bin .omega-fixture/product.bin.omega.json; then
+            echo 'ERROR: tampered artifact escaped fail-closed gate'
+            exit 1
+          fi
+          echo 'OMEGA_TAMPER_NEGATIVE_TEST_PASS'
