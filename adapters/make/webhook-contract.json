@@ -1,0 +1,11 @@
+{
+  "contract_id": "OMEGA_DNA_MAKE_WEBHOOK_V1",
+  "status": "ADAPTER_READY",
+  "required_fields": ["event_id","project_id","artifact_id","parent_id","platform","genome_id","genome_version","genome_sha256","gate_result"],
+  "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+  "genome_version": "1.0.0",
+  "genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312",
+  "default_acceptance": "RECEIVED_NOT_QUALIFIED",
+  "pass_requires_external_evidence": true,
+  "field_claims_from_host_evidence": "FORBIDDEN"
+}
