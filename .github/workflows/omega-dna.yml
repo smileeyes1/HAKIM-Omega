@@ -31,6 +31,10 @@ jobs:
         run: node runtime/test-production-router.mjs
       - name: Verify monotonic bounded production operational current
         run: node runtime/validate-operational-current.mjs
+      - name: Verify Omega sustainability and mirrored recovery heads
+        run: node runtime/validate-sustainability.mjs
+      - name: Execute Omega disaster-recovery drill
+        run: node runtime/test-disaster-recovery.mjs
       - name: Syntax-check centralized release binder
         run: node --check release/merge-evidence.mjs
       - name: Build release-action positive fixture and evidence
