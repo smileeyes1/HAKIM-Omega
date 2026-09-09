@@ -23,6 +23,8 @@ jobs:
         run: node runtime/test-google-project-bootstrap.mjs
       - name: Verify platform propagation registry
         run: node runtime/validate-platform-registry.mjs
+      - name: Verify bounded production reference systems
+        run: node runtime/validate-reference-systems.mjs
       - name: Syntax-check centralized release binder
         run: node --check release/merge-evidence.mjs
       - name: Build release-action positive fixture and evidence
