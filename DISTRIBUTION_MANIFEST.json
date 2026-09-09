@@ -1,6 +1,6 @@
 {
   "distribution_id": "OMEGA_INHERITABLE_DNA_DISTRIBUTION",
-  "distribution_version": "1.3.0",
+  "distribution_version": "1.4.0",
   "core_genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
   "core_genome_version": "1.0.0",
   "core_genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312",
@@ -9,11 +9,14 @@
     "github_inherit_and_release_gate",
     "reusable_consumer_workflow",
     "google_apps_script_adapter",
+    "google_project_bootstrap_extension",
+    "google_project_bootstrap_runtime_qualification",
     "gemini_gems_projection",
     "google_workspace_revision_or_export_identity",
     "make_webhook_contract",
     "platform_enforcement_registry"
   ],
   "default_new_artifact_state": "UNPROVEN",
-  "release_mode": "FAIL_CLOSED"
+  "release_mode": "FAIL_CLOSED",
+  "scope_limit": "HOST_AND_CONNECTED_WORKFLOW_ASSURANCE_ONLY_NO_FIELD_OR_PHYSICAL_EQUIVALENCE_CLAIM"
 }
