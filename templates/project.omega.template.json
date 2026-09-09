@@ -1,0 +1,11 @@
+{
+  "project_id": "REQUIRED",
+  "parent_authority": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+  "genome_version": "1.0.0",
+  "genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312",
+  "platform": "REQUIRED",
+  "applied_profiles": [],
+  "release_policy": "FAIL_CLOSED",
+  "material_outputs_require_lineage": true,
+  "unintegrated_output_state": "UNPROVEN"
+}
