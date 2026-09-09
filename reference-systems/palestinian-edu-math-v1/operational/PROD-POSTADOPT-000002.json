@@ -1,0 +1,64 @@
+{
+  "evidence_id": "OMEGA_PRODUCTION_POST_ADOPTION_SMOKE_V2",
+  "result": "PASS",
+  "effective_autorecover_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+  "effective_autorecover_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+  "router": {
+    "id": "OMEGA_PRODUCTION_ROUTER_v1",
+    "source_sha256": "18f75ca1e78303011c2af8c065b61bb275831fb9095cfc02d144d706d38fcc8b",
+    "github_blob_sha1": "522ce6dc18aacaaf623aa444d8c8d799d17dd817",
+    "qualification_ci": {
+      "commit": "dd778273d0d8472add721e85a978e0bc14adb0db",
+      "run_id": 34332592887,
+      "job_id": 102404442474,
+      "result": "PASS",
+      "router_step": "PASS"
+    },
+    "local_and_ci_qualification": "13/13 PASS",
+    "route_output_sha256": "552dfc1973704405799868c8230acc34fc81eb9c2d5a57e6f46815ba39785a4a",
+    "route_result": {
+      "router_id": "OMEGA_PRODUCTION_ROUTER_v1",
+      "result": "MATCH",
+      "child_state": "UNPROVEN",
+      "release_authority": "NONE_ROUTING_ONLY",
+      "reason_codes": ["EXACT_BOUNDED_SCOPE_MATCH"],
+      "selected_pipeline": {
+        "id": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM",
+        "version": "1.0.0",
+        "scope_id": "PAL_G1_ADDITION_WITHIN_10_RESULT_UNKNOWN_EQUATION_CARD_PDF_HOST_ONLY",
+        "package_sha256": "0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf"
+      },
+      "next_required_gate": "PRODUCT_INSTANCE_FAIL_CLOSED_RELEASE_GATE",
+      "production_pass_inheritance": "FORBIDDEN"
+    }
+  },
+  "product_instance": {
+    "run_id": "PROD-POSTADOPT-000002",
+    "semantic_student_view": "٣ + ٦ = □",
+    "artifact_sha256": "dc510ee0d040aac96f294b5c31b72f8244cd9f52e461e110cfa44da153607b4b",
+    "release_decision": "RELEASE",
+    "negative_tests": "4/4 detected",
+    "delivery_identity_pass": true,
+    "student_eye_render_200dpi": "PASS: ٣ + ٦ = □ visible; equality between second operand and answer box; no clipping/overlap/reversal"
+  },
+  "operational_metrics_after_run": {
+    "metrics_version": "1",
+    "runs_total": 8,
+    "released": 7,
+    "no_go": 1,
+    "negative_fault_tests_attempted_total": 31,
+    "invalid_negative_test_fixtures": 1,
+    "valid_negative_fault_tests_total": 30,
+    "valid_negative_fault_tests_detected": 30,
+    "valid_negative_fault_test_escapes": 0,
+    "known_p0_escape_at_release_observed": 0,
+    "field_escape_rate": "UNKNOWN_NOT_MEASURED",
+    "aviation_nuclear_equivalent_failure_probability": "NOT_ESTABLISHED"
+  },
+  "claims_boundary": [
+    "HOST_ONLY_BOUNDED_SCOPE_EVIDENCE",
+    "NO_FIELD_OR_PHYSICAL_CLAIMS",
+    "NO_AVIATION_NUCLEAR_EQUIVALENCE_CLAIM",
+    "PASS_NOT_INHERITED"
+  ]
+}
