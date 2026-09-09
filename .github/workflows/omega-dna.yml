@@ -19,6 +19,8 @@ jobs:
         run: node runtime/validate-dna.mjs
       - name: Verify Google / Apps Script / Gemini adapter inheritance
         run: node runtime/validate-google-adapter.mjs
+      - name: Execute Google Project Bootstrap runtime qualification
+        run: node runtime/test-google-project-bootstrap.mjs
       - name: Verify platform propagation registry
         run: node runtime/validate-platform-registry.mjs
       - name: Syntax-check centralized release binder
