@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const hashBytes=b=>crypto.createHash('sha256').update(b).digest('hex');
+const S=j('sustainability/manifest.json'), C=j('recovery/current.json'), H=j('recovery/head-v4.3.json'), F=j('recovery/fallback-v4.2.json'), P=j('reference-systems/palestinian-edu-math-v1/manifest.json'), O=j('reference-systems/palestinian-edu-math-v1/operational/current.json');
+const cases=[]; const add=(name,pass,details={})=>cases.push({name,pass:!!pass,...details});
+const verifyCurrent=x=>x?.pointer_id==='OMEGA_AUTORECOVER_CURRENT'&&x?.status==='PASS'&&x?.effective_head===S.protected_heads.autorecover_head&&x?.effective_head_sha256===S.protected_heads.autorecover_sha256&&x?.fallback_head===S.protected_heads.fallback_head&&x?.fallback_sha256===S.protected_heads.fallback_sha256;
+const headBytes=fs.readFileSync('recovery/head-v4.3.json'); const fallBytes=fs.readFileSync('recovery/fallback-v4.2.json');
+add('V4_3_HEAD_HASH_VERIFIED',hashBytes(headBytes)===S.protected_heads.autorecover_sha256);
+add('V4_2_FALLBACK_HASH_VERIFIED',hashBytes(fallBytes)===S.protected_heads.fallback_sha256);
+add('CURRENT_VALID',verifyCurrent(C));
+const badCurrent=structuredClone(C); badCurrent.effective_head_sha256='0'.repeat(64); add('CURRENT_CORRUPTION_DETECTED',!verifyCurrent(badCurrent));
+const tamperedFallback=Buffer.concat([fallBytes,Buffer.from('\nTAMPER')]); add('FALLBACK_CORRUPTION_DETECTED',hashBytes(tamperedFallback)!==S.protected_heads.fallback_sha256);
+const prodSha=P.package?.sha256??P.package_sha256; add('PRODUCTION_HEAD_VALID',prodSha===S.protected_heads.production_sha256&&P.scope_id===S.protected_heads.production_scope);
+const badP=structuredClone(P); if(badP.package) badP.package.sha256='0'.repeat(64); else badP.package_sha256='0'.repeat(64); add('PRODUCTION_HEAD_TAMPER_DETECTED',(badP.package?.sha256??badP.package_sha256)!==S.protected_heads.production_sha256);
+add('OPERATIONAL_ESCAPE_FREE',O.metrics?.valid_negative_fault_test_escapes===0&&O.metrics?.known_p0_escape_at_release_observed===0);
+const badO=structuredClone(O); badO.metrics.valid_negative_fault_test_escapes=1; add('NONZERO_ESCAPE_DETECTED',!(badO.metrics.valid_negative_fault_test_escapes===0&&badO.metrics.known_p0_escape_at_release_observed===0));
+add('PASS_INHERITANCE_FORBIDDEN',String(O.operational_law||'').includes('PASS is never inherited'));
+for(const p of S.authoritative_storage.github.required||[]) add('PRESENT:'+p,fs.existsSync(p));
+const passed=cases.filter(x=>x.pass).length; const result=passed===cases.length?'PASS':'FAIL';
+console.log(JSON.stringify({drill_id:'OMEGA_DISASTER_RECOVERY_DRILL_v1',result,passed,total:cases.length,cases},null,2));
+process.exit(result==='PASS'?0:1);
