@@ -1,0 +1,54 @@
+{
+  "evidence_id": "OMEGA_SUSTAINABILITY_PROVIDER_CLOSURE_EVIDENCE_v1",
+  "result": "PASS_PROVIDER_VERIFIED",
+  "protected_heads_unchanged": {
+    "autorecover": "v4.3 / b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+    "fallback": "v4.2 / ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a",
+    "main_signed": "v0.8.0/sequence8",
+    "host_assurance": "v0.9H.1",
+    "production": "v1.0.0 / 0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf"
+  },
+  "provider_verification": {
+    "provider": "GitHub Actions",
+    "repository": "smileeyes1/HAKIM-Omega",
+    "commit": "f96a8c696a982ecb8bbb767ead3281e105eb1d8f",
+    "run_id": 34347186555,
+    "job_id": 102451469153,
+    "workflow": "Omega DNA Fail-Closed Gate",
+    "conclusion": "success",
+    "required_steps_passed": [
+      "Verify Omega DNA and all lineage sidecars",
+      "Verify Google / Apps Script / Gemini adapter inheritance",
+      "Execute Google Project Bootstrap runtime qualification",
+      "Verify platform propagation registry",
+      "Verify bounded production reference systems",
+      "Verify stable autorecover current pointer and fallback",
+      "Execute bounded production router qualification",
+      "Verify monotonic bounded production operational current",
+      "Verify Omega sustainability and mirrored recovery heads",
+      "Execute Omega disaster-recovery drill",
+      "Execute centralized Omega release action end-to-end",
+      "Verify tamper is killed after release"
+    ]
+  },
+  "host_snapshot_evidence": {
+    "sustainability_gate": "PASS",
+    "disaster_recovery_drill": "21/21 PASS",
+    "operational_runs": 8,
+    "valid_fault_escapes": 0,
+    "known_p0_escape_at_release": 0
+  },
+  "continuous_operation": {
+    "daily_ci_schedule": "17 3 * * * UTC",
+    "policy": "Every push, PR, manual dispatch, and daily schedule re-runs sustainability, recovery, operational-current, lineage, production, release, and tamper gates.",
+    "on_failure": "FAIL_CLOSED; do not promote; preserve last-known-good; use exact verified fallback where applicable."
+  },
+  "remaining_limits": [
+    "NO_PROVIDER_AVAILABILITY_CAN_BE_GUARANTEED_FOREVER",
+    "MAIN_SIGNING_KEY_CONTINUITY_NOT_HARDWARE_BACKED_OR_PORTABLE_PROVEN",
+    "MAKE_GATEWAY_INACTIVE_DUE_PLAN_LIMIT",
+    "UNINTEGRATED_PLATFORMS_NOT_ENFORCED",
+    "FIELD_AND_PHYSICAL_CLAIMS_NOT_PROVEN",
+    "NO_AVIATION_NUCLEAR_EQUIVALENCE_CLAIM"
+  ]
+}
