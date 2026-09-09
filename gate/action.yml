@@ -1,0 +1,14 @@
+name: Omega DNA Release Gate
+description: Fail-closed release gate for an Ω artifact and its lineage sidecar.
+inputs:
+  artifact:
+    description: Path to delivered artifact
+    required: true
+  sidecar:
+    description: Path to artifact .omega.json sidecar
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: node "$GITHUB_ACTION_PATH/verify.mjs" "${{ inputs.artifact }}" "${{ inputs.sidecar }}"
