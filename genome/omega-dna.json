@@ -1,0 +1,57 @@
+{
+  "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+  "genome_version": "1.0.0",
+  "status": "ACTIVE_HOST_DEFAULT",
+  "authority": {
+    "canonical_spec": "OMEGA_CANONICAL_GOVERNING_BASELINE_FREEZE_SPEC_v1",
+    "main_signed_head": "0.8.0/sequence8",
+    "host_assurance_head": "0.9H.1",
+    "field_branch": "optional_not_default"
+  },
+  "inheritance": {
+    "mode": "fail_closed",
+    "default_scope": "all_materially_relevant_outputs",
+    "require_sidecar": true,
+    "require_parent_link": true,
+    "require_artifact_sha256": true,
+    "require_applied_profiles": true,
+    "require_gate_result": true,
+    "unknown_or_unproven": "NO_RELEASE",
+    "field_claims_from_host_evidence": "FORBIDDEN"
+  },
+  "protected_invariants": [
+    "PREVENT_FIRST",
+    "FAIL_CLOSED",
+    "DEFENCE_IN_DEPTH",
+    "EVIDENCE_BASED_RELEASE",
+    "LOSSLESS_CONTRACT",
+    "PROVEN_SUCCESS_FROZEN_BY_DEFAULT",
+    "ACTUAL_OUTPUT_REQUIRED",
+    "UPSTREAM_PASS_NEVER_OVERRIDES_DOWNSTREAM_P0_FAIL",
+    "PROMPT_COMPLIANCE_NOT_EXECUTABLE_ENFORCEMENT",
+    "TESTED_ARTIFACT_EQUALS_DELIVERED_ARTIFACT",
+    "NO_THEORETICAL_EXPANSION_WITHOUT_TRIGGER"
+  ],
+  "profiles": {
+    "palestinian_arabic_student": {
+      "activate_when_applicable": true,
+      "invariants": [
+        "ARABIC_NATIVE_RTL",
+        "EASTERN_ARABIC_DIGITS_STUDENT_FACING",
+        "SEMANTIC_MATH_SEPARATE_FROM_GLYPHS_AND_BIDI",
+        "DETERMINISTIC_MATH_SLOTS_AND_GEOMETRY",
+        "STUDENT_EYE_ALL_P0_PAGES"
+      ]
+    }
+  },
+  "runtime_directive": "RECOVER_CANONICAL_AND_DNA -> LOCK_CONTRACT -> INHERIT_APPLICABLE_PROFILE -> EXECUTE_E2E -> VERIFY_ACTUAL_OUTPUT -> ATTACH_LINEAGE_SIDECAR -> FAIL_CLOSED_ON_P0 -> RELEASE_WITH_EVIDENCE",
+  "claims_forbidden_without_specific_evidence": [
+    "PHYSICAL_ANDROID_QUALIFIED",
+    "PHYSICAL_PRINTER_QUALIFIED",
+    "HARDWARE_BACKED_TRUST",
+    "ORGANIZATIONALLY_INDEPENDENT_IVV",
+    "FIELD_PROVEN",
+    "AVIATION_NUCLEAR_EQUIVALENT",
+    "ZERO_DEFECT"
+  ]
+}
