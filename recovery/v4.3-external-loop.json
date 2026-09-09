@@ -1,0 +1,56 @@
+{
+  "evidence_id": "OMEGA_AUTORECOVER_V4_3_EXTERNAL_LOOP_CLOSURE",
+  "result": "PASS",
+  "scope": "HOST_AND_CONNECTED_CONTROL_PLANE_WITH_BOUNDED_PRODUCTION_REFERENCE",
+  "autorecover_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+  "autorecover_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+  "autorecover_library_path": "/HAKIM_CANONICAL/OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3.json",
+  "previous_proven_fallback": {
+    "head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_2",
+    "sha256": "ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a"
+  },
+  "core_genome": {
+    "id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+    "version": "1.0.0",
+    "sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312"
+  },
+  "distribution_head": {
+    "id": "OMEGA_INHERITABLE_DNA",
+    "version": "1.4.0",
+    "sha256": "502f9d5675062ffc48e765b5426425802e0e5347d68cd980b666566f0e528df0"
+  },
+  "production_reference_head": {
+    "id": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM",
+    "version": "1.0.0",
+    "sha256": "0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf",
+    "scope_id": "PAL_G1_ADDITION_WITHIN_10_RESULT_UNKNOWN_EQUATION_CARD_PDF_HOST_ONLY",
+    "automatic_use": "EXACT_SCOPE_MATCH_ONLY",
+    "pass_inheritance": "FORBIDDEN"
+  },
+  "protected_heads": {
+    "main_signed": "v0.8.0/sequence8",
+    "host_assurance": "v0.9H.1"
+  },
+  "github": {
+    "repository": "smileeyes1/HAKIM-Omega",
+    "commit": "d2cf16c96c2a54f7fcfe9422f6a0ec5d61e4f328",
+    "run_id": 34328650636,
+    "job_id": 102391761060,
+    "conclusion": "success"
+  },
+  "google": {
+    "governing_doc_id": "1S48_cV5Ej4BL1AIpOuqSbkosegqu3HYxT5Tko0JD9D4",
+    "governing_doc_revision": "ANLCKQl3w6gPRQryIM-xUZysMbPlEwtRW7_2VicW9OxlLIsBYPQhpv2do3dSFaeZIQoM5cPr4pD-Wj5YVsoP4N4nB6H5TRy3PazTla01OZ8",
+    "registry_sheet_id": "1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU",
+    "genome_config_autorecover_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+    "genome_config_autorecover_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+    "external_loop_status": "PASS"
+  },
+  "limitations": [
+    "NO_FIELD_OR_PHYSICAL_CLAIMS",
+    "NO_AVIATION_NUCLEAR_EQUIVALENCE_CLAIM",
+    "PRODUCTION_REFERENCE_BOUNDED_SCOPE_ONLY",
+    "UNINTEGRATED_PLATFORMS_REMAIN_NOT_ENFORCED",
+    "PASS_IS_NOT_INHERITED_BY_CHILD_ARTIFACTS"
+  ]
+}
