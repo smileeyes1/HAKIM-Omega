@@ -1,0 +1,67 @@
+{
+  "evidence_id": "OMEGA_AUTORECOVER_V4_3_STABILITY_CLOSURE",
+  "result": "PASS",
+  "evidence_mode": "APPEND_ONLY_NON_SELF_REFERENTIAL",
+  "effective_head": {
+    "id": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+    "sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+    "library_path": "/HAKIM_CANONICAL/OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3.json"
+  },
+  "stable_current_pointer": {
+    "id": "OMEGA_AUTORECOVER_CURRENT",
+    "library_path": "/HAKIM_CANONICAL/OMEGA_AUTORECOVER_CURRENT.json",
+    "effective_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+    "fallback_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_2",
+    "fallback_sha256": "ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a",
+    "fail_closed": true
+  },
+  "protected_heads": {
+    "main_signed": "v0.8.0/sequence8",
+    "host_assurance": "v0.9H.1",
+    "core_genome_version": "1.0.0",
+    "core_genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312",
+    "distribution_head": "OMEGA_INHERITABLE_DNA v1.4.0",
+    "distribution_sha256": "502f9d5675062ffc48e765b5426425802e0e5347d68cd980b666566f0e528df0"
+  },
+  "bounded_production_reference": {
+    "id": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM",
+    "version": "1.0.0",
+    "sha256": "0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf",
+    "scope_id": "PAL_G1_ADDITION_WITHIN_10_RESULT_UNKNOWN_EQUATION_CARD_PDF_HOST_ONLY",
+    "automatic_use": "EXACT_SCOPE_MATCH_ONLY",
+    "child_default_state": "UNPROVEN",
+    "pass_inheritance": "FORBIDDEN"
+  },
+  "github_final_gate": {
+    "repository": "smileeyes1/HAKIM-Omega",
+    "commit": "58f780ad6d23c838fcd1a4e9f1ca79c1499c3cae",
+    "run_id": 34329317204,
+    "job_id": 102393912891,
+    "conclusion": "success",
+    "required_steps": {
+      "dna_lineage": "PASS",
+      "google_adapter": "PASS",
+      "google_project_bootstrap_runtime": "PASS",
+      "platform_registry": "PASS",
+      "bounded_production_reference": "PASS",
+      "stable_autorecover_current_and_fallback": "PASS",
+      "central_release_e2e": "PASS",
+      "post_release_tamper_rejection": "PASS"
+    }
+  },
+  "google_control_plane": {
+    "registry_sheet_id": "1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU",
+    "autorecover_head": "OMEGA_AUTORECOVER_AUTHORITY_MANIFEST_v4_3",
+    "autorecover_sha256": "b16530dfcab17b2e678079287463528740770845eb6f0161df43de2e242c84fd",
+    "github_ci_head": "58f780ad6d23c838fcd1a4e9f1ca79c1499c3cae",
+    "external_loop_closure": "PASS"
+  },
+  "recovery_law": "READ OMEGA_AUTORECOVER_CURRENT -> verify v4.3 SHA -> verify external-loop/stability evidence -> recover v4.3 -> exact bounded production scope may route to Production Head v1.0.0; every new child starts UNPROVEN. On verification failure fallback to v4.2 or NO_GO.",
+  "limitations": [
+    "NO_FIELD_OR_PHYSICAL_CLAIMS",
+    "NO_AVIATION_NUCLEAR_EQUIVALENCE_CLAIM",
+    "PRODUCTION_REFERENCE_BOUNDED_SCOPE_ONLY",
+    "UNINTEGRATED_PLATFORMS_REMAIN_NOT_ENFORCED",
+    "PASS_IS_NOT_INHERITED_BY_CHILD_ARTIFACTS"
+  ]
+}
