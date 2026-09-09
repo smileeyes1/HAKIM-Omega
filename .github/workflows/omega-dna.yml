@@ -27,6 +27,8 @@ jobs:
         run: node runtime/validate-reference-systems.mjs
       - name: Verify stable autorecover current pointer and fallback
         run: node runtime/validate-recovery-current.mjs
+      - name: Execute bounded production router qualification
+        run: node runtime/test-production-router.mjs
       - name: Syntax-check centralized release binder
         run: node --check release/merge-evidence.mjs
       - name: Build release-action positive fixture and evidence
