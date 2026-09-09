@@ -21,3 +21,6 @@ UNKNOWN / UNTESTED / UNPROVEN / missing P0 evidence => NO RELEASE. Host evidence
 
 ## Portable integration contract
 Any external platform can participate by preserving the sidecar fields and refusing PASS unless its own applicable validators/evidence succeed. This repository cannot magically enforce platforms with no integration; enforcement is real only where a validator/gate is wired into that platform's release path.
+
+## Distribution layer v1.1
+Reusable GitHub actions are provided under `inherit/` and `gate/`. See `DISTRIBUTION.md`.
