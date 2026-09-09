@@ -3,6 +3,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
 permissions:
   contents: read
 jobs:
@@ -15,3 +17,5 @@ jobs:
           node-version: '22'
       - name: Verify Omega DNA and all lineage sidecars
         run: node runtime/validate-dna.mjs
+      - name: Verify Google / Apps Script / Gemini adapter inheritance
+        run: node runtime/validate-google-adapter.mjs
