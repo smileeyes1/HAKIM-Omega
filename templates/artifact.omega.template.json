@@ -1,0 +1,26 @@
+{
+  "omega_lineage_version": "1",
+  "artifact_id": "REPLACE_WITH_STABLE_ARTIFACT_ID",
+  "artifact_sha256": "REPLACE_WITH_64_HEX_SHA256",
+  "artifact_type": "REPLACE_WITH_TYPE",
+  "dna": {
+    "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+    "genome_version": "1.0.0",
+    "genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312"
+  },
+  "parent": {
+    "kind": "contract_or_artifact",
+    "id": "REPLACE_WITH_PARENT_ID",
+    "sha256": "REPLACE_WITH_PARENT_SHA256_IF_APPLICABLE"
+  },
+  "applied_profiles": [],
+  "applicable_p0": [],
+  "evidence_refs": [],
+  "gate": {
+    "result": "UNPROVEN",
+    "scope": "HOST_ONLY_OR_FIELD_AS_PROVEN",
+    "tested_equals_delivered": false
+  },
+  "claims": [],
+  "limitations": []
+}
