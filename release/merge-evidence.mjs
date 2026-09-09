@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+const [artifactPath,sidecarPath,evidencePath]=process.argv.slice(2);
+if(!artifactPath||!sidecarPath||!evidencePath) throw new Error('usage: merge-evidence <artifact> <sidecar> <evidence>');
+const s=JSON.parse(fs.readFileSync(sidecarPath,'utf8'));
+const e=JSON.parse(fs.readFileSync(evidencePath,'utf8'));
+if(e.result!=='PASS') throw new Error('EVIDENCE_NOT_PASS');
+if(!Array.isArray(e.evidence_ids)||e.evidence_ids.length===0) throw new Error('MISSING_EVIDENCE_IDS');
+if(e.tested_artifact_sha256!==s.artifact_sha256) throw new Error('TESTED_DELIVERED_MISMATCH');
+const forbidden=new Set(['PHYSICAL_ANDROID_QUALIFIED','PHYSICAL_PRINTER_QUALIFIED','HARDWARE_BACKED_TRUST','ORGANIZATIONALLY_INDEPENDENT_IVV','FIELD_PROVEN','AVIATION_NUCLEAR_EQUIVALENT','ZERO_DEFECT']);
+for(const c of (e.claims||[])) if(forbidden.has(c)&&e.scope!=='FIELD_AS_PROVEN') throw new Error('UNSUPPORTED_HIGH_CLAIM:'+c);
+s.evidence_refs=e.evidence_ids;
+s.gate.result='PASS';
+s.gate.scope=e.scope||'HOST_ONLY';
+s.gate.tested_equals_delivered=true;
+s.claims=e.claims||[];
+s.limitations=e.limitations||[];
+fs.writeFileSync(sidecarPath,JSON.stringify(s,null,2)+'\n');
