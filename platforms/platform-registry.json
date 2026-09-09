@@ -3,7 +3,7 @@
   "registry_version": "1.4.0",
   "default_policy": "FAIL_CLOSED_UNLESS_ENFORCEMENT_OR_EXPLICIT_UNPROVEN_STATE",
   "platforms": [
-    {"id":"chatgpt_library","mode":"ENFORCED_WHEN_ARTIFACT_PIPELINE_USED","adapter":"autorecover_v4_2_and_sidecar","physical_claims":false},
+    {"id":"chatgpt_library","mode":"ENFORCED_WHEN_ARTIFACT_PIPELINE_USED","adapter":"autorecover_v4_3_plus_bounded_production_reference_and_sidecar","physical_claims":false},
     {"id":"github","mode":"ENFORCED","adapter":"inherit_action_plus_release_gate_plus_ci","physical_claims":false},
     {"id":"google_drive","mode":"ENFORCED_FOR_CONNECTED_WORKFLOWS","adapter":"lineage_registry_plus_export_hash_or_revision_identity","physical_claims":false},
     {"id":"google_docs","mode":"ENFORCED_FOR_CONNECTED_WORKFLOWS","adapter":"revision_identity_plus_export_validation","physical_claims":false},
