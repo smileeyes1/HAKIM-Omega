@@ -1,0 +1,32 @@
+name: Omega DNA Reusable Release
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+      artifact_id:
+        required: true
+        type: string
+      parent_id:
+        required: true
+        type: string
+      profiles:
+        required: false
+        type: string
+        default: ''
+      evidence_file:
+        required: true
+        type: string
+jobs:
+  omega-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: smileeyes1/HAKIM-Omega/release@main
+        with:
+          artifact: ${{ inputs.artifact }}
+          artifact-id: ${{ inputs.artifact_id }}
+          parent-id: ${{ inputs.parent_id }}
+          profiles: ${{ inputs.profiles }}
+          evidence-file: ${{ inputs.evidence_file }}
