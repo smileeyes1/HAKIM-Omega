@@ -1,0 +1,60 @@
+{
+  "reference_system_id": "OMEGA_PAL_EDU_PRODUCTION_REFERENCE_SYSTEM",
+  "version": "1.0.0",
+  "status": "PASS_WITHIN_BOUNDED_HOST_PRODUCTION_SCOPE",
+  "scope_id": "PAL_G1_ADDITION_WITHIN_10_RESULT_UNKNOWN_EQUATION_CARD_PDF_HOST_ONLY",
+  "package_sha256": "0e248c5f39df4b406390ebb8186c1aeaec9f07f755941d34b2dacc57a1b0feaf",
+  "core_genome": {
+    "id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
+    "version": "1.0.0",
+    "sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312"
+  },
+  "distribution": {
+    "version": "1.4.0",
+    "sha256": "502f9d5675062ffc48e765b5426425802e0e5347d68cd980b666566f0e528df0"
+  },
+  "autorecover_parent": {
+    "version": "4.2",
+    "sha256": "ea165b6844e6c32f05a4627b4094f52655a50f88dc0d1f06627047913f3a506a"
+  },
+  "protected_heads": {
+    "main_signed": "v0.8.0/sequence8",
+    "host_assurance": "v0.9H.1"
+  },
+  "metrics_snapshot": {
+    "runs_total": 6,
+    "released": 5,
+    "no_go": 1,
+    "valid_negative_fault_tests_total": 22,
+    "valid_negative_fault_tests_detected": 22,
+    "valid_negative_fault_test_escapes": 0,
+    "known_p0_escape_at_release_observed": 0,
+    "student_eye_pages_passed": 5,
+    "student_eye_pages_total": 5
+  },
+  "reproducible_build": "PASS_2_OF_2_IDENTICAL",
+  "default_child_state": "UNPROVEN",
+  "pass_inheritance": "FORBIDDEN",
+  "automatic_use_rule": "Use automatically only when the task contract matches the declared scope_id. Each child artifact starts UNPROVEN and must pass its own product-instance release gate. Outside scope, this PASS MUST NOT be generalized.",
+  "delivery_namespace_policy": {
+    "candidate": "staging",
+    "pass": "release",
+    "no_go": "quarantine",
+    "staging_empty_after_run_required": true
+  },
+  "forbidden_claims_without_new_evidence": [
+    "FIELD_PROVEN",
+    "PHYSICAL_ANDROID_QUALIFIED",
+    "PHYSICAL_PRINTER_QUALIFIED",
+    "HARDWARE_BACKED_TRUST",
+    "ORGANIZATIONALLY_INDEPENDENT_IVV",
+    "AVIATION_NUCLEAR_EQUIVALENT",
+    "ZERO_DEFECT"
+  ],
+  "limitations": [
+    "BOUNDED_DOMAIN_ONLY",
+    "HOST_OS_COMMON_CAUSE_REMAINS",
+    "FIELD_ESCAPE_RATE_UNKNOWN_NOT_MEASURED",
+    "CROSS_OS_REPRODUCIBLE_BUILD_NOT_YET_PROVEN"
+  ]
+}
