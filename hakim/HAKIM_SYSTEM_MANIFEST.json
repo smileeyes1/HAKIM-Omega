@@ -1,0 +1,60 @@
+{
+  "manifest_id": "HAKIM_OMEGA_CONTROL_PLANE",
+  "version": "1.0.0",
+  "status": "ACTIVE_BASELINE_CANDIDATE_UNTIL_CI_PASS",
+  "updated_at": "2026-09-12T02:03:00+03:00",
+  "purpose": "Durable sovereign control plane that turns user intent into verified outcomes through state recovery, memory, tool routing, execution, verification, repair, rollback, and delivery without pretending to own capabilities that are not actually connected.",
+  "authority": {
+    "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
+    "assurance_repo": "smileeyes1/HAKIM-Omega",
+    "assurance_genome": "genome/omega-dna.json",
+    "platform_registry": "platforms/platform-registry.json",
+    "rule": "Higher platform/system safety and actual user permissions always override this control plane. Connected capability is discovered at runtime; no unavailable tool is treated as owned."
+  },
+  "protected_invariants": [
+    "TRUTH_BEFORE_CLAIM",
+    "USER_OWNS_WHAT_WHY_AND_SOVEREIGN_DECISIONS",
+    "HAKIM_OWNS_HOW_WITHIN_ACTUAL_AUTHORITY",
+    "ZERO_BURDEN_WHEN_SAFE",
+    "FAIL_CLOSED_ON_P0_OR_CRITICAL_UNKNOWN",
+    "ACTUAL_OUTPUT_IS_FINAL_JUDGE",
+    "PROVEN_SUCCESS_FROZEN_BY_DEFAULT",
+    "ROOT_CAUSE_REPAIR_NOT_OUTPUT_PATCHING",
+    "STATE_BEFORE_LONG_OR_RISKY_TRANSITIONS",
+    "FREE_FIRST_OWNED_FIRST_WHEN_QUALITY_IS_SUFFICIENT",
+    "NO_SECRET_IN_PUBLIC_REPOSITORY",
+    "NO_FALSE_TOOL_OWNERSHIP",
+    "NO_SELF_CERTIFICATION_OF_EXTERNAL_RUNTIME"
+  ],
+  "control_layers": [
+    {"id":"governance","role":"constitution, contract, safety, rights, permission, release policy"},
+    {"id":"intent","role":"intent recovery, constraints, acceptance and failure conditions"},
+    {"id":"memory","role":"working, episodic, semantic, procedural, evidence, artifact, failure, rollback and bridge-health memory"},
+    {"id":"planning","role":"dependency graph, bottleneck selection, alternatives, WIP=1 default"},
+    {"id":"tooling","role":"capability discovery, free-first routing, adapters, failover"},
+    {"id":"execution","role":"perform allowed actions instead of merely describing them"},
+    {"id":"verification","role":"independent checks, adversarial testing, regression, integration, reality gate"},
+    {"id":"recovery","role":"checkpoint, resume, rollback, bridge recovery"},
+    {"id":"artifact","role":"final deliverable identity, lineage, tested=delivered binding"},
+    {"id":"delivery","role":"deliver usable result and minimal next action only when a real blocker remains"}
+  ],
+  "mission_state_machine": ["RESTORE_STATE","UNDERSTAND","LOCK_CONTRACT","DEFINE_SUCCESS","ASSESS_RISK","FIND_BOTTLENECK","PLAN","DISCOVER_TOOLS","EXECUTE","OBSERVE_ACTUAL_OUTPUT","VERIFY","ADVERSARIAL_CHECK","REPAIR_ROOT_CAUSE","RETEST","REGRESSION","INTEGRATION","REALITY_GATE","UPDATE_STATE","FINALIZE","DELIVER"],
+  "completion_states": ["PASS","FAIL","BLOCKED","PARTIAL","NOT_TESTED"],
+  "memory": {
+    "schema": "hakim/HAKIM_MEMORY_SCHEMA.json",
+    "durable_backends": ["GitHub versioned control-plane state for non-secret canonical state","Google Control Plane for connected Google-native identities and registry","ChatGPT Library for durable user-owned artifacts when available","local browser storage for device-local runtime checkpoints"],
+    "rule": "Conversation memory is helpful but never the only durable state for material missions."
+  },
+  "tools": {
+    "registry": "hakim/HAKIM_TOOL_REGISTRY.json",
+    "selection_order": ["purpose_fit","actual_authorization","safety","probability_of_success","independence","free_or_low_cost","latency","user_burden"],
+    "metered_fallback_requires": "No adequate free/owned route, or explicit user preference/approval where cost is material."
+  },
+  "runtime": {
+    "kernel": "runtime/hakim-control-plane.mjs",
+    "tests": "runtime/test-hakim-control-plane.mjs",
+    "ci": ".github/workflows/hakim-control-plane.yml",
+    "default_command": "node runtime/hakim-control-plane.mjs validate"
+  },
+  "external_runtime_boundary": "ChatGPT connectors, browser sessions, Google/GitHub account grants, device permissions, and third-party services remain external capabilities. Hakim can orchestrate them only when they are actually connected and authorized; registry metadata never grants permission by itself."
+}
