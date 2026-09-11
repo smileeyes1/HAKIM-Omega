@@ -1,14 +1,14 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "updated_at": "2026-09-12T02:03:00+03:00",
-  "status": "ACTIVE_BUILDING_CONTROL_PLANE",
+  "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
     "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, state, recovery, verification, and delivery while preserving actual permission boundaries.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
-    "current_bottleneck": "Durable unified control-plane registry and executable self-test",
-    "next_highest_safe_action": "Validate and promote this control-plane candidate through CI; then mirror its identity into Google Control Plane."
+    "current_bottleneck": "General local-browser bridge field qualification and per-tool runtime authority discovery",
+    "next_highest_safe_action": "Mirror verified control-plane identity into Google Lineage Registry; then qualify the generic local browser bridge without weakening security."
   },
   "baseline": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
@@ -20,21 +20,33 @@
     "Existing HAKIM-Omega inheritable assurance repository and fail-closed lineage architecture",
     "Connected Google Control Plane with governing document and registry sheet",
     "Local Firefox/Violentmonkey approach can execute a userscript inside Gemini",
-    "Gemini educational Gem setup reached a state where name/instructions and both knowledge files were evidenced in the UI before live chat verification remained"
+    "Gemini educational Gem setup reached a state where name/instructions and both knowledge files were evidenced in the UI before live chat verification remained",
+    "Hakim control-plane local validator PASS: 17 registered tool families and 10 memory layers",
+    "Hakim control-plane regression suite PASS: 24 assertions",
+    "GitHub Actions HAKIM Control Plane Gate run 34657104599 completed SUCCESS on head d13e578b51593b327041cc4c6cd040109a8cfdc7",
+    "GitHub Actions Omega DNA Fail-Closed Gate run 34657104528 completed SUCCESS on the same head"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
     "Gemini mobile UI selectors changed and caused false field selection before fail-closed repair",
     "Cloud browser automation may require metered credits",
-    "Remote desktop device may be offline and must not block host-executable work"
+    "Remote desktop device may be offline and must not block host-executable work",
+    "Generic local-browser Hakim bridge is not yet field-qualified across multiple websites and must remain PARTIAL until actual runtime evidence exists"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available"},
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; CI gates passed"},
     {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"Google Drive connector read/write available"},
-    {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"userscript UI visible in Gemini; full general Hakim bridge not yet field-qualified"},
+    {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"userscript UI visible and operational in Gemini; generic cross-site bridge not yet field-qualified"},
     {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"no dependency"},
-    {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default"}
+    {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
   ],
-  "release_state": "UNPROVEN_UNTIL_CI_PASS_AND_GOOGLE_IDENTITY_MIRROR",
-  "rollback": "Existing main branch before control-plane commit remains rollback point."
+  "evidence": {
+    "local_validation": {"status":"PASS","tool_count":17,"memory_layers":10},
+    "local_regression": {"status":"PASS","assertions":24},
+    "github_control_plane_ci": {"status":"PASS","run_id":34657104599,"head_sha":"d13e578b51593b327041cc4c6cd040109a8cfdc7"},
+    "github_omega_dna_ci": {"status":"PASS","run_id":34657104528,"head_sha":"d13e578b51593b327041cc4c6cd040109a8cfdc7"}
+  },
+  "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE",
+  "claims_limit": "This PASS covers control-plane schema, routing, state, memory architecture and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the generic local browser bridge.",
+  "rollback": "Existing main branch before the Hakim control-plane series remains a valid rollback path; proven Omega baselines remain unchanged."
 }
