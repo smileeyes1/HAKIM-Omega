@@ -1,6 +1,6 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "updated_at": "2026-09-12T02:03:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
@@ -8,7 +8,7 @@
     "contract_status": "LOCKED",
     "wip_limit": 1,
     "current_bottleneck": "General local-browser bridge field qualification and per-tool runtime authority discovery",
-    "next_highest_safe_action": "Mirror verified control-plane identity into Google Lineage Registry; then qualify the generic local browser bridge without weakening security."
+    "next_highest_safe_action": "Qualify the generic free local-browser bridge across representative sites while keeping per-tool runtime permission discovery fail-closed."
   },
   "baseline": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
@@ -23,8 +23,9 @@
     "Gemini educational Gem setup reached a state where name/instructions and both knowledge files were evidenced in the UI before live chat verification remained",
     "Hakim control-plane local validator PASS: 17 registered tool families and 10 memory layers",
     "Hakim control-plane regression suite PASS: 24 assertions",
-    "GitHub Actions HAKIM Control Plane Gate run 34657104599 completed SUCCESS on head d13e578b51593b327041cc4c6cd040109a8cfdc7",
-    "GitHub Actions Omega DNA Fail-Closed Gate run 34657104528 completed SUCCESS on the same head"
+    "GitHub Actions HAKIM Control Plane Gate run 34657215495 completed SUCCESS on verified state head fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1",
+    "GitHub Actions Omega DNA Fail-Closed Gate run 34657215489 completed SUCCESS on the same verified state head",
+    "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 with PASS_CONTROL_PLANE_HOST_SCOPE and explicit permission/runtime limits"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
@@ -35,7 +36,7 @@
   ],
   "bridge_health": [
     {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; CI gates passed"},
-    {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"Google Drive connector read/write available"},
+    {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"Lineage Registry mirror written and read back successfully"},
     {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"userscript UI visible and operational in Gemini; generic cross-site bridge not yet field-qualified"},
     {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"no dependency"},
     {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
@@ -43,10 +44,11 @@
   "evidence": {
     "local_validation": {"status":"PASS","tool_count":17,"memory_layers":10},
     "local_regression": {"status":"PASS","assertions":24},
-    "github_control_plane_ci": {"status":"PASS","run_id":34657104599,"head_sha":"d13e578b51593b327041cc4c6cd040109a8cfdc7"},
-    "github_omega_dna_ci": {"status":"PASS","run_id":34657104528,"head_sha":"d13e578b51593b327041cc4c6cd040109a8cfdc7"}
+    "github_control_plane_ci": {"status":"PASS","run_id":34657215495,"head_sha":"fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1"},
+    "github_omega_dna_ci": {"status":"PASS","run_id":34657215489,"head_sha":"fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1"},
+    "google_lineage_mirror": {"status":"PASS","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","artifact_id":"HAKIM_OMEGA_CONTROL_PLANE_v1","gate":"PASS_CONTROL_PLANE_HOST_SCOPE"}
   },
   "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE",
-  "claims_limit": "This PASS covers control-plane schema, routing, state, memory architecture and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the generic local browser bridge.",
+  "claims_limit": "This PASS covers control-plane schema, routing, state, memory architecture, Google lineage mirror and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the generic local browser bridge.",
   "rollback": "Existing main branch before the Hakim control-plane series remains a valid rollback path; proven Omega baselines remain unchanged."
 }
