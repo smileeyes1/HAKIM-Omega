@@ -1,0 +1,32 @@
+name: HAKIM Control Plane Gate
+
+on:
+  push:
+    paths:
+      - 'hakim/**'
+      - 'runtime/hakim-control-plane.mjs'
+      - 'runtime/test-hakim-control-plane.mjs'
+      - '.github/workflows/hakim-control-plane.yml'
+  pull_request:
+    paths:
+      - 'hakim/**'
+      - 'runtime/hakim-control-plane.mjs'
+      - 'runtime/test-hakim-control-plane.mjs'
+      - '.github/workflows/hakim-control-plane.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate control plane
+        run: node runtime/hakim-control-plane.mjs validate
+      - name: Run fail-closed regression tests
+        run: node runtime/test-hakim-control-plane.mjs
