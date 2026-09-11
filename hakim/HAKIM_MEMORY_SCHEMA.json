@@ -1,0 +1,34 @@
+{
+  "schema_id": "HAKIM_MEMORY_SCHEMA",
+  "version": "1.0.0",
+  "principles": [
+    "Memory exists to improve continuity, correctness, recovery, and user burden—not to collect data for its own sake.",
+    "Do not store secrets, passwords, security codes, raw auth tokens, or session cookies in durable public state.",
+    "Every durable fact has provenance, timestamp, confidence/status, scope, and supersession rules.",
+    "User corrections supersede inferred memory.",
+    "A remembered success is reusable only inside its proven scope."
+  ],
+  "layers": [
+    {"id":"working","purpose":"current mission scratch state","durability":"ephemeral_checkpointed","required_fields":["mission_id","contract","phase","next_action"]},
+    {"id":"episodic","purpose":"what happened, actions, failures, recoveries","durability":"durable_for_material_missions","required_fields":["event","timestamp","evidence_ref"]},
+    {"id":"semantic","purpose":"stable facts, preferences, constraints, domain knowledge","durability":"durable_with_provenance","required_fields":["claim","source","status","scope"]},
+    {"id":"procedural","purpose":"proven workflows, generators, validators, routing rules","durability":"versioned","required_fields":["procedure_id","version","proven_scope","tests"]},
+    {"id":"evidence","purpose":"sources, hashes, revision IDs, screenshots, test outputs","durability":"immutable_or_versioned","required_fields":["evidence_type","identity","supports","timestamp"]},
+    {"id":"artifact","purpose":"delivered artifact identities and lineage","durability":"versioned","required_fields":["artifact_id","version","hash_or_revision","tested_identity","delivered_identity"]},
+    {"id":"failures","purpose":"known failures and causal fixes","durability":"versioned","required_fields":["failure_signature","root_cause","fix","regression_test"]},
+    {"id":"rollback","purpose":"last verified baseline and recovery point","durability":"protected","required_fields":["baseline_id","identity","restore_steps"]},
+    {"id":"bridge_health","purpose":"tool/connector reachability and last actual proof","durability":"time_bounded","required_fields":["bridge_id","state","checked_at","evidence"]},
+    {"id":"user_contract","purpose":"user preferences, hard constraints, sovereign decisions","durability":"durable_when_appropriate","required_fields":["rule","source","scope","priority"]}
+  ],
+  "record_schema": {
+    "id":"string","layer":"enum","value":"object_or_string","status":"PASS|FAIL|PARTIAL|NOT_TESTED|BLOCKED|INFERRED","source":"string","evidence_ref":"string_or_null","scope":"string","created_at":"iso8601","updated_at":"iso8601","expires_at":"iso8601_or_null","supersedes":"id_or_null","sensitivity":"PUBLIC|PRIVATE|SECRET","notes":"string_or_null"
+  },
+  "persistence": {
+    "public_nonsecret_canonical":"GitHub",
+    "google_native_identity":"Google Control Plane",
+    "artifact_library":"ChatGPT Library when available",
+    "device_runtime_checkpoint":"local browser storage",
+    "secret_material":"never in this schema; use platform-managed secure credential storage only"
+  },
+  "recovery_sequence": ["LOAD_CANONICAL","LOAD_ACTIVE_STATE","LOAD_USER_CONTRACT","LOAD_LAST_VERIFIED_BASELINE","LOAD_KNOWN_FAILURES","CHECK_BRIDGE_HEALTH_FRESHNESS","RESUME_FROM_LAST_PROVEN_POINT"]
+}
