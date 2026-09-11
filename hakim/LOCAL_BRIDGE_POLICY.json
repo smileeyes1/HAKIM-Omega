@@ -1,0 +1,50 @@
+{
+  "policy_id": "HAKIM_LOCAL_BROWSER_BRIDGE_POLICY",
+  "version": "1.0.0",
+  "transport": {
+    "mission_url": "https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/main/hakim/REMOTE_MISSION.json",
+    "relay_issue_url": "https://github.com/smileeyes1/HAKIM-Omega/issues/1",
+    "poll_seconds": 20,
+    "public_channel_rule": "Only non-secret, non-private missions and sanitized status metadata may cross the public repository channel."
+  },
+  "allowed_hosts": [
+    "gemini.google.com",
+    "github.com",
+    "docs.google.com",
+    "drive.google.com",
+    "mail.google.com",
+    "calendar.google.com",
+    "www.notion.so",
+    "notion.so",
+    "app.todoist.com",
+    "www.canva.com",
+    "www.figma.com",
+    "replit.com",
+    "vercel.com",
+    "www.dropbox.com"
+  ],
+  "remote_allowed_classifications": ["PUBLIC", "INTERNAL_NON_SENSITIVE"],
+  "forbidden_field_tokens": [
+    "password", "passcode", "otp", "one-time", "verification code", "security code", "cvv", "cvc", "card number", "bank account", "routing number", "كلمة المرور", "رمز التحقق", "رمز الأمان", "بطاقة", "حساب بنكي"
+  ],
+  "high_impact_tokens": [
+    "delete", "remove account", "purchase", "buy", "checkout", "pay", "transfer", "publish", "send email", "send message", "حذف", "شراء", "دفع", "تحويل", "نشر", "إرسال بريد", "إرسال رسالة"
+  ],
+  "limits": {
+    "max_actions": 50,
+    "max_wait_ms": 120000,
+    "max_delay_ms": 10000,
+    "https_only": true,
+    "credentials_in_mission": false,
+    "private_page_content_in_public_report": false
+  },
+  "report_fields": ["mission_id", "status", "action_index", "action_type", "host", "path", "error_code", "timestamp"],
+  "safety": {
+    "high_impact_requires_local_confirmation": true,
+    "secret_fields_never_autofilled": true,
+    "unknown_host_is_blocked": true,
+    "expired_mission_is_blocked": true,
+    "unknown_action_is_blocked": true,
+    "no_success_claim_without_action_completion": true
+  }
+}
