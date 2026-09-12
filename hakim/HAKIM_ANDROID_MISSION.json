@@ -2,6 +2,8 @@
   "schema_version": "1.0.0",
   "enabled": true,
   "mission_id": "HAKIM_ANDROID_SMOKE_2026_09_12_A",
+  "created_at": "2026-09-12T04:20:00Z",
+  "expires_at": "2026-09-19T04:20:00Z",
   "cost_class": "FREE",
   "data_classification": "PUBLIC",
   "goal": "Prove that the new local Hakim Android app can receive a free public mission and open ChatGPT on the actual phone without handling credentials or private content.",
