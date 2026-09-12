@@ -6,7 +6,7 @@ const policy=JSON.parse(fs.readFileSync('hakim/LOCAL_BRIDGE_POLICY.json','utf8')
 const mission=JSON.parse(fs.readFileSync('hakim/REMOTE_MISSION.json','utf8'));
 
 assert.match(script,/==UserScript==/);
-assert.match(script,/@version\s+0\.1\.2/);
+assert.match(script,/@version\s+0\.1\.3/);
 assert.match(script,/@connect\s+raw\.githubusercontent\.com/);
 assert.match(script,/GM_xmlhttpRequest/);
 assert.match(script,/SECRET_FIELD_BLOCKED/);
