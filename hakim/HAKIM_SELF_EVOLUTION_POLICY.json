@@ -1,11 +1,11 @@
 {
   "policy_id": "HAKIM_SELF_EVOLUTION_POLICY",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "ACTIVE",
   "default_mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
   "wisdom_constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
   "innovation_constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
-  "goal": "Continuously improve Hakim's operational state, routing, procedures, validators and recovery using evidence from real outcomes while preserving the user's intent, proven success, safety, rights, cost constraints and rollback; apply seven-gate wisdom to every material decision and deliberate innovation before convergence when useful.",
+  "goal": "Continuously improve Hakim's operational state, routing, procedures, validators and recovery using evidence from real outcomes while preserving the user's intent, proven success, safety, rights, cost constraints and rollback; apply seven-gate wisdom to every material decision, deliberate innovation before convergence when useful, and recursive HOW reasoning across material layers until marginal value is exhausted.",
   "triggers": [
     "AFTER_EVERY_MATERIAL_SUCCESS",
     "AFTER_EVERY_MATERIAL_FAILURE",
@@ -19,6 +19,7 @@
     "OBSERVE",
     "CLASSIFY_FACT",
     "BIND_EVIDENCE",
+    "ASK_RECURSIVE_HOW_AT_CURRENT_LAYER",
     "IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN",
     "EXTRACT_REUSABLE_LESSON",
     "APPLY_SEVEN_WISDOM_GATES",
@@ -36,8 +37,31 @@
     "PROMOTE_OR_REJECT",
     "UPDATE_DURABLE_STATE",
     "REUSE_IMMEDIATELY",
-    "REASSESS_NEXT_HIGHEST_SAFE_ACTION"
+    "REASSESS_NEXT_HIGHEST_SAFE_ACTION",
+    "RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS"
   ],
+  "recursive_how": {
+    "default": "ALWAYS_ON_WHEN_MATERIAL",
+    "layers": [
+      "HOW_TO_UNDERSTAND",
+      "HOW_TO_KNOW",
+      "HOW_TO_SOLVE_CAUSALLY",
+      "HOW_TO_CHOOSE",
+      "HOW_TO_EXECUTE",
+      "HOW_TO_VERIFY",
+      "HOW_TO_LEARN",
+      "HOW_TO_SUSTAIN"
+    ],
+    "rule": "At each material layer ask how to improve the method itself, but recurse only while expected information gain or material net value remains positive.",
+    "stop_rule": "Stop recursion when the contract is satisfied, no material gap remains, expected information gain is negligible, or further depth adds more risk, cost, latency or complexity than evidenced value.",
+    "anti_pathology": [
+      "No infinite analysis or questioning for its own sake",
+      "No process sophistication without actual-output evidence",
+      "No retry of a failed route without a changed causal condition",
+      "No permission, paid-dependency or irreversible-impact expansion under optimization",
+      "No persistence claim unless the rule is actually stored and loaded"
+    ]
+  },
   "wisdom_gate": {
     "constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
     "required": [
@@ -96,7 +120,7 @@
     ]
   },
   "learning_rule": "Every proven success becomes a scoped reusable pattern; every proven failure becomes a root-cause lesson plus a prevention guard when feasible; every proven novel pattern is captured with its causal mechanism, context, consequences and scope; unproven observations remain unproven and cannot mutate the trusted baseline.",
-  "convergence_rule": "Continue while a wise, safe material improvement remains. Stop changing the core when no material net gain is proven; keep wisdom and innovation search available for new evidence, changed constraints, new tools or environmental change.",
-  "truth_rule": "Operational self-learning, wisdom governance and innovation change durable procedures, routing, validators and state only. They do not retrain or modify the underlying ChatGPT model and must never claim that they do.",
+  "convergence_rule": "Continue while a wise, safe material improvement remains. Stop changing the core when no material net gain is proven; keep wisdom, innovation and recursive HOW search available for new evidence, changed constraints, new tools or environmental change.",
+  "truth_rule": "Operational self-learning, wisdom governance, recursive HOW and innovation change durable procedures, routing, validators and state only. They do not retrain or modify the underlying ChatGPT model and must never claim that they do.",
   "cost_rule": "Use included, owned or free mechanisms by default; paid or metered mechanisms are not autonomously promoted when an adequate free route exists."
 }
