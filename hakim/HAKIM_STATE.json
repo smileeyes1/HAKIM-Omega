@@ -1,14 +1,14 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
   "version": "1.0.3",
-  "updated_at": "2026-09-12T03:56:00+03:00",
+  "updated_at": "2026-09-12T06:03:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
-    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, and delivery while preserving actual permission boundaries and minimizing user burden.",
+    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, evidence-bound self-learning and delivery while preserving actual permission boundaries and minimizing user burden.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
     "current_bottleneck": "Field qualification of the free local Firefox/Violentmonkey bridge on the user's actual phone.",
-    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair.",
+    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while the self-evolution loop continues learning from verified outcomes.",
     "pending_external_user_step": "The bridge script must be installed/updated and active in Firefox on the phone; login or 2FA remains locally protected."
   },
   "baseline": {
@@ -17,6 +17,16 @@
     "platform_registry_version": "1.5.0",
     "control_plane_version": "1.1.0",
     "rule": "Do not downgrade or overwrite proven Ω assurance baselines; this control plane composes them."
+  },
+  "self_evolution": {
+    "status": "ACTIVE_HOST_VERIFIED",
+    "mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
+    "policy": "hakim/HAKIM_SELF_EVOLUTION_POLICY.json",
+    "learning_ledger": "hakim/HAKIM_LEARNING_LEDGER.json",
+    "runtime": "runtime/hakim-self-evolution.mjs",
+    "tests": "runtime/test-hakim-self-evolution.mjs",
+    "watchdog": "GitHub Actions scheduled hourly plus ChatGPT condition-watch heartbeat",
+    "promotion_rule": "PROMOTE only after evidence-bound material gain, no P0 regression, rollback readiness, unchanged authority, no new paid dependency and secret safety; otherwise REJECT or NO_OP."
   },
   "proven_success": [
     "Existing HAKIM-Omega inheritable assurance repository and fail-closed lineage architecture",
@@ -29,7 +39,9 @@
     "Current staged field mission passed host-side schema/security CI at head 9942bffd94a3705d04fc6c949331138dfe2b9b47",
     "GitHub Actions HAKIM Control Plane Gate run 34657600851 completed SUCCESS on current staged mission head",
     "GitHub Actions Omega DNA Fail-Closed Gate run 34657600802 completed SUCCESS on current staged mission head",
-    "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 and HAKIM_LOCAL_BROWSER_BRIDGE_v0_1 with explicit scope limits"
+    "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 and HAKIM_LOCAL_BROWSER_BRIDGE_v0_1 with explicit scope limits",
+    "HAKIM self-evolution policy, learning ledger, deterministic promotion gate and adversarial tests are present and passed HAKIM Control Plane Gate run 34669426068 on head 8225b57699036edf9e9b585ee0c592f3e83e0036",
+    "HAKIM control-plane workflow has an hourly scheduled watchdog and push-triggered immediate validation for self-evolution files"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
@@ -37,22 +49,24 @@
     "Cloud browser automation may require metered credits",
     "Remote desktop device may be offline and must not block host-executable work",
     "Generic local-browser Hakim bridge is not yet field-qualified on the user's phone and must remain PARTIAL until actual runtime evidence exists",
-    "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure"
+    "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure",
+    "Operational self-learning does not retrain or modify the underlying ChatGPT model and must never be represented as model self-training"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; current staged mission CI passed"},
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; gated self-evolution changes committed and CI verified"},
     {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"governing document and lineage registry readable/writable"},
     {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"static CI PASS; actual phone roundtrip pending"},
-    {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"no dependency"},
+    {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"device route may be offline; host work continues"},
     {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
   ],
   "evidence": {
-    "github_control_plane_ci":{"status":"PASS","run_id":34657600851,"head_sha":"9942bffd94a3705d04fc6c949331138dfe2b9b47"},
-    "github_omega_dna_ci":{"status":"PASS","run_id":34657600802,"head_sha":"9942bffd94a3705d04fc6c949331138dfe2b9b47"},
+    "github_control_plane_ci":{"status":"PASS","run_id":34669426068,"head_sha":"8225b57699036edf9e9b585ee0c592f3e83e0036"},
+    "github_omega_dna_ci":{"status":"PASS","run_id":34669426096,"head_sha":"8225b57699036edf9e9b585ee0c592f3e83e0036"},
+    "self_evolution_gate":{"status":"PASS","policy_version":"1.0.0","tests":12,"learning_entries":4,"workflow_schedule":"17 * * * *"},
     "staged_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A","relay_issue":1},
     "google_lineage_mirror":{"status":"PASS","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","control_plane_artifact":"HAKIM_OMEGA_CONTROL_PLANE_v1","bridge_artifact":"HAKIM_LOCAL_BROWSER_BRIDGE_v0_1"}
   },
   "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL",
-  "claims_limit": "This PASS covers control-plane schema, intent/memory/tool routing architecture, Google lineage mirror and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
-  "rollback": "Proven Omega baselines remain unchanged; the previous Hakim control-plane commit remains a valid rollback point."
+  "claims_limit": "This PASS covers control-plane schema, intent/memory/tool routing architecture, evidence-bound operational self-learning policy, learning ledger, promotion gate, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
+  "rollback": "Proven Omega baselines remain unchanged; self-evolution is additive and gated. Any candidate failing evidence, regression, authority, cost, secret-safety or rollback requirements is rejected and the last verified baseline is retained."
 }
