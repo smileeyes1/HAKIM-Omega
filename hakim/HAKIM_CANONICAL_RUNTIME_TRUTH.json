@@ -1,0 +1,30 @@
+{
+  "truth_id": "HAKIM_CANONICAL_RUNTIME_TRUTH",
+  "version": "1.0.0",
+  "status": "ACTIVE_FAIL_CLOSED_POINTER",
+  "canonical_instance_id": "HAKIM_ORIGINAL_PHONE_APP",
+  "purpose": "Prevent backend governance from treating an older local control-plane snapshot as newer than the current verified operational state of the same original Hakim. This is a pointer and precedence contract, not a second Hakim and not a copy of secrets.",
+  "canonical_runtime_authority": {
+    "repository": "smileeyes1/SovereignAssistant",
+    "branch": "main",
+    "state_path": "governance/HAKIM_ACTIVE_STATE.json",
+    "governing_constraints_path": "governance/HAKIM_PHONE_SOVEREIGN_CONSTRAINTS.json",
+    "max_value_rule_path": "governance/HAKIM_MAX_VALUE_INTENT_RULE_AR.md",
+    "refresh_rule": "Resolve repository main at runtime and read the named state before choosing a phone-field action. Do not hardcode last_observed_head as permanently current."
+  },
+  "last_observed": {
+    "head_sha": "6b6039e767b4bfe561280855ce3f0a7d5016172c",
+    "observed_at_utc": "2026-09-12T13:27:00Z",
+    "commit_signature_verified": true,
+    "active_extension_version": "2.3",
+    "field_verified": false,
+    "current_blocker": "REAL_PHONE_TRUSTED_LOCAL_WIRELESS_ADB_CONNECTION_NOT_YET_PROVEN",
+    "governing_field_path": "TERMUX_WIRELESS_ADB_LOCAL",
+    "public_command_transport": false,
+    "public_github_command_relay": false
+  },
+  "precedence_rule": "For current phone-field routing and operational truth, a freshly verified canonical runtime state from smileeyes1/SovereignAssistant overrides stale phone-field facts in HAKIM-Omega local snapshots, while HAKIM-Omega remains the backend governance, validation and evidence layer. Neither repository creates a second user-facing Hakim.",
+  "promotion_rule": "Never promote FIELD_VERIFIED, change the original Hakim identity, use a public command relay, or reinterpret CI as phone proof from this pointer. Field promotion still requires direct real-phone evidence under the canonical runtime gates.",
+  "staleness_rule": "If the canonical runtime repository cannot be freshly resolved or its referenced state cannot be read and verified, retain the last verified baseline and classify current phone routing truth as NOT_FRESH rather than falling back silently to an older contradictory snapshot.",
+  "secret_boundary": "This file contains no private key, token, credential, pairing secret or private transport material."
+}
