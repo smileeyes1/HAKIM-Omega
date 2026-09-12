@@ -19,6 +19,11 @@ assert.match(script,/pending_report/);
 assert.match(script,/HAKIM_BRIDGE_RESULT/);
 assert.match(script,/model-response/);
 assert.match(script,/rich-textarea/);
+assert.match(script,/جارٍ الفحص الآن/);
+assert.match(script,/لا توجد مهمة جديدة، الجسر يعمل/);
+assert.match(script,/الجسر متوقف — اضغط «تفعيل» أولًا/);
+assert.match(script,/aria-live="polite"/);
+assert.match(script,/hakim-bridge-check'\)\.onclick=\(\)=>poll\(true\)/);
 assert.ok(!/password\s*=\s*['"][^'"]+['"]/.test(script));
 assert.equal(policy.policy_id,'HAKIM_LOCAL_BROWSER_BRIDGE_POLICY');
 assert.ok(policy.allowed_hosts.includes('gemini.google.com'));
@@ -49,4 +54,4 @@ const metas=[...script.matchAll(/^\/\/ @match\s+https:\/\/([^/]+)\//gm)].map(x=>
 for(const host of metas) assert.ok(policy.allowed_hosts.includes(host),`metadata host not in policy: ${host}`);
 for(const token of policy.forbidden_field_tokens) assert.ok(script.includes(token),`secret token not embedded in runtime guard: ${token}`);
 
-console.log(JSON.stringify({pass:true,assertions:30,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':mission.completed_by_evidence?'COMPLETED_EVIDENCE_BOUND':'IDLE_FAIL_SAFE'},null,2));
+console.log(JSON.stringify({pass:true,assertions:35,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,visible_feedback:true,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':mission.completed_by_evidence?'COMPLETED_EVIDENCE_BOUND':'IDLE_FAIL_SAFE'},null,2));
