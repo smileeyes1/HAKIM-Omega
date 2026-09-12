@@ -1,6 +1,6 @@
 {
   "manifest_id": "HAKIM_OMEGA_CONTROL_PLANE",
-  "version": "1.2.0",
+  "version": "1.1.0",
   "status": "ACTIVE_VERIFIED_HOST_BASELINE",
   "updated_at": "2026-09-12T06:20:00+03:00",
   "purpose": "Durable sovereign control plane that turns user intent, aims, and long-horizon aspirations into verified outcomes through state recovery, intent compilation, memory, deliberate continuous innovation, tool routing, execution, verification, repair, rollback, continuous evidence-bound learning, and delivery without pretending to own capabilities that are not actually connected.",
