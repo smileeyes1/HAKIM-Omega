@@ -1,39 +1,55 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "identity_id": "HAKIM_CANONICAL_INSTANCE",
   "canonical_instance_id": "HAKIM_ORIGINAL_PHONE_APP",
   "display_name": "حكيم",
-  "identity_source": "USER_CONFIRMED_EXISTING_ON_PHONE_APP",
+  "identity_source": "USER_CONFIRMED_EXISTING_ON_PHONE_APP_PLUS_VERIFIED_ARTIFACT_LINEAGE",
   "single_instance": true,
   "instance_role": "CANONICAL_FRONTEND",
   "frontend": {
     "kind": "EXISTING_USER_PHONE_APP",
+    "repository": "smileeyes1/sovereign-android-assistant",
+    "package": "ps.hakim.stable",
+    "source_main_sha": "c7e3751217dff7a3c302fd6087aaad563a146e8c",
+    "target_version_code": 20017,
+    "target_version_name": "2.0.17",
     "replacement_allowed": false,
     "clone_allowed": false,
     "parallel_hakim_allowed": false,
-    "identity_rule": "The existing user-confirmed Hakim app on the phone is the only canonical Hakim. Preserve it and improve it in place; do not create, rename, promote or present another agent, repository, automation, bridge or control plane as a second Hakim."
+    "identity_rule": "The existing user-confirmed Hakim app on the phone, bound to package ps.hakim.stable and the verified field signing lineage, is the only canonical Hakim. Preserve it and improve it in place; do not create, rename, promote or present another agent, repository, automation, bridge or control plane as a second Hakim."
+  },
+  "field_signing_identity": {
+    "certificate_sha256": "F4:2D:71:B0:30:8A:54:3E:25:30:99:C0:23:01:BF:DB:FE:FA:45:F8:75:5B:12:AB:22:A3:C9:03:30:5E:44:2E",
+    "certificate_subject": "CN=Hakim, OU=Personal, O=Hakim, L=Tubas, ST=West Bank, C=PS",
+    "public_key": "RSA-3072",
+    "known_matching_versions": [20013, 20016],
+    "private_key_state": "RECOVERY_PENDING",
+    "wrong_signer_fail_closed": true,
+    "do_not_store_private_key_in_public_repo": true
   },
   "support_components": [
     {"id":"smileeyes1/HAKIM-Omega","role":"BACKEND_ONLY","purpose":"governance, state, validation, learning, recovery and evidence"},
+    {"id":"smileeyes1/SovereignAssistant/android/hakim-companion","role":"REFERENCE_ONLY","purpose":"reuse proven mechanisms only; never install or promote as a parallel Hakim"},
     {"id":"chatgpt_hakim_heartbeat","role":"BACKEND_ONLY","purpose":"scheduled orchestration and recovery fallback"},
     {"id":"local_browser_bridge","role":"BACKEND_ONLY","purpose":"authorized transport to the original phone Hakim when field-connected"},
     {"id":"remote_desktop_commander","role":"OPTIONAL_BACKEND_MAINTENANCE_ONLY","purpose":"maintenance when an authorized device is actually online"}
   ],
-  "routing_rule": "All Hakim-directed improvements, rules, state, learning, automation and bridge work must terminate at or support the canonical original phone Hakim. Support components may execute backend work but must not become a user-facing parallel Hakim identity.",
-  "migration_rule": "Existing useful governance, learning, validation, bridge and automation assets are retained as backend capabilities and rebound to this canonical identity. Duplicate execution paths are deduplicated rather than rebranded as another Hakim.",
+  "routing_rule": "All Hakim-directed improvements, rules, state, learning, automation and bridge work must terminate at or support the canonical ps.hakim.stable original phone Hakim. Support components may execute backend work but must not become a user-facing parallel Hakim identity.",
+  "migration_rule": "Existing useful governance, learning, validation, bridge and automation assets are retained as backend capabilities and rebound to this canonical identity. Duplicate execution paths are deduplicated rather than rebranded as another Hakim. Do not uninstall or clear the canonical app as a signing workaround without explicit migration authority and state-preservation evidence.",
   "field_binding": {
     "mission_id": "FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A",
-    "state": "FIELD_BINDING_PENDING",
+    "state": "SIGNING_CONTINUITY_BLOCKED_FIELD_BINDING_PENDING",
     "field_pass": false,
     "proof_required": "request-bound evidence from the original Hakim on the actual phone",
     "ci_or_send_is_not_field_proof": true,
+    "highest_current_blocker": "Recover the private key matching the pinned ps.hakim.stable field certificate, then sign the frozen 20017 candidate with the same identity and qualify it on the actual phone.",
     "latest_phone_observation": {
       "observed_at_local": "2026-09-12T06:55:00+03:00",
       "source": "USER_SUPPLIED_SCREENSHOT_OF_ORIGINAL_HAKIM",
       "app_visible": true,
       "status_text": "حكيم يعمل — جار الاتصال",
       "window_permissions": "5/5",
-      "connection_state": "CONNECTING_NOT_FIELD_PASS",
+      "connection_state": "PAIRED_SERVICE_RUNNING_CONNECTING_NOT_FIELD_PASS",
       "field_classification": "PARTIAL_FIELD_OBSERVED",
       "privacy": "SANITIZED_NO_SECRET_NO_REQUEST_ID_STORED"
     }
@@ -45,8 +61,10 @@
     "NO_PAID_OR_METERED_UPGRADE",
     "NO_IRREVERSIBLE_HIGH_IMPACT_ACTION_WITHOUT_REQUIRED_AUTHORITY",
     "NO_FALSE_FIELD_CLAIMS",
-    "NO_PARALLEL_HAKIM_IDENTITY"
+    "NO_PARALLEL_HAKIM_IDENTITY",
+    "NO_WRONG_SIGNER_FOR_PS_HAKIM_STABLE",
+    "NO_UNINSTALL_OR_CLEAR_DATA_AS_SILENT_SIGNING_WORKAROUND"
   ],
-  "promotion_rule": "Any material change that would create a second Hakim identity, replace the original phone Hakim, route user-facing authority to a parallel agent, or claim phone execution without field evidence must fail closed.",
-  "rollback": "Retain the last verified original-Hakim binding and backend support state; never roll back by replacing the original app with a parallel identity."
+  "promotion_rule": "Any material change that would create a second Hakim identity, replace the original phone Hakim, sign ps.hakim.stable with a nonmatching certificate, route user-facing authority to a parallel agent, or claim phone execution without field evidence must fail closed.",
+  "rollback": "Retain the last verified original-Hakim binding, field signing identity and backend support state; never roll back by replacing the original app with a parallel identity."
 }
