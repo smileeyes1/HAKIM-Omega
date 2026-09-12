@@ -9,6 +9,7 @@ on:
       - 'runtime/hakim-control-plane.mjs'
       - 'runtime/test-hakim-control-plane.mjs'
       - 'runtime/test-browser-bridge.mjs'
+      - 'runtime/validate-platform-registry.mjs'
       - '.github/workflows/hakim-control-plane.yml'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'runtime/hakim-control-plane.mjs'
       - 'runtime/test-hakim-control-plane.mjs'
       - 'runtime/test-browser-bridge.mjs'
+      - 'runtime/validate-platform-registry.mjs'
       - '.github/workflows/hakim-control-plane.yml'
   workflow_dispatch:
 
@@ -36,5 +38,7 @@ jobs:
         run: node runtime/hakim-control-plane.mjs validate
       - name: Run fail-closed control-plane regression tests
         run: node runtime/test-hakim-control-plane.mjs
+      - name: Validate platform propagation boundaries
+        run: node runtime/validate-platform-registry.mjs
       - name: Run local-browser bridge security tests
         run: node runtime/test-browser-bridge.mjs
