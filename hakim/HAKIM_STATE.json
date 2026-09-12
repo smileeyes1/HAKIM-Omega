@@ -1,15 +1,15 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
   "version": "1.0.3",
-  "updated_at": "2026-09-12T07:03:00+03:00",
+  "updated_at": "2026-09-12T12:16:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
     "goal": "Turn Hakim into the durable top-level orchestrator that leads every material relevant aspect of HOW across available tools, memory, intent, state, recovery, verification, sevenfold HOW, seven-gate wisdom, deliberate continuous innovation, cross-layer governance integrity, evidence-bound self-learning, bounded recursive HOW, bounded completeness and delivery while preserving actual permission boundaries and minimizing user burden.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
-    "current_bottleneck": "Field qualification of the free local Firefox/Violentmonkey bridge on the user's actual phone.",
-    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while ALL_EIGHT, HOW_SEVEN, wisdom, governance integrity, bounded completeness, self-evolution, recursive-HOW and seven-lens innovation continue learning from verified outcomes.",
-    "pending_external_user_step": "The bridge script must be installed/updated and active in Firefox on the phone; login or 2FA remains locally protected."
+    "current_bottleneck": "Field installation and harmless runtime qualification of HAKIM Android SAFE CORE 0.2.0 on the user's actual phone after the previous Accessibility-based candidate was hard-blocked by Play Protect.",
+    "next_highest_safe_action": "Install the separately packaged no-Accessibility SAFE CORE, open it, run the staged FREE PUBLIC smoke mission, capture actual phone PASS/FAIL evidence, then promote or root-cause repair without bypassing Play Protect.",
+    "pending_external_user_step": "Install/open HAKIM Android SAFE CORE on the phone and press تشغيل حكيم الآمن then فحص الآن; no Accessibility permission, Play Protect disablement, API key or paid credit is required."
   },
   "baseline": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
@@ -102,37 +102,41 @@
     "HAKIM bounded completeness across sixteen material dimensions passed independent gates on merged main head a7eead294abbd0784137f6277c7b44396027e5d8",
     "HAKIM ALL_EIGHT total-leadership constitution plus HOW_SEVEN method discipline passed HAKIM run 34670909377 and Omega run 34670909459 on integrated head e2717c80ddeec144cc3ad974587170167349aa53",
     "HAKIM cross-layer governance-integrity validator, CI wiring and self-evolution promotion prerequisite passed independent gates on integrated head d3d87f9b590eb6aa6463b618b5614a1c40e4a2d0",
-    "HAKIM adversarial governance-integrity mutation suite exposed and then eliminated a false-positive runtime-binding check; exact executable load/import/call bindings and 17 mutation rejections passed HAKIM run 34671479245 and Omega run 34671479241 on head c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5"
+    "HAKIM adversarial governance-integrity mutation suite exposed and then eliminated a false-positive runtime-binding check; exact executable load/import/call bindings and 17 mutation rejections passed HAKIM run 34671479245 and Omega run 34671479241 on head c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5",
+    "HAKIM Android SAFE CORE app code uses a separately isolated package, INTERNET only, no Accessibility service/config, FREE/INCLUDED cost gate and limited safe actions; HAKIM Android run 34685262676 and Omega run 34685262694 succeeded on code head 860014d089004f2a1be345296ea94c4c23998082."
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
     "Gemini mobile UI selectors changed and caused false field selection before fail-closed repair",
     "Cloud browser automation may require metered credits",
     "Remote desktop device may be offline and must not block host-executable work",
+    "The first native Android Accessibility-based Hakim candidate was hard-blocked by Google Play Protect on the user's actual phone; it is frozen and must not be reactivated automatically or bypass Play Protect.",
     "Generic local-browser Hakim bridge is not yet field-qualified on the user's phone and must remain PARTIAL until actual runtime evidence exists",
     "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure",
     "Operational self-learning, total leadership, HOW_SEVEN, wisdom governance, recursive HOW, bounded completeness, governance-integrity validation and innovation do not retrain or modify the underlying ChatGPT model and must never be represented as model self-training",
     "Rules do not propagate invisibly to external platforms or future contexts unless actually persisted, loaded or connected there"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; governance-integrity-gated ALL_EIGHT/HOW_SEVEN, bounded completeness, recursive HOW, wisdom, self-evolution and innovation changes committed and independently gated"},
-    {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"governing document and lineage registry previously verified readable/writable"},
-    {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"static CI PASS; actual phone roundtrip pending; relay comments observed 0 this session"},
-    {"id":"remote_desktop_commander","state":"OFFLINE_CONFIRMED_THIS_SESSION","evidence":"no authorized device available through Remote Desktop Commander this session"},
-    {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; governance and Android safe-core changes committed"},
+    {"id":"google_control_plane","state":"PASS_PREVIOUSLY_VERIFIED","evidence":"governing document and lineage registry previously verified readable/writable"},
+    {"id":"hakim_android_safe_core","state":"HOST_VERIFIED_FIELD_INSTALL_PENDING","evidence":"Android and Omega gates succeeded on app code head 860014d089004f2a1be345296ea94c4c23998082; final APK built and hashed; phone install/runtime pending"},
+    {"id":"local_browser_agent_legacy","state":"FROZEN_AFTER_PLAY_PROTECT_FAILURE","evidence":"actual-phone Play Protect screenshot invalidated Accessibility-based default route"},
+    {"id":"remote_desktop_commander","state":"OFFLINE_CONFIRMED_THIS_SESSION","evidence":"registered device exists but status remains offline"},
+    {"id":"tinyfish_browser","state":"BLOCKED_BY_DEFAULT_COST_POLICY","evidence":"metered route; no automatic credits allowed"}
   ],
   "evidence": {
     "github_control_plane_ci":{"status":"PASS","run_id":34671479245,"head_sha":"c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5"},
     "github_omega_dna_ci":{"status":"PASS","run_id":34671479241,"head_sha":"c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5"},
-    "self_evolution_gate":{"status":"PASS","policy_version":"1.6.0","tests":39,"learning_entries":11,"total_leadership_constitution_version":"1.0.0","all_eight_dimensions":8,"how_seven_layers":7,"wisdom_constitution_version":"1.0.0","wisdom_gates":7,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"recursive_how_layers":8,"bounded_completeness_dimensions":16,"governance_integrity":true,"workflow_schedule":"hourly watchdog plus push validation"},
+    "self_evolution_gate":{"status":"PASS","policy_version":"1.6.0","tests":39,"learning_entries":13,"total_leadership_constitution_version":"1.0.0","all_eight_dimensions":8,"how_seven_layers":7,"wisdom_constitution_version":"1.0.0","wisdom_gates":7,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"recursive_how_layers":8,"bounded_completeness_dimensions":16,"governance_integrity":true,"workflow_schedule":"hourly watchdog plus push validation"},
     "total_leadership_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json"},
     "wisdom_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_WISDOM_CONSTITUTION.json"},
     "innovation_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_INNOVATION_CONSTITUTION.json"},
     "governance_integrity_gate":{"status":"PASS_HOST_SCOPE","validator":"runtime/validate-governance-integrity.mjs","mutation_tests":"runtime/test-governance-integrity.mjs","exact_runtime_bindings":true,"test_count":18,"mutation_rejections":17,"verified_head_sha":"c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5","control_plane_run":34671479245,"omega_run":34671479241},
-    "staged_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A","relay_issue":1,"relay_comments_observed":0},
+    "android_safe_core":{"status":"HOST_BUILD_AND_GATES_PASS_FIELD_PENDING","app_code_head":"860014d089004f2a1be345296ea94c4c23998082","android_run":34685262676,"omega_run":34685262694,"package":"ps.hakim.safe.debug","version":"0.2.0-debug","permissions":"INTERNET_ONLY","accessibility":false,"cost_policy":"FREE_OR_INCLUDED_ONLY"},
+    "staged_android_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"HAKIM_ANDROID_SMOKE_2026_09_12_A","cost_class":"FREE","data_classification":"PUBLIC"},
     "google_lineage_mirror":{"status":"PASS_PREVIOUSLY_VERIFIED","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","control_plane_artifact":"HAKIM_OMEGA_CONTROL_PLANE_v1","bridge_artifact":"HAKIM_LOCAL_BROWSER_BRIDGE_v0_1"}
   },
-  "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL",
-  "claims_limit": "This PASS covers control-plane schema, ALL_EIGHT total-leadership accounting, HOW_SEVEN method discipline, seven-gate wisdom governance, exact-binding cross-layer governance-integrity validation with adversarial mutation tests, evidence-bound operational self-learning, bounded recursive HOW, bounded completeness, seven-lens innovation, fail-closed promotion guards, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, propagate invisibly to unconnected platforms, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
-  "rollback": "Proven Omega baselines remain unchanged; governance integrity is additive and fail-closed. Any candidate failing material-scope accounting, HOW_SEVEN, wisdom, governance integrity, completeness, evidence, regression, authority, cost, secret-safety, intent or rollback requirements is rejected and the last verified baseline is retained."
+  "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PENDING",
+  "claims_limit": "This PASS covers the control plane and host-verified Android SAFE CORE build/gates. It does not claim phone installation/runtime PASS until actual phone evidence exists; it does not retrain the underlying ChatGPT model, grant external permissions, bypass Play Protect, silently enable Accessibility, spend paid credits, propagate invisibly to unconnected platforms, or certify every connector at runtime.",
+  "rollback": "Proven Omega baselines remain unchanged. The Accessibility-based Android candidate is frozen after field failure. Any candidate failing material-scope accounting, HOW_SEVEN, wisdom, governance integrity, evidence, regression, authority, cost, secret-safety, intent, least privilege or rollback requirements is rejected and the last verified baseline is retained."
 }
