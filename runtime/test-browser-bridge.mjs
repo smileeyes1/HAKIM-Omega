@@ -6,6 +6,7 @@ const policy=JSON.parse(fs.readFileSync('hakim/LOCAL_BRIDGE_POLICY.json','utf8')
 const mission=JSON.parse(fs.readFileSync('hakim/REMOTE_MISSION.json','utf8'));
 
 assert.match(script,/==UserScript==/);
+assert.match(script,/@version\s+0\.1\.2/);
 assert.match(script,/@connect\s+raw\.githubusercontent\.com/);
 assert.match(script,/GM_xmlhttpRequest/);
 assert.match(script,/SECRET_FIELD_BLOCKED/);
@@ -24,6 +25,16 @@ assert.match(script,/لا توجد مهمة جديدة، الجسر يعمل/);
 assert.match(script,/الجسر متوقف — اضغط «تفعيل» أولًا/);
 assert.match(script,/aria-live="polite"/);
 assert.match(script,/hakim-bridge-check'\)\.onclick=\(\)=>poll\(true\)/);
+assert.match(script,/HEARTBEAT_MS=60\*60\*1000/);
+assert.ok(!/POLL_MS=20000/.test(script),'dense 20s polling must not return');
+assert.match(script,/poll_inflight/);
+assert.match(script,/rate_limit_until/);
+assert.match(script,/retryAfterMs/);
+assert.match(script,/backoffMs/);
+assert.match(script,/MISSION_HTTP_['"]?\+r\.status|MISSION_HTTP_/);
+assert.match(script,/RATE_LIMIT_/);
+assert.match(script,/تم تجاهل الضغط المتكرر/);
+assert.match(script,/setInterval\(\(\)=>poll\(false\),HEARTBEAT_MS\)/);
 assert.ok(!/password\s*=\s*['"][^'"]+['"]/.test(script));
 assert.equal(policy.policy_id,'HAKIM_LOCAL_BROWSER_BRIDGE_POLICY');
 assert.ok(policy.allowed_hosts.includes('gemini.google.com'));
@@ -54,4 +65,4 @@ const metas=[...script.matchAll(/^\/\/ @match\s+https:\/\/([^/]+)\//gm)].map(x=>
 for(const host of metas) assert.ok(policy.allowed_hosts.includes(host),`metadata host not in policy: ${host}`);
 for(const token of policy.forbidden_field_tokens) assert.ok(script.includes(token),`secret token not embedded in runtime guard: ${token}`);
 
-console.log(JSON.stringify({pass:true,assertions:35,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,visible_feedback:true,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':mission.completed_by_evidence?'COMPLETED_EVIDENCE_BOUND':'IDLE_FAIL_SAFE'},null,2));
+console.log(JSON.stringify({pass:true,assertions:45,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,visible_feedback:true,rate_limit_guard:true,event_first_heartbeat:true,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':mission.completed_by_evidence?'COMPLETED_EVIDENCE_BOUND':'IDLE_FAIL_SAFE'},null,2));
