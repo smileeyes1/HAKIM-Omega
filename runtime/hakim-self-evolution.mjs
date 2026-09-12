@@ -9,6 +9,7 @@ const assert = (c, m) => { if (!c) throw new Error(m); };
 export function loadEvolution() {
   return {
     policy: load('hakim/HAKIM_SELF_EVOLUTION_POLICY.json'),
+    total: load('hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json'),
     wisdom: load('hakim/HAKIM_WISDOM_CONSTITUTION.json'),
     innovation: load('hakim/HAKIM_INNOVATION_CONSTITUTION.json'),
     ledger: load('hakim/HAKIM_LEARNING_LEDGER.json'),
@@ -17,11 +18,29 @@ export function loadEvolution() {
 }
 
 export function validateEvolution(x = loadEvolution()) {
-  const { policy, wisdom, innovation, ledger, state } = x;
+  const { policy, total, wisdom, innovation, ledger, state } = x;
   assert(policy.policy_id === 'HAKIM_SELF_EVOLUTION_POLICY', 'bad evolution policy id');
   assert(policy.default_mode === 'ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY', 'self-evolution must remain authority-bounded');
+  assert(policy.total_leadership_constitution === 'hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json', 'total leadership constitution not bound');
   assert(policy.wisdom_constitution === 'hakim/HAKIM_WISDOM_CONSTITUTION.json', 'wisdom constitution not bound');
   assert(policy.innovation_constitution === 'hakim/HAKIM_INNOVATION_CONSTITUTION.json', 'innovation constitution not bound');
+
+  assert(total.constitution_id === 'HAKIM_TOTAL_LEADERSHIP_CONSTITUTION', 'bad total leadership constitution id');
+  assert(total.status === 'ACTIVE_GOVERNING_OVERLAY', 'total leadership constitution must be active');
+  assert(total.motto === 'كل شي.كل شي.كل شي.كل شي.كل شي.كل شي.كل شي.كل شي', 'ALL_EIGHT motto changed');
+  assert(Array.isArray(total.all_eight) && total.all_eight.length === 8, 'ALL_EIGHT must preserve eight dimensions');
+  assert(new Set(total.all_eight.map(x => x.id)).size === 8, 'ALL_EIGHT ids must be unique');
+  for (const id of ['A1_INTENT_AND_OUTCOME','A2_REALITY_AND_EVIDENCE','A3_CAUSES_AND_DEPENDENCIES','A4_OPTIONS_AND_TOOLS','A5_EXECUTION_AND_INTEGRATION','A6_VERIFICATION_AND_REALITY_GATE','A7_RECOVERY_LEARNING_AND_PERSISTENCE','A8_NEXT_HIGHEST_VALUE_GAP']) {
+    assert(total.all_eight.some(x => x.id === id), `missing ALL_EIGHT dimension: ${id}`);
+  }
+  assert(Array.isArray(total.how_seven) && total.how_seven.length === 7, 'HOW_SEVEN must preserve seven layers');
+  assert(new Set(total.how_seven.map(x => x.id)).size === 7, 'HOW_SEVEN ids must be unique');
+  for (const id of ['H1_HOW_UNDERSTAND','H2_HOW_KNOW','H3_HOW_SOLVE','H4_HOW_CHOOSE','H5_HOW_EXECUTE','H6_HOW_VERIFY_AND_RECOVER','H7_HOW_LEARN_SUSTAIN_AND_ADVANCE']) {
+    assert(total.how_seven.some(x => x.id === id), `missing HOW_SEVEN layer: ${id}`);
+  }
+  assert(total.anti_overreach?.some(x => x.includes('All means all material and relevant aspects')), 'ALL_EIGHT authority boundary missing');
+  assert(total.anti_overreach?.some(x => x.includes('No busywork')), 'ALL_EIGHT anti-busywork guard missing');
+  assert(total.persistence?.limits?.includes('stored, loaded or available'), 'total leadership propagation truth boundary missing');
 
   assert(wisdom.constitution_id === 'HAKIM_WISDOM_CONSTITUTION', 'bad wisdom constitution id');
   assert(wisdom.status === 'ACTIVE_GOVERNING_OVERLAY', 'wisdom constitution must be active');
@@ -41,12 +60,19 @@ export function validateEvolution(x = loadEvolution()) {
   assert(Array.isArray(innovation.seven_lenses) && innovation.seven_lenses.length === 7, 'innovation must preserve seven lenses');
   assert(new Set(innovation.seven_lenses.map(x => x.id)).size === 7, 'innovation lens ids must be unique');
 
-  for (const phase of ['BIND_EVIDENCE','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','MAP_ALL_MATERIAL_GAPS','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','EXECUTE_HIGHEST_SAFE_AUTHORIZED_ACTION','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','CHECK_MATERIAL_GAP_CLOSURE','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS','NO_OP_ONLY_IF_NO_SAFE_AUTHORIZED_MATERIAL_GAIN_REMAINS']) {
+  for (const phase of ['BIND_EVIDENCE','APPLY_ALL_EIGHT_SCOPE','APPLY_HOW_SEVEN','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','MAP_ALL_MATERIAL_GAPS','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','EXECUTE_HIGHEST_SAFE_AUTHORIZED_ACTION','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','CHECK_MATERIAL_GAP_CLOSURE','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS','NO_OP_ONLY_IF_NO_SAFE_AUTHORIZED_MATERIAL_GAIN_REMAINS']) {
     assert(policy.cycle.includes(phase), `missing evolution phase: ${phase}`);
   }
+
+  assert(policy.total_leadership?.default === 'ALWAYS_ON_FOR_MATERIAL_RELEVANT_SCOPE', 'total leadership must be active for material relevant scope');
+  assert(policy.total_leadership?.motto === total.motto, 'total leadership motto mismatch');
+  assert(policy.how_seven?.default === 'ALWAYS_ON_FOR_MATERIAL_ACTIONS', 'HOW_SEVEN must be active for material actions');
+  assert(Array.isArray(policy.how_seven?.layers) && policy.how_seven.layers.length === 7, 'policy HOW_SEVEN must preserve seven layers');
+  assert(policy.how_seven.stop_rule?.includes('linked to learning plus the next material gap'), 'HOW_SEVEN completion guard missing');
+
   assert(policy.wisdom_gate?.required?.length === 7, 'self-evolution must require seven wisdom gates');
   assert(policy.recursive_how?.default === 'ALWAYS_ON_WHEN_MATERIAL', 'recursive HOW must be material-by-default');
-  assert(Array.isArray(policy.recursive_how?.layers) && policy.recursive_how.layers.length === 8, 'recursive HOW must preserve eight operational layers');
+  assert(Array.isArray(policy.recursive_how?.layers) && policy.recursive_how.layers.length === 8, 'recursive HOW must preserve eight internal operational layers');
   for (const layer of ['HOW_TO_UNDERSTAND','HOW_TO_KNOW','HOW_TO_SOLVE_CAUSALLY','HOW_TO_CHOOSE','HOW_TO_EXECUTE','HOW_TO_VERIFY','HOW_TO_LEARN','HOW_TO_SUSTAIN']) {
     assert(policy.recursive_how.layers.includes(layer), `missing recursive HOW layer: ${layer}`);
   }
@@ -55,7 +81,6 @@ export function validateEvolution(x = loadEvolution()) {
   assert(policy.recursive_how.anti_pathology?.some(x => x.includes('No persistence claim')), 'recursive HOW propagation truth guard missing');
 
   assert(policy.bounded_completeness?.default === 'ALWAYS_ON_FOR_MATERIAL_SCOPE', 'bounded completeness must be active for material scope');
-  assert(policy.bounded_completeness?.motto === 'كل شي.كل شي.بكل شي.كل شي.بكل شي.كل شي.بكل شي.كل شي.', 'bounded completeness motto changed');
   assert(Array.isArray(policy.bounded_completeness?.dimensions) && policy.bounded_completeness.dimensions.length >= 12, 'bounded completeness dimensions incomplete');
   for (const dimension of ['GOAL','CONTRACT','FACTS_AND_UNCERTAINTY','ROOT_CAUSE','ALTERNATIVES','AUTHORITY','SAFETY_AND_RIGHTS','COST_AND_RESOURCE_BOUNDARIES','EXECUTION','ACTUAL_OUTPUT','VERIFICATION','ADVERSARIAL_AND_REGRESSION','ROLLBACK_AND_RECOVERY','LEARNING','PERSISTENCE','NEXT_MATERIAL_GAP']) {
     assert(policy.bounded_completeness.dimensions.includes(dimension), `missing completeness dimension: ${dimension}`);
@@ -67,7 +92,7 @@ export function validateEvolution(x = loadEvolution()) {
   assert(policy.bounded_completeness.stop_rule?.includes('NO_OP only when no safe authorized material gain remains now'), 'bounded completeness NO_OP rule missing');
 
   const required = new Set(policy.promotion_gate.required);
-  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','wisdom_seven_gates_passed','bounded_completeness_checked','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
+  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','all_eight_scope_checked','how_seven_completed','wisdom_seven_gates_passed','bounded_completeness_checked','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
     assert(required.has(r), `missing promotion requirement: ${r}`);
   }
   assert(innovation.minimum_diversity_rule?.includes('three genuinely different causal approaches'), 'innovation diversity rule missing');
@@ -80,7 +105,7 @@ export function validateEvolution(x = loadEvolution()) {
     if (e.kind === 'FAILURE_LESSON') assert(e.root_cause && e.lesson && e.guard, `failure lesson incomplete: ${e.id}`);
     if (e.kind === 'SUCCESS_PATTERN') assert(e.lesson && e.guard, `success pattern incomplete: ${e.id}`);
   }
-  const raw = JSON.stringify({policy, wisdom, innovation, ledger}).toLowerCase();
+  const raw = JSON.stringify({policy, total, wisdom, innovation, ledger}).toLowerCase();
   for (const forbidden of ['password=', 'api_key=', 'authorization: bearer ', 'session_cookie=', 'recovery_code=']) {
     assert(!raw.includes(forbidden), `possible secret marker found: ${forbidden}`);
   }
@@ -88,6 +113,9 @@ export function validateEvolution(x = loadEvolution()) {
   return {
     pass: true,
     policy_version: policy.version,
+    total_leadership_version: total.version,
+    all_eight_dimensions: total.all_eight.length,
+    how_seven_layers: total.how_seven.length,
     wisdom_version: wisdom.version,
     wisdom_gates: wisdom.seven_gates.length,
     innovation_version: innovation.version,
@@ -105,6 +133,8 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
     'intent_and_contract_preserved',
     'positive_evidence_bound',
     'material_gain_is_observable',
+    'all_eight_scope_checked',
+    'how_seven_completed',
     'wisdom_seven_gates_passed',
     'bounded_completeness_checked',
     'no_p0_regression',
@@ -116,6 +146,8 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   const failed = required.filter(k => candidate[k] !== true);
   if (candidate.material_nontrivial === true && candidate.innovation_search_completed !== true) failed.push('innovation_search_missing');
   if (candidate.material_nontrivial === true && candidate.recursive_how_completed !== true) failed.push('recursive_how_missing');
+  if (candidate.material_nontrivial === true && candidate.all_eight_material_dimensions_accounted !== true) failed.push('all_eight_material_dimension_unaccounted');
+  if (candidate.material_nontrivial === true && candidate.how_seven_traceable !== true) failed.push('how_seven_not_traceable');
   if (candidate.known_safe_authorized_material_gap_remains === true) failed.push('false_complete_material_gap_remains');
   if (candidate.no_op_requested === true && candidate.safe_authorized_material_gain_remains === true) failed.push('premature_no_op');
   if (candidate.manufactures_busywork_for_exhaustiveness === true) failed.push('fake_completeness_busywork');
@@ -132,7 +164,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   return {
     decision: failed.length ? 'REJECT' : 'PROMOTE_CANDIDATE',
     failed: [...new Set(failed)],
-    rule: 'Wisdom governs selection; innovation expands options; recursive HOW improves method; bounded completeness closes every safe authorized material gap without busywork or overreach; promotion still requires evidence, tests, actual-output verification and all governing gates.'
+    rule: 'ALL_EIGHT prevents omission; HOW_SEVEN determines method; wisdom governs judgment; innovation expands options; recursive HOW deepens only while valuable; bounded completeness closes safe authorized material gaps; promotion still requires evidence, tests, actual-output verification and every governing gate.'
   };
 }
 
