@@ -68,6 +68,7 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
   assert(state.self_evolution?.how_seven_layers === total.how_seven?.length, 'self-evolution HOW_SEVEN count drift');
   assert(state.self_evolution?.bounded_completeness_dimensions === policy.bounded_completeness?.dimensions?.length, 'bounded completeness count drift');
   assert(state.self_evolution?.recursive_how_layers === policy.recursive_how?.layers?.length, 'recursive HOW count drift');
+  assert(state.evidence?.self_evolution_gate?.learning_entries === ledger.entries?.length, 'state/learning-ledger entry count drift');
 
   const invariantPairs = [
     ['ALL_EIGHT_MATERIAL_RELEVANT_SCOPE_MUST_BE_ACCOUNTED_FOR', 'APPLY_ALL_EIGHT_SCOPE'],
@@ -135,6 +136,7 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     completeness_dimensions: policy.bounded_completeness.dimensions.length,
     recursive_how_layers: policy.recursive_how.layers.length,
     learning_entries: ledger.entries.length,
+    state_learning_count_bound: true,
     cross_layer_bindings: true,
     exact_runtime_bindings: true,
     workflow_gate_bound: true,
