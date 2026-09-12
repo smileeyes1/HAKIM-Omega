@@ -1,0 +1,48 @@
+name: HAKIM Field Bridge Evidence Ingest
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  ingest:
+    if: >-
+      github.event.issue.number == 1 &&
+      github.event.comment.user.login == github.repository_owner &&
+      contains(github.event.comment.body, 'HAKIM_BRIDGE_RESULT')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ingest and validate field report
+        env:
+          HAKIM_REPORT_BODY: ${{ github.event.comment.body }}
+          HAKIM_REPORT_AUTHOR: ${{ github.event.comment.user.login }}
+          HAKIM_EXPECTED_OWNER: ${{ github.repository_owner }}
+        run: node runtime/ingest-browser-bridge-report.mjs
+      - name: Revalidate control plane after evidence transition
+        run: |
+          node runtime/hakim-control-plane.mjs validate
+          node runtime/test-hakim-control-plane.mjs
+          node runtime/validate-platform-registry.mjs
+          node runtime/test-browser-bridge.mjs
+          node runtime/test-field-bridge-ingest.mjs
+      - name: Commit evidence-bound state transition
+        run: |
+          if git diff --quiet; then
+            echo 'No new evidence state to commit.'
+            exit 0
+          fi
+          git config user.name 'HAKIM Evidence Gate'
+          git config user.email 'actions@users.noreply.github.com'
+          git add hakim/FIELD_BRIDGE_EVIDENCE.json hakim/HAKIM_TOOL_REGISTRY.json hakim/HAKIM_STATE.json hakim/REMOTE_MISSION.json platforms/platform-registry.json
+          git commit -m 'Bind actual phone bridge field evidence'
+          git push origin HEAD:main
