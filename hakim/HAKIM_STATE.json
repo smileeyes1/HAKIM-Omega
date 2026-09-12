@@ -1,19 +1,21 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
-  "version": "1.0.2",
-  "updated_at": "2026-09-12T02:03:00+03:00",
+  "version": "1.0.3",
+  "updated_at": "2026-09-12T03:56:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
-    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, state, recovery, verification, and delivery while preserving actual permission boundaries.",
+    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, and delivery while preserving actual permission boundaries and minimizing user burden.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
-    "current_bottleneck": "General local-browser bridge field qualification and per-tool runtime authority discovery",
-    "next_highest_safe_action": "Qualify the generic free local-browser bridge across representative sites while keeping per-tool runtime permission discovery fail-closed."
+    "current_bottleneck": "Field qualification of the free local Firefox/Violentmonkey bridge on the user's actual phone.",
+    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair.",
+    "pending_external_user_step": "The bridge script must be installed/updated and active in Firefox on the phone; login or 2FA remains locally protected."
   },
   "baseline": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
     "assurance_repo": "smileeyes1/HAKIM-Omega",
-    "platform_registry_version": "1.4.0",
+    "platform_registry_version": "1.5.0",
+    "control_plane_version": "1.1.0",
     "rule": "Do not downgrade or overwrite proven Ω assurance baselines; this control plane composes them."
   },
   "proven_success": [
@@ -21,34 +23,36 @@
     "Connected Google Control Plane with governing document and registry sheet",
     "Local Firefox/Violentmonkey approach can execute a userscript inside Gemini",
     "Gemini educational Gem setup reached a state where name/instructions and both knowledge files were evidenced in the UI before live chat verification remained",
-    "Hakim control-plane local validator PASS: 17 registered tool families and 10 memory layers",
-    "Hakim control-plane regression suite PASS: 24 assertions",
-    "GitHub Actions HAKIM Control Plane Gate run 34657215495 completed SUCCESS on verified state head fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1",
-    "GitHub Actions Omega DNA Fail-Closed Gate run 34657215489 completed SUCCESS on the same verified state head",
-    "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 with PASS_CONTROL_PLANE_HOST_SCOPE and explicit permission/runtime limits"
+    "Hakim control-plane local validator PASS on the pre-upgrade baseline",
+    "Hakim control-plane regression suite PASS on the pre-upgrade baseline",
+    "Generic local-browser bridge static security regression PASS in GitHub CI",
+    "Current staged field mission passed host-side schema/security CI at head 9942bffd94a3705d04fc6c949331138dfe2b9b47",
+    "GitHub Actions HAKIM Control Plane Gate run 34657600851 completed SUCCESS on current staged mission head",
+    "GitHub Actions Omega DNA Fail-Closed Gate run 34657600802 completed SUCCESS on current staged mission head",
+    "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 and HAKIM_LOCAL_BROWSER_BRIDGE_v0_1 with explicit scope limits"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
     "Gemini mobile UI selectors changed and caused false field selection before fail-closed repair",
     "Cloud browser automation may require metered credits",
     "Remote desktop device may be offline and must not block host-executable work",
-    "Generic local-browser Hakim bridge is not yet field-qualified across multiple websites and must remain PARTIAL until actual runtime evidence exists"
+    "Generic local-browser Hakim bridge is not yet field-qualified on the user's phone and must remain PARTIAL until actual runtime evidence exists",
+    "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; CI gates passed"},
-    {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"Lineage Registry mirror written and read back successfully"},
-    {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"userscript UI visible and operational in Gemini; generic cross-site bridge not yet field-qualified"},
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; current staged mission CI passed"},
+    {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"governing document and lineage registry readable/writable"},
+    {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"static CI PASS; actual phone roundtrip pending"},
     {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"no dependency"},
     {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
   ],
   "evidence": {
-    "local_validation": {"status":"PASS","tool_count":17,"memory_layers":10},
-    "local_regression": {"status":"PASS","assertions":24},
-    "github_control_plane_ci": {"status":"PASS","run_id":34657215495,"head_sha":"fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1"},
-    "github_omega_dna_ci": {"status":"PASS","run_id":34657215489,"head_sha":"fdc1ee16bfcca4ce6276be3eac7ac8753473f3a1"},
-    "google_lineage_mirror": {"status":"PASS","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","artifact_id":"HAKIM_OMEGA_CONTROL_PLANE_v1","gate":"PASS_CONTROL_PLANE_HOST_SCOPE"}
+    "github_control_plane_ci":{"status":"PASS","run_id":34657600851,"head_sha":"9942bffd94a3705d04fc6c949331138dfe2b9b47"},
+    "github_omega_dna_ci":{"status":"PASS","run_id":34657600802,"head_sha":"9942bffd94a3705d04fc6c949331138dfe2b9b47"},
+    "staged_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A","relay_issue":1},
+    "google_lineage_mirror":{"status":"PASS","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","control_plane_artifact":"HAKIM_OMEGA_CONTROL_PLANE_v1","bridge_artifact":"HAKIM_LOCAL_BROWSER_BRIDGE_v0_1"}
   },
-  "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE",
-  "claims_limit": "This PASS covers control-plane schema, routing, state, memory architecture, Google lineage mirror and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the generic local browser bridge.",
-  "rollback": "Existing main branch before the Hakim control-plane series remains a valid rollback path; proven Omega baselines remain unchanged."
+  "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL",
+  "claims_limit": "This PASS covers control-plane schema, intent/memory/tool routing architecture, Google lineage mirror and CI-tested host behavior. It does not grant external account permissions, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
+  "rollback": "Proven Omega baselines remain unchanged; the previous Hakim control-plane commit remains a valid rollback point."
 }
