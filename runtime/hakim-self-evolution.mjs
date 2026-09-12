@@ -41,10 +41,19 @@ export function validateEvolution(x = loadEvolution()) {
   assert(Array.isArray(innovation.seven_lenses) && innovation.seven_lenses.length === 7, 'innovation must preserve seven lenses');
   assert(new Set(innovation.seven_lenses.map(x => x.id)).size === 7, 'innovation lens ids must be unique');
 
-  for (const phase of ['BIND_EVIDENCE','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY']) {
+  for (const phase of ['BIND_EVIDENCE','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS']) {
     assert(policy.cycle.includes(phase), `missing evolution phase: ${phase}`);
   }
   assert(policy.wisdom_gate?.required?.length === 7, 'self-evolution must require seven wisdom gates');
+  assert(policy.recursive_how?.default === 'ALWAYS_ON_WHEN_MATERIAL', 'recursive HOW must be material-by-default');
+  assert(Array.isArray(policy.recursive_how?.layers) && policy.recursive_how.layers.length === 8, 'recursive HOW must preserve eight operational layers');
+  for (const layer of ['HOW_TO_UNDERSTAND','HOW_TO_KNOW','HOW_TO_SOLVE_CAUSALLY','HOW_TO_CHOOSE','HOW_TO_EXECUTE','HOW_TO_VERIFY','HOW_TO_LEARN','HOW_TO_SUSTAIN']) {
+    assert(policy.recursive_how.layers.includes(layer), `missing recursive HOW layer: ${layer}`);
+  }
+  assert(policy.recursive_how.stop_rule?.includes('no material gap remains'), 'recursive HOW convergence guard missing');
+  assert(policy.recursive_how.anti_pathology?.some(x => x.includes('No infinite analysis')), 'recursive HOW anti-loop guard missing');
+  assert(policy.recursive_how.anti_pathology?.some(x => x.includes('No persistence claim')), 'recursive HOW propagation truth guard missing');
+
   const required = new Set(policy.promotion_gate.required);
   for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','wisdom_seven_gates_passed','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
     assert(required.has(r), `missing promotion requirement: ${r}`);
@@ -71,6 +80,7 @@ export function validateEvolution(x = loadEvolution()) {
     wisdom_gates: wisdom.seven_gates.length,
     innovation_version: innovation.version,
     innovation_lenses: innovation.seven_lenses.length,
+    recursive_how_layers: policy.recursive_how.layers.length,
     lessons: ledger.entries.length,
     baseline_protected: true
   };
@@ -91,18 +101,20 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   ];
   const failed = required.filter(k => candidate[k] !== true);
   if (candidate.material_nontrivial === true && candidate.innovation_search_completed !== true) failed.push('innovation_search_missing');
+  if (candidate.material_nontrivial === true && candidate.recursive_how_completed !== true) failed.push('recursive_how_missing');
   if (candidate.retries_failed_route_without_causal_change === true) failed.push('failed_route_retried_without_causal_change');
   if (candidate.change_for_novelty_only === true) failed.push('novelty_without_material_gain');
   if (candidate.disproportionate_action === true) failed.push('wisdom_proportionality_failed');
   if (candidate.ignores_known_second_order_harm === true) failed.push('wisdom_second_order_failed');
   if (candidate.needlessly_irreversible === true) failed.push('wisdom_reversibility_failed');
   if (candidate.needless_complexity === true) failed.push('wisdom_minimum_sufficient_action_failed');
+  if (candidate.recursive_how_without_expected_gain === true) failed.push('recursive_how_without_material_value');
   if (candidate.high_impact === true && candidate.explicit_authority !== true) failed.push('high_impact_authority_missing');
   if (candidate.mutates_underlying_model === true) failed.push('underlying_model_mutation_forbidden');
   return {
     decision: failed.length ? 'REJECT' : 'PROMOTE_CANDIDATE',
     failed: [...new Set(failed)],
-    rule: 'Wisdom governs selection and proportionality; innovation expands the search space; promotion still requires implementation tests, evidence, actual-output verification and all governing gates.'
+    rule: 'Wisdom governs selection and proportionality; innovation expands the search space; recursive HOW improves the method only while material value remains; promotion still requires implementation tests, evidence, actual-output verification and all governing gates.'
   };
 }
 
