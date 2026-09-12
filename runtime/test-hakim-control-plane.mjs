@@ -31,8 +31,21 @@ for(const x of ['FAIL_CLOSED_ON_P0_OR_CRITICAL_UNKNOWN','PROVEN_SUCCESS_FROZEN_B
 for(const x of ['NO_UNSUPPORTED_HIDDEN_INTENT','NO_CONSTRAINT_LOSS','NO_SUCCESS_CLAIM_WITHOUT_OBSERVABLE_ACCEPTANCE']) ok(cp.intent.anti_drift_checks.includes(x),`missing anti drift ${x}`);
 const pm=new Map(cp.platforms.platforms.map(p=>[p.id,p])); eq(pm.get('hakim_control_plane').mode,'ENFORCED_HOST_CONTROL_PLANE'); ok(['STATIC_CI_PASS_FIELD_PARTIAL','FIELD_SMOKE_PASS_SCOPE_LIMITED'].includes(pm.get('hakim_local_browser_bridge').mode)); eq(pm.get('gemini_gems').mode,'RUNTIME_PROJECTION_ONLY_UNLESS_EXTERNAL_GATE_WIRED'); eq(pm.get('unintegrated_external_platform').mode,'PROPAGATION_NOT_ENFORCED');
 
-const s=status(cp); eq(s.control_plane,'1.1.0'); eq(s.platform_registry,'1.5.0'); ok(s.next_action); ok(Array.isArray(s.bridges)); ok(['PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL','PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS'].includes(s.release_state));
+const explicitFieldStates=[
+  'PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL',
+  'PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS',
+  'PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PENDING'
+];
+const s=status(cp); eq(s.control_plane,'1.1.0'); eq(s.platform_registry,'1.5.0'); ok(s.next_action); ok(Array.isArray(s.bridges)); ok(explicitFieldStates.includes(s.release_state));
+eq(cp.state.release_state,'PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PENDING');
+eq(cp.state.evidence.android_safe_core.status,'HOST_BUILD_AND_GATES_PASS_FIELD_PENDING');
+eq(cp.state.evidence.android_safe_core.accessibility,false); eq(cp.state.evidence.android_safe_core.cost_policy,'FREE_OR_INCLUDED_ONLY');
 const serialized=JSON.stringify(cp).toLowerCase(); for(const marker of ['password=','api_key=','session_cookie=','authorization: bearer ','recovery_code=']) eq(serialized.includes(marker),false);
+
+const invalidSafe=structuredClone(cp); invalidSafe.state.evidence.android_safe_core.accessibility=true;
+assert.throws(()=>validateControlPlane(invalidSafe),/no-accessibility/); n++;
+const falsePass=structuredClone(cp); falsePass.state.release_state='PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PASS';
+assert.throws(()=>validateControlPlane(falsePass),/field boundary/); n++;
 
 const promoted=structuredClone(cp);
 promoted.platforms.platforms.find(x=>x.id==='hakim_local_browser_bridge').mode='FIELD_SMOKE_PASS_SCOPE_LIMITED';
@@ -40,4 +53,4 @@ promoted.state.release_state='PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_P
 promoted.tools.tools.find(x=>x.id==='local_browser_agent').qualification.field_runtime='PASS_SMOKE_SCOPE_ONLY';
 eq(validateControlPlane(promoted).pass,true);
 
-console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','field bridge scope-limited progression']},null,2));
+console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','explicit Android safe-core field-pending boundary','false Android field PASS rejection']},null,2));
