@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
   "version": "1.0.0",
-  "updated_at": "2026-09-12T06:10:00+03:00",
+  "updated_at": "2026-09-12T06:16:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -55,6 +55,16 @@
       "lesson": "A tested capability is not fully governed merely because its files exist; every material control capability must also be reachable from the governing manifest/state and independently regression-tested.",
       "guard": "For every new material control layer, verify three bindings before promotion: implementation exists, governing manifest/state reference it, and the exact integrated head passes independent gates.",
       "scope": "governed self-evolution integration"
+    },
+    {
+      "id": "L-20260912-006",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "A seven-lens innovation constitution was integrated into Hakim's governing manifest and self-evolution runtime, with guards against novelty-only change and unchanged retry of failed routes. The first manifest version bump triggered a fail-closed compatibility error; preserving the compatible manifest version while retaining the additive innovation overlay then passed both independent CI gates on the exact same head.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "Initial HAKIM Control Plane Gate run 34669825801 failed on unexpected control-plane version; repaired head ffac38ea09e4428b88bb7d9f1090f52052f1d11e passed HAKIM run 34669870351 and Omega run 34669870441.",
+      "lesson": "Innovation should widen causal search without creating unnecessary compatibility churn; additive overlays can preserve proven interfaces while still adding enforceable behavior.",
+      "guard": "Before bumping a governing schema/version for an additive innovation, test whether the existing contract can safely carry the new overlay; require exact-head independent gates after integration.",
+      "scope": "continuous innovation architecture"
     }
   ]
 }
