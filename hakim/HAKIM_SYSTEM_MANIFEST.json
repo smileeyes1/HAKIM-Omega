@@ -2,8 +2,8 @@
   "manifest_id": "HAKIM_OMEGA_CONTROL_PLANE",
   "version": "1.1.0",
   "status": "ACTIVE_VERIFIED_HOST_BASELINE",
-  "updated_at": "2026-09-12T03:56:00+03:00",
-  "purpose": "Durable sovereign control plane that turns user intent, aims, and long-horizon aspirations into verified outcomes through state recovery, intent compilation, memory, tool routing, execution, verification, repair, rollback, and delivery without pretending to own capabilities that are not actually connected.",
+  "updated_at": "2026-09-12T06:03:00+03:00",
+  "purpose": "Durable sovereign control plane that turns user intent, aims, and long-horizon aspirations into verified outcomes through state recovery, intent compilation, memory, tool routing, execution, verification, repair, rollback, continuous evidence-bound learning, and delivery without pretending to own capabilities that are not actually connected.",
   "authority": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
     "assurance_repo": "smileeyes1/HAKIM-Omega",
@@ -26,7 +26,8 @@
     "RUNTIME_AUTHORITY_DISCOVERY_REQUIRED",
     "NO_SECRET_IN_PUBLIC_REPOSITORY",
     "NO_FALSE_TOOL_OWNERSHIP",
-    "NO_SELF_CERTIFICATION_OF_EXTERNAL_RUNTIME"
+    "NO_SELF_CERTIFICATION_OF_EXTERNAL_RUNTIME",
+    "SELF_EVOLUTION_REQUIRES_EVIDENCE_REGRESSION_AND_ROLLBACK"
   ],
   "control_layers": [
     {"id":"governance","role":"constitution, contract, safety, rights, permission, release policy"},
@@ -36,11 +37,12 @@
     {"id":"tooling","role":"capability discovery, runtime authority probe, free-first routing, adapters, failover"},
     {"id":"execution","role":"perform allowed actions instead of merely describing them"},
     {"id":"verification","role":"independent checks, adversarial testing, regression, integration, reality gate"},
+    {"id":"self_evolution","role":"evidence-bound operational learning, candidate improvement, promotion gate, rollback and immediate reuse within proven scope"},
     {"id":"recovery","role":"checkpoint, resume, rollback, bridge recovery"},
     {"id":"artifact","role":"final deliverable identity, lineage, tested=delivered binding"},
     {"id":"delivery","role":"deliver usable result and minimal next action only when a real blocker remains"}
   ],
-  "mission_state_machine": ["RESTORE_STATE","UNDERSTAND","COMPILE_INTENT","LOCK_CONTRACT","DEFINE_SUCCESS","ASSESS_RISK","FIND_BOTTLENECK","PLAN","DISCOVER_TOOLS","AUTHORITY_CHECK","EXECUTE","OBSERVE_ACTUAL_OUTPUT","VERIFY","ADVERSARIAL_CHECK","REPAIR_ROOT_CAUSE","RETEST","REGRESSION","INTEGRATION","REALITY_GATE","UPDATE_STATE","FINALIZE","DELIVER"],
+  "mission_state_machine": ["RESTORE_STATE","UNDERSTAND","COMPILE_INTENT","LOCK_CONTRACT","DEFINE_SUCCESS","ASSESS_RISK","FIND_BOTTLENECK","PLAN","DISCOVER_TOOLS","AUTHORITY_CHECK","EXECUTE","OBSERVE_ACTUAL_OUTPUT","VERIFY","ADVERSARIAL_CHECK","REPAIR_ROOT_CAUSE","RETEST","REGRESSION","INTEGRATION","REALITY_GATE","UPDATE_STATE","LEARN_FROM_OUTCOME","EVOLUTION_PROMOTION_GATE","REUSE_PROVEN_LEARNING","FINALIZE","DELIVER"],
   "completion_states": ["PASS","FAIL","BLOCKED","PARTIAL","NOT_TESTED"],
   "intent_engine": {
     "schema": "hakim/HAKIM_INTENT_SCHEMA.json",
@@ -55,19 +57,29 @@
   },
   "memory": {
     "schema": "hakim/HAKIM_MEMORY_SCHEMA.json",
+    "learning_ledger": "hakim/HAKIM_LEARNING_LEDGER.json",
     "durable_backends": ["GitHub versioned control-plane state for non-secret canonical state","Google Control Plane for connected Google-native identities and registry","ChatGPT Library for durable user-owned artifacts when available","local browser storage for device-local runtime checkpoints"],
     "rule": "Conversation memory is helpful but never the only durable state for material missions."
+  },
+  "self_evolution": {
+    "policy": "hakim/HAKIM_SELF_EVOLUTION_POLICY.json",
+    "learning_ledger": "hakim/HAKIM_LEARNING_LEDGER.json",
+    "mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
+    "promotion_rule": "Only evidence-bound material improvements with no P0 regression, known rollback, unchanged authority boundary, no new paid dependency and protected secrets may be promoted.",
+    "truth_boundary": "Operational learning may update procedures, routing, validators and durable state; it does not retrain or modify the underlying ChatGPT model."
   },
   "tools": {
     "registry": "hakim/HAKIM_TOOL_REGISTRY.json",
     "selection_order": ["purpose_fit","actual_authorization","safety","probability_of_success","independence","free_or_low_cost","latency","user_burden"],
     "metered_fallback_requires": "No adequate free/owned route, or explicit user preference/approval where cost is material."
   },
-  "durable_state": {"active_state":"hakim/HAKIM_STATE.json","remote_mission":"hakim/REMOTE_MISSION.json","local_bridge_policy":"hakim/LOCAL_BRIDGE_POLICY.json"},
+  "durable_state": {"active_state":"hakim/HAKIM_STATE.json","remote_mission":"hakim/REMOTE_MISSION.json","local_bridge_policy":"hakim/LOCAL_BRIDGE_POLICY.json","phone_control_layer":"hakim/HAKIM_PHONE_CONTROL_LAYER.json","self_evolution_policy":"hakim/HAKIM_SELF_EVOLUTION_POLICY.json","learning_ledger":"hakim/HAKIM_LEARNING_LEDGER.json"},
   "runtime": {
     "kernel": "runtime/hakim-control-plane.mjs",
     "tests": "runtime/test-hakim-control-plane.mjs",
     "bridge_tests": "runtime/test-browser-bridge.mjs",
+    "self_evolution_kernel": "runtime/hakim-self-evolution.mjs",
+    "self_evolution_tests": "runtime/test-hakim-self-evolution.mjs",
     "ci": ".github/workflows/hakim-control-plane.yml",
     "default_command": "node runtime/hakim-control-plane.mjs validate"
   },
