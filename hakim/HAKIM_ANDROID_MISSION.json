@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "enabled": true,
+  "mission_id": "HAKIM_ANDROID_SMOKE_2026_09_12_A",
+  "cost_class": "FREE",
+  "data_classification": "PUBLIC",
+  "goal": "Prove that the new local Hakim Android app can receive a free public mission and open ChatGPT on the actual phone without handling credentials or private content.",
+  "actions": [
+    {"type":"OPEN_URL","url":"https://chatgpt.com/"},
+    {"type":"WAIT","ms":1500},
+    {"type":"STATUS","text":"تم الوصول إلى ChatGPT — اختبار حكيم المحلي ناجح حتى خطوة الفتح"},
+    {"type":"REPORT"}
+  ]
+}
