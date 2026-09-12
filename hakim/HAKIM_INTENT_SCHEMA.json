@@ -1,0 +1,65 @@
+{
+  "schema_id": "HAKIM_INTENT_SCHEMA",
+  "version": "1.0.0",
+  "purpose": "Represent user intentions, purposes, aspirations, dreams, and concrete requests as auditable mission contracts without inventing hidden goals.",
+  "principles": [
+    "Explicit user intent outranks inferred convenience.",
+    "Inference may clarify means but must not silently alter sovereign goals.",
+    "Long-horizon aspirations are decomposed into reversible milestones and the next highest safe action.",
+    "Unknowns that materially change the outcome remain explicit until resolved.",
+    "Every action must trace to an intent, acceptance criterion, dependency, risk control, or recovery need.",
+    "A dream or aspiration is not declared achieved until its defined observable outcome is actually evidenced."
+  ],
+  "intent_states": [
+    "CAPTURED",
+    "CLARIFIED",
+    "LOCKED",
+    "IN_PROGRESS",
+    "PARTIAL",
+    "PASS",
+    "BLOCKED",
+    "SUPERSEDED",
+    "CANCELLED"
+  ],
+  "fields": {
+    "intent_id": "string",
+    "statement": "string",
+    "why": "string_or_null",
+    "desired_outcome": "string",
+    "observable_acceptance": "array",
+    "non_goals": "array",
+    "hard_constraints": "array",
+    "preferences": "array",
+    "dependencies": "array",
+    "risks": "array",
+    "horizon": "NOW|SHORT|MEDIUM|LONG|OPEN",
+    "reversibility": "REVERSIBLE|PARTIAL|IRREVERSIBLE",
+    "sovereign_decisions": "array",
+    "known_unknowns": "array",
+    "evidence_required": "array",
+    "next_highest_safe_action": "string",
+    "status": "intent_state",
+    "source": "string",
+    "updated_at": "iso8601"
+  },
+  "compile_sequence": [
+    "CAPTURE",
+    "SEPARATE_WHAT_FROM_HOW",
+    "RECOVER_RELEVANT_CONTEXT",
+    "IDENTIFY_OUTCOME",
+    "DEFINE_ACCEPTANCE",
+    "IDENTIFY_CONSTRAINTS",
+    "IDENTIFY_UNKNOWN_UNKNOWNS_WHERE_POSSIBLE",
+    "ASSESS_RISK",
+    "DECOMPOSE_MILESTONES",
+    "CHOOSE_NEXT_HIGHEST_SAFE_ACTION",
+    "LOCK_CONTRACT"
+  ],
+  "anti_drift_checks": [
+    "PLAN_SERVES_DESIRED_OUTCOME",
+    "NO_UNSUPPORTED_HIDDEN_INTENT",
+    "NO_CONSTRAINT_LOSS",
+    "NO_FORMAT_SUBSTITUTION_WITHOUT_PERMISSION",
+    "NO_SUCCESS_CLAIM_WITHOUT_OBSERVABLE_ACCEPTANCE"
+  ]
+}
