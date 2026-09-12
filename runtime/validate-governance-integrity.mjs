@@ -74,14 +74,15 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     ['HOW_SEVEN_GOVERNS_MATERIAL_EXECUTION_METHOD', 'APPLY_HOW_SEVEN'],
     ['WISDOM_SEVEN_GATES_GOVERN_EVERY_MATERIAL_DECISION', 'APPLY_SEVEN_WISDOM_GATES'],
     ['INNOVATE_SEVEN_LENSES_BEFORE_CONVERGENCE_ON_MATERIAL_NONTRIVIAL_GAPS', 'INNOVATE_ACROSS_SEVEN_LENSES'],
-    ['SELF_EVOLUTION_REQUIRES_EVIDENCE_REGRESSION_AND_ROLLBACK', 'REGRESSION_TEST']
+    ['SELF_EVOLUTION_REQUIRES_EVIDENCE_REGRESSION_AND_ROLLBACK', 'REGRESSION_TEST'],
+    ['CROSS_LAYER_GOVERNANCE_INTEGRITY_REQUIRED_FOR_PROMOTION', 'CHECK_GOVERNANCE_INTEGRITY']
   ];
   for (const [inv, phase] of invariantPairs) {
     assert(manifest.protected_invariants?.includes(inv), `manifest invariant missing: ${inv}`);
     assert(policy.cycle?.includes(phase), `policy phase missing for invariant ${inv}: ${phase}`);
   }
 
-  for (const required of ['all_eight_scope_checked','how_seven_completed','wisdom_seven_gates_passed','bounded_completeness_checked','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
+  for (const required of ['all_eight_scope_checked','how_seven_completed','wisdom_seven_gates_passed','bounded_completeness_checked','governance_integrity_passed','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
     assert(policy.promotion_gate?.required?.includes(required), `promotion gate missing: ${required}`);
   }
 
@@ -92,12 +93,14 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     'hakim/HAKIM_SELF_EVOLUTION_POLICY.json',
     'runtime/hakim-self-evolution.mjs',
     'runtime/test-hakim-self-evolution.mjs',
-    'runtime/validate-governance-integrity.mjs'
+    'runtime/validate-governance-integrity.mjs',
+    'runtime/test-governance-integrity.mjs'
   ]) assert(workflow.includes(fileRef) || fileRef.startsWith('hakim/'), `workflow watch/step coverage missing: ${fileRef}`);
 
   assert(workflow.includes("node runtime/hakim-self-evolution.mjs validate"), 'workflow does not validate self-evolution');
   assert(workflow.includes('node runtime/test-hakim-self-evolution.mjs'), 'workflow does not run self-evolution adversarial tests');
   assert(workflow.includes('node runtime/validate-governance-integrity.mjs'), 'workflow does not run governance integrity gate');
+  assert(workflow.includes('node runtime/test-governance-integrity.mjs'), 'workflow does not run governance integrity mutation tests');
 
   for (const ref of [
     'HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json',
@@ -127,7 +130,8 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     recursive_how_layers: policy.recursive_how.layers.length,
     learning_entries: ledger.entries.length,
     cross_layer_bindings: true,
-    workflow_gate_bound: true
+    workflow_gate_bound: true,
+    mutation_test_bound: true
   };
 }
 
