@@ -1,6 +1,6 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "updated_at": "2026-09-12T06:55:00+03:00",
   "entries": [
     {
@@ -105,6 +105,16 @@
       "lesson": "A growing autonomous control plane needs a single independent consistency gate across constitutions, policy, state, runtime and CI; otherwise individually valid layers can drift apart during evolution.",
       "guard": "Block promotion whenever any material governance binding is missing, stale, contradictory or unwired; preserve the last verified baseline, synchronize the layers, then require both independent gates on the integrated head.",
       "scope": "cross-layer governance integrity and autonomous evolution hardening"
+    },
+    {
+      "id": "L-20260912-011",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "The user's interaction sequence «و؟ → و؟ → و؟ → لِمَ؟ → و؟ → و؟ → اعتمد → أصلح → أكمل → هَيّا» was converted into an always-on proportionate interaction loop inside the already-bound total-leadership constitution, protected by deterministic governance checks and a material self-evolution promotion guard.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "HAKIM Control Plane Gate run 34671496540 and Omega DNA Fail-Closed Gate run 34671496567 both succeeded on branch head 429e7dd528ad0989b0a8025664995f527184b075.",
+      "lesson": "A recurring meta-instruction is most reliable when translated into a bounded executable loop: search the remainder, alternatives and effects; ask why for root cause; choose the next proof-bearing step and persistence guard; then adopt, repair, complete and execute now, repeating only while material gain remains.",
+      "guard": "For every interaction, keep at least one proportionate internal WAW-LIMA-HAYYA pass where this constitution is loaded; for material non-trivial promotion require explicit loop completion; reject infinite recursion, unchanged failed-route retries, raw-reasoning exposure, authority expansion, busywork and persistence claims outside actually loaded contexts.",
+      "scope": "default interaction governance and material self-evolution"
     }
   ]
 }
