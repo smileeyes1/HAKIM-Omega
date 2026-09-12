@@ -1,14 +1,14 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
   "version": "1.0.3",
-  "updated_at": "2026-09-12T06:16:00+03:00",
+  "updated_at": "2026-09-12T06:21:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
-    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, deliberate continuous innovation, evidence-bound self-learning and delivery while preserving actual permission boundaries and minimizing user burden.",
+    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, seven-gate wisdom, deliberate continuous innovation, evidence-bound self-learning and delivery while preserving actual permission boundaries and minimizing user burden.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
     "current_bottleneck": "Field qualification of the free local Firefox/Violentmonkey bridge on the user's actual phone.",
-    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while the self-evolution and seven-lens innovation loop continues learning from verified outcomes.",
+    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while the wisdom, self-evolution and seven-lens innovation loops continue learning from verified outcomes.",
     "pending_external_user_step": "The bridge script must be installed/updated and active in Firefox on the phone; login or 2FA remains locally protected."
   },
   "baseline": {
@@ -18,25 +18,36 @@
     "control_plane_version": "1.1.0",
     "rule": "Do not downgrade or overwrite proven Ω assurance baselines; this control plane composes them."
   },
+  "wisdom": {
+    "status": "ACTIVE_HOST_VERIFIED",
+    "constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
+    "motto": "الحكمة.الحكمة.الحكمة.الحكمة.الحكمة.الحكمة.الحكمة",
+    "default": "ALWAYS_ON_ACROSS_MATERIAL_DECISIONS",
+    "seven_gates": 7,
+    "governing_rule": "Truth and uncertainty, purpose and rights, proportionality, second-order effects and timing, minimum sufficient action, reversibility and resilience, and human context with justice and mercy govern every material action and promotion.",
+    "anti_inaction_rule": "Wisdom must not become avoidable hesitation: when evidence is sufficient and delay adds risk or burden, execute the smallest sufficient authorized action.",
+    "relation_to_innovation": "Innovation generates and combines options; wisdom chooses which option is appropriate, when to act, and at what scale."
+  },
   "innovation": {
     "status": "ACTIVE_HOST_VERIFIED",
     "constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
     "motto": "ابتكر.ابتكر.ابتكر.ابتكر.ابتكر.ابتكر.ابتكر",
     "default": "ALWAYS_ON_WHEN_IT_CAN_IMPROVE_THE_OUTCOME",
     "seven_lenses": 7,
-    "material_gap_rule": "For material non-trivial gaps, expand the causal solution space before convergence; consider at least three genuinely different causal approaches when they exist, then select by evidenced net value.",
-    "anti_novelty_rule": "Do not change merely because an option is new; evidence, intent, authority, safety, rights, cost, regression and rollback remain binding."
+    "material_gap_rule": "For material non-trivial gaps, expand the causal solution space before convergence; consider at least three genuinely different causal approaches when they exist, then let wisdom and evidence select by net value.",
+    "anti_novelty_rule": "Do not change merely because an option is new; wisdom, evidence, intent, authority, safety, rights, cost, regression and rollback remain binding."
   },
   "self_evolution": {
     "status": "ACTIVE_HOST_VERIFIED",
     "mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
     "policy": "hakim/HAKIM_SELF_EVOLUTION_POLICY.json",
+    "wisdom_constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
     "innovation_constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
     "learning_ledger": "hakim/HAKIM_LEARNING_LEDGER.json",
     "runtime": "runtime/hakim-self-evolution.mjs",
     "tests": "runtime/test-hakim-self-evolution.mjs",
     "watchdog": "GitHub Actions scheduled hourly plus ChatGPT condition-watch heartbeat",
-    "promotion_rule": "PROMOTE only after evidence-bound material gain, deliberate innovation search when material/non-trivial, no P0 regression, rollback readiness, unchanged authority, no new paid dependency and secret safety; otherwise REJECT or NO_OP."
+    "promotion_rule": "PROMOTE only after all seven wisdom gates, evidence-bound material gain, deliberate innovation search when material/non-trivial, no P0 regression, rollback readiness, unchanged authority, no new paid dependency and secret safety; otherwise REJECT or NO_OP."
   },
   "proven_success": [
     "Existing HAKIM-Omega inheritable assurance repository and fail-closed lineage architecture",
@@ -50,9 +61,9 @@
     "GitHub Actions HAKIM Control Plane Gate run 34657600851 completed SUCCESS on current staged mission head",
     "GitHub Actions Omega DNA Fail-Closed Gate run 34657600802 completed SUCCESS on current staged mission head",
     "Google Lineage Registry contains HAKIM_OMEGA_CONTROL_PLANE_v1 and HAKIM_LOCAL_BROWSER_BRIDGE_v0_1 with explicit scope limits",
-    "HAKIM self-evolution policy, learning ledger, deterministic promotion gate and adversarial tests are present and passed HAKIM Control Plane Gate run 34669426068 on head 8225b57699036edf9e9b585ee0c592f3e83e0036",
-    "HAKIM control-plane workflow has an hourly scheduled watchdog and push-triggered immediate validation for self-evolution files",
-    "HAKIM seven-lens innovation constitution, self-evolution binding and anti-novelty/failed-route guards passed HAKIM Control Plane Gate run 34669870351 and Omega DNA Fail-Closed Gate run 34669870441 on head ffac38ea09e4428b88bb7d9f1090f52052f1d11e"
+    "HAKIM self-evolution policy, learning ledger, deterministic promotion gate and adversarial tests are present and continuously gated",
+    "HAKIM seven-lens innovation constitution and fail-closed anti-novelty/failed-route guards are active and verified",
+    "HAKIM seven-gate wisdom constitution, proportionality/second-order/reversibility/minimum-sufficient-action guards and wisdom-governed self-evolution passed HAKIM Control Plane Gate run 34670111717 and Omega DNA Fail-Closed Gate run 34670111724 on head 5457430d5b891e29c1b4aeeca965917c1ae624a2"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
@@ -61,25 +72,26 @@
     "Remote desktop device may be offline and must not block host-executable work",
     "Generic local-browser Hakim bridge is not yet field-qualified on the user's phone and must remain PARTIAL until actual runtime evidence exists",
     "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure",
-    "Operational self-learning and innovation do not retrain or modify the underlying ChatGPT model and must never be represented as model self-training",
+    "Operational self-learning, wisdom governance and innovation do not retrain or modify the underlying ChatGPT model and must never be represented as model self-training",
     "Rules do not propagate invisibly to external platforms or future contexts unless actually persisted, loaded or connected there"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; gated self-evolution and innovation changes committed and CI verified"},
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; gated wisdom, self-evolution and innovation changes committed and CI verified"},
     {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"governing document and lineage registry readable/writable"},
     {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"static CI PASS; actual phone roundtrip pending"},
     {"id":"remote_desktop_commander","state":"NOT_REQUIRED_FOR_CURRENT_HOST_WORK","evidence":"device route may be offline; host work continues"},
     {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
   ],
   "evidence": {
-    "github_control_plane_ci":{"status":"PASS","run_id":34669870351,"head_sha":"ffac38ea09e4428b88bb7d9f1090f52052f1d11e"},
-    "github_omega_dna_ci":{"status":"PASS","run_id":34669870441,"head_sha":"ffac38ea09e4428b88bb7d9f1090f52052f1d11e"},
-    "self_evolution_gate":{"status":"PASS","policy_version":"1.1.0","tests":17,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"learning_entries":5,"workflow_schedule":"17 * * * *"},
-    "innovation_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_INNOVATION_CONSTITUTION.json","head_sha":"ffac38ea09e4428b88bb7d9f1090f52052f1d11e","control_plane_run":34669870351,"omega_run":34669870441},
+    "github_control_plane_ci":{"status":"PASS","run_id":34670111717,"head_sha":"5457430d5b891e29c1b4aeeca965917c1ae624a2"},
+    "github_omega_dna_ci":{"status":"PASS","run_id":34670111724,"head_sha":"5457430d5b891e29c1b4aeeca965917c1ae624a2"},
+    "self_evolution_gate":{"status":"PASS","policy_version":"1.2.0","tests":23,"wisdom_constitution_version":"1.0.0","wisdom_gates":7,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"workflow_schedule":"hourly watchdog plus push validation"},
+    "wisdom_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_WISDOM_CONSTITUTION.json","verified_head_sha":"5457430d5b891e29c1b4aeeca965917c1ae624a2","control_plane_run":34670111717,"omega_run":34670111724},
+    "innovation_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_INNOVATION_CONSTITUTION.json"},
     "staged_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A","relay_issue":1},
     "google_lineage_mirror":{"status":"PASS","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","control_plane_artifact":"HAKIM_OMEGA_CONTROL_PLANE_v1","bridge_artifact":"HAKIM_LOCAL_BROWSER_BRIDGE_v0_1"}
   },
   "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL",
-  "claims_limit": "This PASS covers control-plane schema, intent/memory/tool routing architecture, evidence-bound operational self-learning, seven-lens innovation constitution, promotion/anti-novelty gates, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, propagate invisibly to unconnected platforms, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
-  "rollback": "Proven Omega baselines remain unchanged; self-evolution and innovation are additive and gated. Any candidate failing evidence, regression, authority, cost, secret-safety, intent or rollback requirements is rejected and the last verified baseline is retained."
+  "claims_limit": "This PASS covers control-plane schema, seven-gate wisdom governance, intent/memory/tool routing architecture, evidence-bound operational self-learning, seven-lens innovation, fail-closed wisdom and promotion guards, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, propagate invisibly to unconnected platforms, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
+  "rollback": "Proven Omega baselines remain unchanged; wisdom, self-evolution and innovation are additive and gated. Any candidate failing wisdom, evidence, regression, authority, cost, secret-safety, intent or rollback requirements is rejected and the last verified baseline is retained."
 }
