@@ -14,6 +14,8 @@ on:
       - 'runtime/validate-platform-registry.mjs'
       - 'runtime/validate-phone-control-layer.mjs'
       - 'runtime/test-phone-control-layer.mjs'
+      - 'runtime/hakim-self-evolution.mjs'
+      - 'runtime/test-hakim-self-evolution.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   pull_request:
@@ -29,8 +31,12 @@ on:
       - 'runtime/validate-platform-registry.mjs'
       - 'runtime/validate-phone-control-layer.mjs'
       - 'runtime/test-phone-control-layer.mjs'
+      - 'runtime/hakim-self-evolution.mjs'
+      - 'runtime/test-hakim-self-evolution.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
+  schedule:
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -58,3 +64,7 @@ jobs:
         run: node runtime/validate-phone-control-layer.mjs
       - name: Run phone control fail-closed regression tests
         run: node runtime/test-phone-control-layer.mjs
+      - name: Validate continuous self-evolution policy and learning ledger
+        run: node runtime/hakim-self-evolution.mjs validate
+      - name: Run adversarial self-evolution promotion tests
+        run: node runtime/test-hakim-self-evolution.mjs
