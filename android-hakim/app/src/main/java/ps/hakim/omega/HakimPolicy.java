@@ -12,6 +12,7 @@ public final class HakimPolicy {
     public static final String APP_VERSION = "٠٫١٫٠";
     public static final String MISSION_URL = "https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/hakim-next-android/hakim/HAKIM_ANDROID_MISSION.json";
     public static final String RELAY_ISSUE = "https://github.com/smileeyes1/HAKIM-Omega/issues/1";
+    public static final String RELAY_INSTALL_URL = "https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/hakim-next-android/mobile-agent/hakim-android-report-relay.user.js";
 
     public static final String[] ALL_EIGHT = {
             "الغاية والنتيجة", "الواقع والدليل", "الأسباب والتبعيات", "الخيارات والأدوات",
@@ -81,6 +82,10 @@ public final class HakimPolicy {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static boolean isRelayInstallUrl(String value) {
+        return RELAY_INSTALL_URL.equals(value);
     }
 
     public static boolean isAllowedPackage(String packageName) {
