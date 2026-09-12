@@ -64,10 +64,7 @@ public final class MainActivity extends Activity {
         root.addView(status, full());
 
         root.addView(button("تشغيل حكيم", v -> enableHakim()), full());
-        root.addView(button("فحص الآن", v -> {
-            status.setText("الحالة: بدأ الفحص الآن…");
-            HakimAccessibilityService.requestImmediatePoll(this);
-        }), full());
+        root.addView(button("فحص الآن", v -> runCheckNow()), full());
         root.addView(button("إيقاف حكيم", v -> {
             getSharedPreferences(PREFS, MODE_PRIVATE).edit().putBoolean("enabled", false).apply();
             status.setText("الحالة: حكيم متوقف محليًا");
@@ -76,6 +73,7 @@ public final class MainActivity extends Activity {
         root.addView(button("فتح ChatGPT", v -> openAllowed("https://chatgpt.com/")), full());
         root.addView(button("فتح Gemini", v -> openAllowed("https://gemini.google.com/app")), full());
         root.addView(button("إعدادات إمكانية الوصول", v -> startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))), full());
+        root.addView(button("تثبيت قناة التقرير المجانية", v -> openRelayInstaller()), full());
         root.addView(button("حالة الكلفة والصلاحيات", v -> showPolicyState()), full());
         root.addView(button("دستور حكيم المختصر", v -> showConstitution()), full());
 
@@ -118,11 +116,35 @@ public final class MainActivity extends Activity {
         }
     }
 
+    private void runCheckNow() {
+        if (!getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean("enabled", false)) {
+            status.setText("الحالة: حكيم متوقف — اضغط «تشغيل حكيم» أولًا.");
+            return;
+        }
+        if (!isHakimAccessibilityEnabled()) {
+            status.setText("الحالة: يلزم تفعيل إمكانية الوصول لحكيم أولًا.");
+            startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+            return;
+        }
+        status.setText("الحالة: بدأ الفحص الآن…");
+        HakimAccessibilityService.requestImmediatePoll(this);
+    }
+
     private void openAllowed(String url) {
         if (!HakimPolicy.isAllowedUrl(url)) {
             Toast.makeText(this, "حُظر الرابط بسياسة حكيم", Toast.LENGTH_SHORT).show();
             return;
         }
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+    private void openRelayInstaller() {
+        String url = HakimPolicy.RELAY_INSTALL_URL;
+        if (!HakimPolicy.isRelayInstallUrl(url) || !url.startsWith("https://raw.githubusercontent.com/")) {
+            Toast.makeText(this, "حُظر رابط التثبيت بسياسة حكيم", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        status.setText("قناة التقرير مجانية ومحلية: افتح الرابط في Firefox/Violentmonkey وثبّتها مرة واحدة فقط.");
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
