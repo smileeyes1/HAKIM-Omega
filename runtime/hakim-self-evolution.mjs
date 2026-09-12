@@ -39,8 +39,22 @@ export function validateEvolution(x = loadEvolution()) {
   for (const id of ['H1_HOW_UNDERSTAND','H2_HOW_KNOW','H3_HOW_SOLVE','H4_HOW_CHOOSE','H5_HOW_EXECUTE','H6_HOW_VERIFY_AND_RECOVER','H7_HOW_LEARN_SUSTAIN_AND_ADVANCE']) {
     assert(total.how_seven.some(x => x.id === id), `missing HOW_SEVEN layer: ${id}`);
   }
+  const interactionLoop = total.waw_lima_hayya_loop;
+  assert(interactionLoop?.default === 'ALWAYS_ON_EVERY_INTERACTION_PROPORTIONATE', 'WAW-LIMA-HAYYA must be always-on and proportionate');
+  assert(Array.isArray(interactionLoop?.questions) && interactionLoop.questions.length === 6, 'WAW-LIMA-HAYYA must preserve six question stages');
+  assert(new Set(interactionLoop.questions.map(x => x.id)).size === 6, 'WAW-LIMA-HAYYA ids must be unique');
+  for (const id of ['Q1_WAW_REMAINDER','Q2_WAW_ALTERNATIVES','Q3_WAW_EFFECTS','Q4_LIMA_ROOT_CAUSE','Q5_WAW_NEXT_AND_PROOF','Q6_WAW_PERSISTENCE']) {
+    assert(interactionLoop.questions.some(x => x.id === id), `missing WAW-LIMA-HAYYA question: ${id}`);
+  }
+  assert(JSON.stringify(interactionLoop.action_sequence) === JSON.stringify(['ADOPT_BEST_PROVEN_ROUTE','REPAIR_ROOT_CAUSE','COMPLETE_MATERIAL_SAFE_GAPS','HAYYA_EXECUTE_NOW']), 'WAW-LIMA-HAYYA action order changed');
+  assert(interactionLoop.interaction_rule?.includes('كل تفاعل'), 'WAW-LIMA-HAYYA every-interaction rule missing');
+  assert(interactionLoop.recursion_rule?.includes('انعدام المكسب المادي'), 'WAW-LIMA-HAYYA convergence rule missing');
+  assert(interactionLoop.failure_rule?.includes('لا تُعده بلا تغيير سببي'), 'WAW-LIMA-HAYYA failed-route guard missing');
+  assert(interactionLoop.visibility_rule?.includes('التفكير الداخلي الخام'), 'WAW-LIMA-HAYYA raw-reasoning boundary missing');
+  assert(interactionLoop.authority_rule?.includes('لا توسع'), 'WAW-LIMA-HAYYA authority boundary missing');
   assert(total.anti_overreach?.some(x => x.includes('All means all material and relevant aspects')), 'ALL_EIGHT authority boundary missing');
   assert(total.anti_overreach?.some(x => x.includes('No busywork')), 'ALL_EIGHT anti-busywork guard missing');
+  assert(total.anti_overreach?.some(x => x.includes('WAW-LIMA-HAYYA must converge')), 'WAW-LIMA-HAYYA anti-loop guard missing');
   assert(total.persistence?.limits?.includes('stored, loaded or available'), 'total leadership propagation truth boundary missing');
 
   assert(wisdom.constitution_id === 'HAKIM_WISDOM_CONSTITUTION', 'bad wisdom constitution id');
@@ -123,6 +137,8 @@ export function validateEvolution(x = loadEvolution()) {
     total_leadership_version: total.version,
     all_eight_dimensions: total.all_eight.length,
     how_seven_layers: total.how_seven.length,
+    waw_lima_hayya_questions: interactionLoop.questions.length,
+    waw_lima_hayya_actions: interactionLoop.action_sequence.length,
     wisdom_version: wisdom.version,
     wisdom_gates: wisdom.seven_gates.length,
     innovation_version: innovation.version,
@@ -153,6 +169,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
     'secrets_not_persisted'
   ];
   const failed = required.filter(k => candidate[k] !== true);
+  if (candidate.material_nontrivial === true && candidate.waw_lima_hayya_completed !== true) failed.push('waw_lima_hayya_missing');
   if (candidate.material_nontrivial === true && candidate.innovation_search_completed !== true) failed.push('innovation_search_missing');
   if (candidate.material_nontrivial === true && candidate.recursive_how_completed !== true) failed.push('recursive_how_missing');
   if (candidate.material_nontrivial === true && candidate.all_eight_material_dimensions_accounted !== true) failed.push('all_eight_material_dimension_unaccounted');
@@ -173,7 +190,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   return {
     decision: failed.length ? 'REJECT' : 'PROMOTE_CANDIDATE',
     failed: [...new Set(failed)],
-    rule: 'ALL_EIGHT prevents omission; HOW_SEVEN determines method; wisdom governs judgment; innovation expands options; recursive HOW deepens only while valuable; bounded completeness closes safe authorized material gaps; cross-layer governance integrity must pass; promotion still requires evidence, tests, actual-output verification and every governing gate.'
+    rule: 'ALL_EIGHT prevents omission; HOW_SEVEN determines method; WAW-LIMA-HAYYA forces bounded gap/root-cause/action closure before material promotion; wisdom governs judgment; innovation expands options; recursive HOW deepens only while valuable; bounded completeness closes safe authorized material gaps; cross-layer governance integrity must pass; promotion still requires evidence, tests, actual-output verification and every governing gate.'
   };
 }
 

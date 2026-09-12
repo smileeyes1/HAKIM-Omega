@@ -6,6 +6,8 @@ const v = validateEvolution();
 assert(v.pass === true, 'baseline evolution validation failed');
 assert(v.all_eight_dimensions === 8, 'ALL_EIGHT total leadership not active');
 assert(v.how_seven_layers === 7, 'HOW_SEVEN not active');
+assert(v.waw_lima_hayya_questions === 6, 'WAW-LIMA-HAYYA question loop not active');
+assert(v.waw_lima_hayya_actions === 4, 'WAW-LIMA-HAYYA action closure not active');
 assert(v.wisdom_gates === 7, 'seven wisdom gates not active');
 assert(v.innovation_lenses === 7, 'seven innovation lenses not active');
 assert(v.recursive_how_layers === 8, 'internal recursive HOW layers not active');
@@ -28,17 +30,18 @@ const good = {
   secrets_not_persisted: true
 };
 assert(evaluateCandidate(good).decision === 'PROMOTE_CANDIDATE', 'good candidate rejected');
-assert(evaluateCandidate({ ...good, material_nontrivial: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'PROMOTE_CANDIDATE', 'complete material candidate rejected');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'PROMOTE_CANDIDATE', 'complete material candidate rejected');
 
 for (const key of Object.keys(good)) {
   const c = { ...good, [key]: false };
   assert(evaluateCandidate(c).decision === 'REJECT', `candidate promoted with failed gate: ${key}`);
 }
 
-assert(evaluateCandidate({ ...good, material_nontrivial: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: false, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted with unaccounted ALL_EIGHT dimension');
-assert(evaluateCandidate({ ...good, material_nontrivial: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: false }).decision === 'REJECT', 'material candidate promoted without traceable HOW_SEVEN');
-assert(evaluateCandidate({ ...good, material_nontrivial: true, innovation_search_completed: false, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted without innovation search');
-assert(evaluateCandidate({ ...good, material_nontrivial: true, innovation_search_completed: true, recursive_how_completed: false, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted without recursive HOW');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: false, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted without WAW-LIMA-HAYYA closure');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: false, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted with unaccounted ALL_EIGHT dimension');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: true, innovation_search_completed: true, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: false }).decision === 'REJECT', 'material candidate promoted without traceable HOW_SEVEN');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: true, innovation_search_completed: false, recursive_how_completed: true, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted without innovation search');
+assert(evaluateCandidate({ ...good, material_nontrivial: true, waw_lima_hayya_completed: true, innovation_search_completed: true, recursive_how_completed: false, all_eight_material_dimensions_accounted: true, how_seven_traceable: true }).decision === 'REJECT', 'material candidate promoted without recursive HOW');
 assert(evaluateCandidate({ ...good, recursive_how_without_expected_gain: true }).decision === 'REJECT', 'recursive HOW continued without material value');
 assert(evaluateCandidate({ ...good, known_safe_authorized_material_gap_remains: true }).decision === 'REJECT', 'false COMPLETE allowed while material gap remains');
 assert(evaluateCandidate({ ...good, no_op_requested: true, safe_authorized_material_gain_remains: true }).decision === 'REJECT', 'premature NO_OP allowed');
@@ -56,11 +59,13 @@ assert(evaluateCandidate({ ...good, no_new_paid_dependency: false }).decision ==
 
 console.log(JSON.stringify({
   pass: true,
-  tests: 39,
+  tests: 44,
   policy: v.policy_version,
   total_leadership: v.total_leadership_version,
   all_eight_dimensions: v.all_eight_dimensions,
   how_seven_layers: v.how_seven_layers,
+  waw_lima_hayya_questions: v.waw_lima_hayya_questions,
+  waw_lima_hayya_actions: v.waw_lima_hayya_actions,
   wisdom: v.wisdom_version,
   wisdom_gates: v.wisdom_gates,
   innovation: v.innovation_version,
