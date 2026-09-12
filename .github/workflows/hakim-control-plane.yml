@@ -12,6 +12,8 @@ on:
       - 'runtime/ingest-browser-bridge-report.mjs'
       - 'runtime/test-field-bridge-ingest.mjs'
       - 'runtime/validate-platform-registry.mjs'
+      - 'runtime/validate-phone-control-layer.mjs'
+      - 'runtime/test-phone-control-layer.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   pull_request:
@@ -25,6 +27,8 @@ on:
       - 'runtime/ingest-browser-bridge-report.mjs'
       - 'runtime/test-field-bridge-ingest.mjs'
       - 'runtime/validate-platform-registry.mjs'
+      - 'runtime/validate-phone-control-layer.mjs'
+      - 'runtime/test-phone-control-layer.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   workflow_dispatch:
@@ -50,3 +54,7 @@ jobs:
         run: node runtime/test-browser-bridge.mjs
       - name: Test field-bridge evidence ingestion
         run: node runtime/test-field-bridge-ingest.mjs
+      - name: Validate phone control layer
+        run: node runtime/validate-phone-control-layer.mjs
+      - name: Run phone control fail-closed regression tests
+        run: node runtime/test-phone-control-layer.mjs
