@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
-  "version": "1.0.5",
-  "updated_at": "2026-09-12T07:01:00+03:00",
+  "version": "1.0.6",
+  "updated_at": "2026-09-12T12:15:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -116,6 +116,27 @@
       "lesson": "Governance integrity must validate the exact executable binding or causal relationship, not merely the presence of a related identifier somewhere in source text.",
       "guard": "Use exact binding checks plus adversarial mutation tests for critical governance wiring; mutation tests themselves are mandatory in CI and learning-ledger counts are cross-checked against active state.",
       "scope": "governance validator strength and false-positive prevention"
+    },
+    {
+      "id": "L-20260912-012",
+      "kind": "FAILURE_LESSON",
+      "observation": "The first native Android Hakim candidate used AccessibilityService for UI automation and Google Play Protect hard-blocked installation on the user's actual phone with a warning that the app could request access to sensitive data.",
+      "status": "FIELD_PROVEN_FAILURE",
+      "evidence": "User-provided screenshot from the actual Android phone on 2026-09-12 showing Play Protect app blocked for Hakim.",
+      "root_cause": "The candidate requested a highly sensitive Android accessibility capability while being sideloaded, creating an unacceptable platform-protection and trust boundary for the default field path.",
+      "lesson": "Do not optimize for automation depth before field-installability and least privilege. Platform protection is a design constraint, not a barrier to bypass.",
+      "guard": "Default Android candidate must contain no AccessibilityService/BIND_ACCESSIBILITY_SERVICE and must never instruct the user to disable Play Protect; reintroducing sensitive capability requires a separate explicit design/authority review and independent field qualification.",
+      "scope": "Android field architecture and least-privilege routing"
+    },
+    {
+      "id": "L-20260912-013",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "Hakim Android SAFE CORE was rebuilt as a separate least-privilege package with INTERNET only, no Accessibility source/config, no hidden screen reading/typing/clicking, FREE/INCLUDED cost gate, restricted OPEN_URL/WAIT/STATUS/REPORT actions, visible Arabic status, and fail-closed static regression coverage.",
+      "status": "HOST_VERIFIED_FIELD_PENDING",
+      "evidence": "HAKIM Android APK run 34685262676 and Omega DNA run 34685262694 succeeded on app code head 860014d089004f2a1be345296ea94c4c23998082; generated APK passed archive integrity and contained an APK signing block. Actual phone install/runtime remains pending.",
+      "lesson": "When a protected capability blocks the field goal, reduce privilege and split architecture before seeking a bypass. Keep host verification distinct from field verification.",
+      "guard": "SAFE CORE remains the only default Android field candidate until actual phone PASS; preserve package isolation, version alignment, no-Accessibility static checks, free-only cost gate and FIELD_PENDING truth boundary.",
+      "scope": "Android safe-core recovery and field qualification"
     }
   ]
 }
