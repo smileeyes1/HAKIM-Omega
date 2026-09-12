@@ -1,8 +1,10 @@
 // ==UserScript==
 // @name         حكيم Ω — الجسر المحلي المجاني
 // @namespace    hakim-omega-local-bridge
-// @version      0.1.2
+// @version      0.1.3
 // @description  جسر محلي آمن على Firefox/Violentmonkey يلتقط مهام حكيم غير السرية من GitHub وينفذها على نطاقات مسموحة مع حالة مستمرة وتقارير منقحة ومقاومة لضغط الطلبات.
+// @updateURL    https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/main/mobile-agent/hakim-omega-local-bridge.user.js
+// @downloadURL  https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/main/mobile-agent/hakim-omega-local-bridge.user.js
 // @match        https://gemini.google.com/*
 // @match        https://github.com/*
 // @match        https://docs.google.com/*
@@ -27,7 +29,7 @@
 
 (() => {
   'use strict';
-  const VERSION='٠٫١٫٢';
+  const VERSION='٠٫١٫٣';
   const ROOT='hakim-omega-local-bridge';
   const K='hakim_omega_bridge_';
   const MISSION_URL='https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/main/hakim/REMOTE_MISSION.json';
