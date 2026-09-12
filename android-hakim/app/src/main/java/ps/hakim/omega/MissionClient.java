@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 
 public final class MissionClient {
     private MissionClient() {}
@@ -35,9 +36,28 @@ public final class MissionClient {
 
     public static void validateMission(JSONObject m) {
         if (!m.optBoolean("enabled", false)) throw new IllegalStateException("MISSION_IDLE");
-        if (m.optString("mission_id", "").isEmpty()) throw new IllegalStateException("MISSION_ID_MISSING");
+        String id = m.optString("mission_id", "");
+        if (id.isEmpty() || !id.matches("[A-Z0-9_\\-]{1,120}")) throw new IllegalStateException("MISSION_ID_INVALID");
         if (!HakimPolicy.isAllowedCost(m.optString("cost_class", "COST_UNKNOWN"))) throw new IllegalStateException("BLOCKED_BY_COST");
         if (!HakimPolicy.isAllowedClassification(m.optString("data_classification", ""))) throw new IllegalStateException("CLASSIFICATION_BLOCKED");
+
+        String created = m.optString("created_at", "");
+        String expires = m.optString("expires_at", "");
+        if (created.isEmpty() || expires.isEmpty()) throw new IllegalStateException("MISSION_TIME_BOUNDARY_MISSING");
+        try {
+            Instant c = Instant.parse(created);
+            Instant x = Instant.parse(expires);
+            Instant now = Instant.now();
+            if (!x.isAfter(c)) throw new IllegalStateException("MISSION_TIME_RANGE_INVALID");
+            if (now.isAfter(x)) throw new IllegalStateException("MISSION_EXPIRED");
+            if (c.isAfter(now.plusSeconds(300))) throw new IllegalStateException("MISSION_NOT_YET_VALID");
+            if (x.isAfter(c.plusSeconds(14L * 24L * 3600L))) throw new IllegalStateException("MISSION_LIFETIME_TOO_LONG");
+        } catch (IllegalStateException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalStateException("MISSION_TIME_INVALID");
+        }
+
         JSONArray actions = m.optJSONArray("actions");
         if (actions == null || actions.length() == 0 || actions.length() > 30) throw new IllegalStateException("MISSION_ACTIONS_INVALID");
         String raw = m.toString();
@@ -51,7 +71,8 @@ public final class MissionClient {
                 throw new IllegalStateException("ACTION_TYPE_BLOCKED");
             }
             if (type.equals("OPEN_URL") && !HakimPolicy.isAllowedUrl(a.optString("url", ""))) throw new IllegalStateException("URL_BLOCKED");
-            if (type.equals("SET_TEXT") && HakimPolicy.containsSecretMarker(a.optString("text", ""))) throw new IllegalStateException("SECRET_TEXT_BLOCKED");
+            if (type.equals("SET_TEXT") && (HakimPolicy.containsSecretMarker(a.optString("text", "")) || HakimPolicy.isHighImpact(a.optString("text", "")))) throw new IllegalStateException("TEXT_BLOCKED");
+            if (type.equals("WAIT") && (a.optLong("ms", 0) < 0 || a.optLong("ms", 0) > 10000)) throw new IllegalStateException("WAIT_BLOCKED");
         }
     }
 }
