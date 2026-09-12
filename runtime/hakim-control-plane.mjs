@@ -41,18 +41,23 @@ export function validateControlPlane(cp = loadControlPlane()) {
   assert(tools.registry_id === 'HAKIM_TOOL_REGISTRY', 'bad tool registry id');
   assert(tools.version === '1.2.0', 'unexpected tool registry version');
   assert(Array.isArray(tools.authority_states) && tools.authority_states.includes('UNKNOWN') && tools.authority_states.includes('BLOCKED'), 'authority-state model missing');
+  assert(tools.cost_guard?.mode === 'FAIL_CLOSED_FREE_ONLY_DEFAULT', 'cost guard must fail closed');
+  assert(Array.isArray(tools.cost_guard?.autonomous_allowed) && tools.cost_guard.autonomous_allowed.length >= 3, 'allowed cost classes missing');
+  assert(Array.isArray(tools.cost_guard?.autonomous_blocked) && tools.cost_guard.autonomous_blocked.includes('COST_UNKNOWN') && tools.cost_guard.autonomous_blocked.includes('CREDIT_CONSUMING'), 'blocked cost classes missing');
   assert(Array.isArray(tools.tools) && tools.tools.length >= 22, 'too few registered tool families');
   const ids = tools.tools.map(t => t.id);
   assert(new Set(ids).size === ids.length, 'duplicate tool id');
+  const knownCostClasses = new Set([...tools.cost_guard.autonomous_allowed, ...tools.cost_guard.autonomous_blocked]);
   for (const t of tools.tools) {
     assert(typeof t.availability === 'string' && t.availability.length > 0, `availability missing for ${t.id}`);
     assert(typeof t.cost_policy === 'string', `cost policy missing for ${t.id}`);
+    assert(typeof t.cost_class === 'string' && knownCostClasses.has(t.cost_class), `invalid or missing cost class for ${t.id}`);
     assert(Array.isArray(t.capabilities), `capabilities missing for ${t.id}`);
   }
   const tm = toolMap(cp);
-  assert(tm.get('local_browser_agent')?.cost_policy === 'free', 'local free browser route missing');
+  assert(tm.get('local_browser_agent')?.cost_class === 'VERIFIED_FREE', 'local free browser route missing');
   assert(tm.get('local_browser_agent')?.default_enabled === true, 'local browser route must be default enabled');
-  assert(tm.get('tinyfish_browser')?.default_enabled === false && /metered/i.test(tm.get('tinyfish_browser')?.cost_policy || ''), 'metered browser must remain fallback');
+  assert(tm.get('tinyfish_browser')?.default_enabled === false && tm.get('tinyfish_browser')?.cost_class === 'CREDIT_CONSUMING', 'credit browser must remain blocked fallback');
   for (const id of ['chatgpt_web_research','chatgpt_automations','chatgpt_image_generation','chatgpt_artifact_runtime','plugin_directory']) assert(tm.has(id), `native capability missing: ${id}`);
 
   assert(memory.schema_id === 'HAKIM_MEMORY_SCHEMA', 'bad memory schema id');
@@ -96,11 +101,39 @@ export function planMission(taskType, availableToolIds = null, cp = loadControlP
   validateControlPlane(cp);
   const route = cp.tools.task_routes[taskType];
   if (!route) return { status:'BLOCKED', reason:'UNKNOWN_TASK_ROUTE', task_type:taskType, route:[] };
-  const known=toolMap(cp); let candidates=route.map(id=>known.get(id)).filter(Boolean);
-  if(Array.isArray(availableToolIds)){const allow=new Set(availableToolIds);candidates=candidates.filter(t=>allow.has(t.id));}
-  candidates.sort((a,b)=>{const rank=t=>(t.default_enabled?0:10)+(/metered/i.test(t.cost_policy)?5:0);return rank(a)-rank(b);});
-  if(!candidates.length) return {status:'BLOCKED',reason:'NO_AUTHORIZED_CAPABILITY',task_type:taskType,route:[]};
-  return {status:'PASS',task_type:taskType,route:candidates.map(t=>({id:t.id,availability:t.availability,cost_policy:t.cost_policy,default_enabled:t.default_enabled})),authority_rule:cp.tools.runtime_discovery_policy?.rule||'Runtime authority must be verified before execution.'};
+  const known = toolMap(cp);
+  let routed = route.map(id => known.get(id)).filter(Boolean);
+  if (Array.isArray(availableToolIds)) {
+    const allow = new Set(availableToolIds);
+    routed = routed.filter(t => allow.has(t.id));
+  }
+  if (!routed.length) return {status:'BLOCKED',reason:'NO_AUTHORIZED_CAPABILITY',task_type:taskType,route:[]};
+
+  const allowedCosts = new Set(cp.tools.cost_guard.autonomous_allowed);
+  const blockedByCost = routed.filter(t => !allowedCosts.has(t.cost_class));
+  const candidates = routed.filter(t => allowedCosts.has(t.cost_class));
+  if (!candidates.length) {
+    return {
+      status:'BLOCKED',
+      reason:'BLOCKED_BY_COST',
+      task_type:taskType,
+      route:[],
+      blocked_tools:blockedByCost.map(t => ({id:t.id,cost_class:t.cost_class,cost_policy:t.cost_policy})),
+      approval_rule:cp.tools.cost_guard.approval_rule,
+    };
+  }
+
+  candidates.sort((a,b) => {
+    const rank = t => (t.default_enabled ? 0 : 10);
+    return rank(a) - rank(b);
+  });
+  return {
+    status:'PASS',
+    task_type:taskType,
+    route:candidates.map(t=>({id:t.id,availability:t.availability,cost_policy:t.cost_policy,cost_class:t.cost_class,default_enabled:t.default_enabled})),
+    blocked_by_cost:blockedByCost.map(t=>({id:t.id,cost_class:t.cost_class})),
+    authority_rule:cp.tools.runtime_discovery_policy?.rule||'Runtime authority and cost eligibility must be verified before execution.'
+  };
 }
 
 export function status(cp = loadControlPlane()) {
