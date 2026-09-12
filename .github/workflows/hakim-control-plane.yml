@@ -16,6 +16,7 @@ on:
       - 'runtime/test-phone-control-layer.mjs'
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
+      - 'runtime/test-supreme-intent-contract.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
       - 'runtime/validate-canonical-instance.mjs'
@@ -37,6 +38,7 @@ on:
       - 'runtime/test-phone-control-layer.mjs'
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
+      - 'runtime/test-supreme-intent-contract.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
       - 'runtime/validate-canonical-instance.mjs'
@@ -76,6 +78,8 @@ jobs:
         run: node runtime/hakim-self-evolution.mjs validate
       - name: Run adversarial self-evolution promotion tests
         run: node runtime/test-hakim-self-evolution.mjs
+      - name: Validate durable supreme-intent interpretation contract
+        run: node runtime/test-supreme-intent-contract.mjs
       - name: Validate cross-layer governance integrity
         run: node runtime/validate-governance-integrity.mjs
       - name: Run adversarial governance-integrity mutation tests
