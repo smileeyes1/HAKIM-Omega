@@ -1,0 +1,71 @@
+{
+  "layer_id": "HAKIM_PHONE_CONTROL_LAYER",
+  "version": "0.1.0",
+  "status": "ACTIVE_HOST_VERIFIED_FIELD_PARTIAL",
+  "purpose": "Make Hakim the top-level phone-oriented execution layer across connected accounts, browser UI, authorized local shell, automation transports, state, recovery and verification without claiming permissions that are not actually active.",
+  "principles": [
+    "TRUTH_BEFORE_CLAIM",
+    "FREE_FIRST",
+    "LOCAL_FIRST_WHEN_SUFFICIENT",
+    "LEAST_PRIVILEGE",
+    "SECRETS_STAY_OUT_OF_PUBLIC_REPO",
+    "HIGH_IMPACT_REQUIRES_LOCAL_OR_EXPLICIT_CONFIRMATION",
+    "MEANS_FAILURE_DOES_NOT_FAIL_THE_GOAL",
+    "ACTUAL_PHONE_OUTPUT_IS_FINAL_JUDGE"
+  ],
+  "control_tiers": [
+    {"tier":"T0","name":"direct_connected_services","scope":"Gmail, Calendar, Drive and other authorized connectors without phone UI automation","field_requirement":"connector runtime authorization"},
+    {"tier":"T1","name":"local_browser_control","scope":"Allowed web apps in Firefox/Violentmonkey with click/type/navigate/assert/checkpoint","field_requirement":"actual phone roundtrip PASS"},
+    {"tier":"T2","name":"authorized_device_terminal","scope":"Filesystem, processes, scripts and local tooling through Remote Desktop Commander when the phone-side device endpoint is online","field_requirement":"device online plus runtime command PASS"},
+    {"tier":"T3","name":"termux_shizuku_shell","scope":"ADB-shell-class local automation without root through Shizuku/rish when explicitly enabled by the user on-device","field_requirement":"local Shizuku start, rish bind and harmless shell smoke PASS"},
+    {"tier":"T4","name":"screen_capture_when_needed","scope":"Screen capture only through Android MediaProjection with per-session user consent","field_requirement":"fresh user consent for each capture session"},
+    {"tier":"T5","name":"root_device_control","scope":"Not required and not pursued by default","field_requirement":"explicit separate user decision and safety review"}
+  ],
+  "channels": [
+    {"id":"chatgpt_connectors","role":"direct account execution","cost":"included_or_free","current_state":"AVAILABLE_BY_RUNTIME_PROBE","default":true},
+    {"id":"local_browser_agent","role":"free phone web UI executor","cost":"free","current_state":"HOST_STATIC_PASS_FIELD_PENDING","default":true},
+    {"id":"remote_desktop_commander","role":"authorized phone/local terminal and file executor","cost":"owned_or_included","current_state":"OFFLINE_LAST_PROBE_2026_09_12","default":true},
+    {"id":"make_ntfy_command_transport","role":"outbound phone command transport","cost":"use_included_free_quota_only","current_state":"HOST_SEND_PASS_PHONE_RECEIPT_UNPROVEN","default":false},
+    {"id":"make_result_webhook","role":"phone result return transport","cost":"use_included_free_quota_only","current_state":"HOST_RECEIVER_PASS_PHONE_ORIGIN_UNPROVEN","default":false},
+    {"id":"termux_shizuku_rish","role":"local non-root elevated shell fallback","cost":"free","current_state":"NOT_FIELD_QUALIFIED","default":false},
+    {"id":"tinyfish_cloud_browser","role":"cloud web automation fallback","cost":"metered","current_state":"OPTIONAL_ONLY","default":false}
+  ],
+  "routing_order": [
+    "Use a direct authorized connector when it completes the goal without weaker UI automation.",
+    "For phone-local filesystem or terminal work, use Remote Desktop Commander when the device is online.",
+    "For supported web UI on the phone, use the free local browser agent after field qualification.",
+    "Use Make/ntfy only as transport; transport receipt alone never proves phone execution.",
+    "Use Termux plus Shizuku/rish only after the user enables the required local Android permissions.",
+    "Use metered cloud-browser automation only when no adequate free route exists and cost policy allows it."
+  ],
+  "security_boundaries": {
+    "public_missions":"PUBLIC or INTERNAL_NON_SENSITIVE only",
+    "passwords_otp_recovery":"never placed in public missions or public GitHub reports",
+    "phone_reports":"sanitized status and evidence metadata by default, not private page contents",
+    "system_privilege":"no silent root, no silent developer-mode enablement, no silent permission escalation",
+    "high_impact":"delete, purchase, payment, account removal, publication and external message send require explicit task authority and applicable confirmation gate"
+  },
+  "current_evidence": {
+    "remote_desktop_probe":"Registered device exists but is offline on 2026-09-12; no command execution claim.",
+    "local_browser_bridge":"Host-side static/security CI PASS; harmless phone field mission staged; actual phone report absent.",
+    "make_outbound":"On-demand sender has successful host executions; this proves transport send only.",
+    "make_return":"Webhook receiver is active; observed delivery was a Make-origin probe, not a phone-origin result.",
+    "android_platform":"Accessibility and MediaProjection permissions cannot be silently enabled; Android requires user-controlled activation/consent for those protected capabilities."
+  },
+  "field_acceptance": [
+    "At least one harmless command is observed executing on the actual phone.",
+    "A return result is independently bound to the same request or mission id.",
+    "No protected secret is exposed in public transport or evidence.",
+    "A failed route falls back without corrupting proven state.",
+    "High-impact gates remain fail-closed.",
+    "After a reboot or disconnect, recovery behavior and required local re-authorization are explicit."
+  ],
+  "current_bottleneck": "Actual phone-side execution evidence is still missing for the free local browser bridge and the private command/return transport; the registered Remote Desktop Commander device is offline.",
+  "next_highest_safe_action": "Keep the harmless browser field mission staged, reconnect any authorized local device endpoint when available, and run only harmless phone roundtrip probes until one local path is field-proven; then promote that path without changing the proven host control plane.",
+  "external_sources": [
+    "https://developer.android.com/reference/android/accessibilityservice/AccessibilityService",
+    "https://developer.android.com/media/platform/av-capture",
+    "https://github.com/RikkaApps/Shizuku-API/blob/master/rish/README.md",
+    "https://github.com/termux/termux-api"
+  ]
+}
