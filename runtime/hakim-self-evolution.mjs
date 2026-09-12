@@ -41,7 +41,7 @@ export function validateEvolution(x = loadEvolution()) {
   assert(Array.isArray(innovation.seven_lenses) && innovation.seven_lenses.length === 7, 'innovation must preserve seven lenses');
   assert(new Set(innovation.seven_lenses.map(x => x.id)).size === 7, 'innovation lens ids must be unique');
 
-  for (const phase of ['BIND_EVIDENCE','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS']) {
+  for (const phase of ['BIND_EVIDENCE','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','MAP_ALL_MATERIAL_GAPS','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','EXECUTE_HIGHEST_SAFE_AUTHORIZED_ACTION','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','CHECK_MATERIAL_GAP_CLOSURE','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS','NO_OP_ONLY_IF_NO_SAFE_AUTHORIZED_MATERIAL_GAIN_REMAINS']) {
     assert(policy.cycle.includes(phase), `missing evolution phase: ${phase}`);
   }
   assert(policy.wisdom_gate?.required?.length === 7, 'self-evolution must require seven wisdom gates');
@@ -54,8 +54,20 @@ export function validateEvolution(x = loadEvolution()) {
   assert(policy.recursive_how.anti_pathology?.some(x => x.includes('No infinite analysis')), 'recursive HOW anti-loop guard missing');
   assert(policy.recursive_how.anti_pathology?.some(x => x.includes('No persistence claim')), 'recursive HOW propagation truth guard missing');
 
+  assert(policy.bounded_completeness?.default === 'ALWAYS_ON_FOR_MATERIAL_SCOPE', 'bounded completeness must be active for material scope');
+  assert(policy.bounded_completeness?.motto === 'كل شي.كل شي.بكل شي.كل شي.بكل شي.كل شي.بكل شي.كل شي.', 'bounded completeness motto changed');
+  assert(Array.isArray(policy.bounded_completeness?.dimensions) && policy.bounded_completeness.dimensions.length >= 12, 'bounded completeness dimensions incomplete');
+  for (const dimension of ['GOAL','CONTRACT','FACTS_AND_UNCERTAINTY','ROOT_CAUSE','ALTERNATIVES','AUTHORITY','SAFETY_AND_RIGHTS','COST_AND_RESOURCE_BOUNDARIES','EXECUTION','ACTUAL_OUTPUT','VERIFICATION','ADVERSARIAL_AND_REGRESSION','ROLLBACK_AND_RECOVERY','LEARNING','PERSISTENCE','NEXT_MATERIAL_GAP']) {
+    assert(policy.bounded_completeness.dimensions.includes(dimension), `missing completeness dimension: ${dimension}`);
+  }
+  assert(policy.bounded_completeness.completion_rule?.includes('known material, safe, authorized and net-beneficial action remains executable now'), 'false-complete guard missing');
+  assert(policy.bounded_completeness.no_fake_work_rule?.includes('not activity volume'), 'anti-busywork guard missing');
+  assert(policy.bounded_completeness.no_overreach_rule?.includes('Never expand permissions'), 'completeness authority boundary missing');
+  assert(policy.bounded_completeness.blocked_rule?.includes('classify the blocker precisely'), 'blocked-state truth guard missing');
+  assert(policy.bounded_completeness.stop_rule?.includes('NO_OP only when no safe authorized material gain remains now'), 'bounded completeness NO_OP rule missing');
+
   const required = new Set(policy.promotion_gate.required);
-  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','wisdom_seven_gates_passed','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
+  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','wisdom_seven_gates_passed','bounded_completeness_checked','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
     assert(required.has(r), `missing promotion requirement: ${r}`);
   }
   assert(innovation.minimum_diversity_rule?.includes('three genuinely different causal approaches'), 'innovation diversity rule missing');
@@ -81,6 +93,7 @@ export function validateEvolution(x = loadEvolution()) {
     innovation_version: innovation.version,
     innovation_lenses: innovation.seven_lenses.length,
     recursive_how_layers: policy.recursive_how.layers.length,
+    completeness_dimensions: policy.bounded_completeness.dimensions.length,
     lessons: ledger.entries.length,
     baseline_protected: true
   };
@@ -93,6 +106,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
     'positive_evidence_bound',
     'material_gain_is_observable',
     'wisdom_seven_gates_passed',
+    'bounded_completeness_checked',
     'no_p0_regression',
     'rollback_exists',
     'authority_not_expanded',
@@ -102,6 +116,10 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   const failed = required.filter(k => candidate[k] !== true);
   if (candidate.material_nontrivial === true && candidate.innovation_search_completed !== true) failed.push('innovation_search_missing');
   if (candidate.material_nontrivial === true && candidate.recursive_how_completed !== true) failed.push('recursive_how_missing');
+  if (candidate.known_safe_authorized_material_gap_remains === true) failed.push('false_complete_material_gap_remains');
+  if (candidate.no_op_requested === true && candidate.safe_authorized_material_gain_remains === true) failed.push('premature_no_op');
+  if (candidate.manufactures_busywork_for_exhaustiveness === true) failed.push('fake_completeness_busywork');
+  if (candidate.scope_expands_beyond_contract === true) failed.push('completeness_scope_overreach');
   if (candidate.retries_failed_route_without_causal_change === true) failed.push('failed_route_retried_without_causal_change');
   if (candidate.change_for_novelty_only === true) failed.push('novelty_without_material_gain');
   if (candidate.disproportionate_action === true) failed.push('wisdom_proportionality_failed');
@@ -114,7 +132,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   return {
     decision: failed.length ? 'REJECT' : 'PROMOTE_CANDIDATE',
     failed: [...new Set(failed)],
-    rule: 'Wisdom governs selection and proportionality; innovation expands the search space; recursive HOW improves the method only while material value remains; promotion still requires implementation tests, evidence, actual-output verification and all governing gates.'
+    rule: 'Wisdom governs selection; innovation expands options; recursive HOW improves method; bounded completeness closes every safe authorized material gap without busywork or overreach; promotion still requires evidence, tests, actual-output verification and all governing gates.'
   };
 }
 
