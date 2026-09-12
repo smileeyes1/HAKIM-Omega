@@ -19,7 +19,7 @@ public final class MissionClient {
         c.setConnectTimeout(10000);
         c.setReadTimeout(12000);
         c.setRequestProperty("Cache-Control", "no-cache");
-        c.setRequestProperty("User-Agent", "Hakim-Android/0.1");
+        c.setRequestProperty("User-Agent", "Hakim-Android-Safe/0.2");
         int code = c.getResponseCode();
         if (code < 200 || code >= 300) throw new IllegalStateException("MISSION_HTTP_" + code);
         StringBuilder sb = new StringBuilder();
@@ -59,7 +59,7 @@ public final class MissionClient {
         }
 
         JSONArray actions = m.optJSONArray("actions");
-        if (actions == null || actions.length() == 0 || actions.length() > 30) throw new IllegalStateException("MISSION_ACTIONS_INVALID");
+        if (actions == null || actions.length() == 0 || actions.length() > 20) throw new IllegalStateException("MISSION_ACTIONS_INVALID");
         String raw = m.toString();
         if (HakimPolicy.containsSecretMarker(raw)) throw new IllegalStateException("SECRET_MARKER_BLOCKED");
         if (HakimPolicy.isHighImpact(raw)) throw new IllegalStateException("HIGH_IMPACT_REMOTE_BLOCKED");
@@ -67,12 +67,12 @@ public final class MissionClient {
             JSONObject a = actions.optJSONObject(i);
             if (a == null) throw new IllegalStateException("ACTION_INVALID");
             String type = a.optString("type", "");
-            if (!(type.equals("OPEN_URL") || type.equals("WAIT") || type.equals("SET_TEXT") || type.equals("CLICK_TEXT") || type.equals("ASSERT_TEXT") || type.equals("STATUS") || type.equals("REPORT"))) {
-                throw new IllegalStateException("ACTION_TYPE_BLOCKED");
+            if (!(type.equals("OPEN_URL") || type.equals("WAIT") || type.equals("STATUS") || type.equals("REPORT"))) {
+                throw new IllegalStateException("ACTION_TYPE_BLOCKED_SAFE_CORE");
             }
             if (type.equals("OPEN_URL") && !HakimPolicy.isAllowedUrl(a.optString("url", ""))) throw new IllegalStateException("URL_BLOCKED");
-            if (type.equals("SET_TEXT") && (HakimPolicy.containsSecretMarker(a.optString("text", "")) || HakimPolicy.isHighImpact(a.optString("text", "")))) throw new IllegalStateException("TEXT_BLOCKED");
             if (type.equals("WAIT") && (a.optLong("ms", 0) < 0 || a.optLong("ms", 0) > 10000)) throw new IllegalStateException("WAIT_BLOCKED");
+            if (type.equals("STATUS") && (HakimPolicy.containsSecretMarker(a.optString("text", "")) || HakimPolicy.isHighImpact(a.optString("text", "")))) throw new IllegalStateException("STATUS_TEXT_BLOCKED");
         }
     }
 }
