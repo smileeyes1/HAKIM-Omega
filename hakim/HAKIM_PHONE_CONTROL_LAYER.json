@@ -1,72 +1,69 @@
 {
   "layer_id": "HAKIM_PHONE_CONTROL_LAYER",
-  "version": "0.1.1",
-  "status": "ACTIVE_HOST_VERIFIED_FIELD_PARTIAL",
-  "purpose": "Make Hakim the top-level phone-oriented execution layer across connected accounts, browser UI, authorized local shell, automation transports, state, recovery and verification without claiming permissions that are not actually active.",
+  "version": "0.2.0",
+  "status": "SAFE_CORE_HOST_VERIFIED_FIELD_PENDING",
+  "purpose": "Make Hakim the top-level phone-oriented execution layer while preserving Android platform protection, free-first routing, least privilege, explicit field evidence and truthful capability boundaries.",
   "principles": [
     "TRUTH_BEFORE_CLAIM",
-    "FREE_FIRST",
+    "FREE_OR_INCLUDED_ONLY_BY_DEFAULT",
     "LOCAL_FIRST_WHEN_SUFFICIENT",
     "LEAST_PRIVILEGE",
+    "NO_PLAY_PROTECT_BYPASS",
+    "NO_SILENT_PERMISSION_ESCALATION",
     "SECRETS_STAY_OUT_OF_PUBLIC_REPO",
-    "HIGH_IMPACT_REQUIRES_LOCAL_OR_EXPLICIT_CONFIRMATION",
-    "MEANS_FAILURE_DOES_NOT_FAIL_THE_GOAL",
     "ACTUAL_PHONE_OUTPUT_IS_FINAL_JUDGE",
-    "VISIBLE_LOCAL_FEEDBACK_FOR_MANUAL_PHONE_ACTIONS"
+    "MEANS_FAILURE_DOES_NOT_FAIL_THE_GOAL"
   ],
   "control_tiers": [
-    {"tier":"T0","name":"direct_connected_services","scope":"Gmail, Calendar, Drive and other authorized connectors without phone UI automation","field_requirement":"connector runtime authorization"},
-    {"tier":"T1","name":"local_browser_control","scope":"Allowed web apps in Firefox/Violentmonkey with click/type/navigate/assert/checkpoint plus immediate visible local status for activation and manual checks","field_requirement":"actual phone roundtrip PASS"},
-    {"tier":"T2","name":"authorized_device_terminal","scope":"Filesystem, processes, scripts and local tooling through Remote Desktop Commander when the phone-side device endpoint is online","field_requirement":"device online plus runtime command PASS"},
-    {"tier":"T3","name":"termux_shizuku_shell","scope":"ADB-shell-class local automation without root through Shizuku/rish when explicitly enabled by the user on-device","field_requirement":"local Shizuku start, rish bind and harmless shell smoke PASS"},
-    {"tier":"T4","name":"screen_capture_when_needed","scope":"Screen capture only through Android MediaProjection with per-session user consent","field_requirement":"fresh user consent for each capture session"},
-    {"tier":"T5","name":"root_device_control","scope":"Not required and not pursued by default","field_requirement":"explicit separate user decision and safety review"}
+    {"tier":"T0","name":"direct_connected_services","scope":"Authorized connectors that complete account tasks without phone UI automation","field_requirement":"connector runtime authorization"},
+    {"tier":"T1_SAFE","name":"hakim_android_safe_core","scope":"Local Android app with INTERNET only; free/public mission fetch, safe URL open, visible status and sanitized report relay; no Accessibility, screen reading, hidden typing or hidden clicking","field_requirement":"actual install + open + safe mission roundtrip on phone"},
+    {"tier":"T1_LEGACY","name":"accessibility_automation_experimental","scope":"Frozen. Previous sideloaded Accessibility design was blocked by Play Protect on the user's phone and is not a default route.","field_requirement":"must not be reactivated automatically"},
+    {"tier":"T2","name":"authorized_device_terminal","scope":"Filesystem/process execution through Remote Desktop Commander when its phone endpoint is online","field_requirement":"device online plus harmless command PASS"},
+    {"tier":"T3","name":"termux_shizuku_shell","scope":"Optional local non-root shell automation only after explicit on-device enablement","field_requirement":"local Shizuku/rish qualification"},
+    {"tier":"T4","name":"screen_capture_when_needed","scope":"Android MediaProjection only with fresh per-session user consent","field_requirement":"fresh user consent"},
+    {"tier":"T5","name":"root_device_control","scope":"Not required and not pursued by default","field_requirement":"separate explicit user decision and safety review"}
   ],
   "channels": [
     {"id":"chatgpt_connectors","role":"direct account execution","cost":"included_or_free","current_state":"AVAILABLE_BY_RUNTIME_PROBE","default":true},
-    {"id":"local_browser_agent","role":"free phone web UI executor","cost":"free","current_state":"HOST_STATIC_PASS_VISIBLE_FEEDBACK_FIELD_PENDING","default":true},
-    {"id":"remote_desktop_commander","role":"authorized phone/local terminal and file executor","cost":"owned_or_included","current_state":"OFFLINE_LAST_PROBE_2026_09_12","default":true},
-    {"id":"make_ntfy_command_transport","role":"outbound phone command transport","cost":"use_included_free_quota_only","current_state":"HOST_SEND_PASS_PHONE_RECEIPT_UNPROVEN","default":false},
-    {"id":"make_result_webhook","role":"phone result return transport","cost":"use_included_free_quota_only","current_state":"HOST_RECEIVER_PASS_PHONE_ORIGIN_UNPROVEN","default":false},
-    {"id":"termux_shizuku_rish","role":"local non-root elevated shell fallback","cost":"free","current_state":"NOT_FIELD_QUALIFIED","default":false},
-    {"id":"tinyfish_cloud_browser","role":"cloud web automation fallback","cost":"metered","current_state":"OPTIONAL_ONLY","default":false}
+    {"id":"hakim_android_safe_core","role":"safe phone field candidate","cost":"free","current_state":"HOST_BUILD_AND_GATES_PASS_FIELD_INSTALL_PENDING","default":true,"head_sha":"860014d089004f2a1be345296ea94c4c23998082","package":"ps.hakim.safe.debug","version":"0.2.0-debug"},
+    {"id":"local_browser_agent_legacy","role":"legacy free browser UI executor","cost":"free","current_state":"FROZEN_AFTER_PLAY_PROTECT_ACCESSIBILITY_PATH_FAILURE","default":false},
+    {"id":"remote_desktop_commander","role":"authorized phone/local terminal executor","cost":"owned_or_included","current_state":"OFFLINE_LAST_PROBE_2026_09_12","default":false},
+    {"id":"make_ntfy_command_transport","role":"transport only","cost":"included_free_quota_only","current_state":"HOST_SEND_PASS_PHONE_EXECUTION_UNPROVEN","default":false},
+    {"id":"termux_shizuku_rish","role":"optional local non-root shell fallback","cost":"free","current_state":"NOT_FIELD_QUALIFIED","default":false},
+    {"id":"tinyfish_cloud_browser","role":"cloud browser fallback","cost":"metered","current_state":"BLOCKED_BY_DEFAULT_COST_POLICY","default":false}
   ],
   "routing_order": [
-    "Use a direct authorized connector when it completes the goal without weaker UI automation.",
-    "For phone-local filesystem or terminal work, use Remote Desktop Commander when the device is online.",
-    "For supported web UI on the phone, use the free local browser agent after field qualification.",
-    "Use Make/ntfy only as transport; transport receipt alone never proves phone execution.",
-    "Use Termux plus Shizuku/rish only after the user enables the required local Android permissions.",
-    "Use metered cloud-browser automation only when no adequate free route exists and cost policy allows it."
+    "Use a direct authorized connector when it completes the goal without phone UI automation.",
+    "For the current phone field qualification, use HAKIM Android SAFE CORE only.",
+    "Never request disabling Play Protect or re-enable the Accessibility-based candidate automatically.",
+    "Use Remote Desktop Commander only when the registered device is actually online.",
+    "Use Termux/Shizuku only after explicit local enablement and separate qualification.",
+    "Do not use metered cloud-browser routes without a specific explicit paid-operation approval."
   ],
   "security_boundaries": {
+    "safe_core_permissions":"INTERNET only; no AccessibilityService, no screen-reading permission, no contacts/SMS/camera/microphone/location/storage management",
+    "safe_core_actions":"OPEN_URL, WAIT, STATUS and REPORT only",
     "public_missions":"PUBLIC or INTERNAL_NON_SENSITIVE only",
-    "passwords_otp_recovery":"never placed in public missions or public GitHub reports",
-    "phone_reports":"sanitized status and evidence metadata by default, not private page contents",
-    "system_privilege":"no silent root, no silent developer-mode enablement, no silent permission escalation",
-    "high_impact":"delete, purchase, payment, account removal, publication and external message send require explicit task authority and applicable confirmation gate"
+    "passwords_otp_recovery":"never placed in public missions or reports",
+    "phone_reports":"sanitized status/evidence metadata only",
+    "system_privilege":"no silent root, developer-mode enablement, Play Protect bypass or permission escalation",
+    "high_impact":"delete, purchase, payment, transfer, account removal, publication and external message send stay outside remote safe-core scope"
   },
   "current_evidence": {
-    "remote_desktop_probe":"Registered device exists but is offline on 2026-09-12; no command execution claim.",
-    "local_browser_bridge":"Bridge v0.1.1 host-side static/security CI PASS on head def769f2ecbde843205a1ea29e54615cfbe3857a; activation/manual-check visible feedback is regression-gated; harmless phone field mission remains staged; actual phone report absent.",
-    "make_outbound":"On-demand sender has successful host executions; this proves transport send only.",
-    "make_return":"Webhook receiver is active; observed delivery was a Make-origin probe, not a phone-origin result.",
-    "android_platform":"Accessibility and MediaProjection permissions cannot be silently enabled; Android requires user-controlled activation/consent for those protected capabilities."
+    "play_protect_field_failure":"The user's actual Android phone displayed Google Play Protect: app blocked because the prior candidate could request access to sensitive data. This field evidence invalidates the Accessibility-based candidate as the default route.",
+    "safe_core_source":"AndroidManifest on candidate head contains INTERNET only and no Accessibility service; old Accessibility service/config sources were removed from safe core.",
+    "safe_core_ci":"HAKIM Android APK workflow run 34685262676 SUCCESS and Omega DNA run 34685262694 SUCCESS on exact head 860014d089004f2a1be345296ea94c4c23998082.",
+    "safe_core_artifact":"APK artifact built, hashed and signed by the debug build; final phone installation/runtime evidence still pending.",
+    "remote_desktop_probe":"Registered device remains offline on latest probe; no command execution claim."
   },
   "field_acceptance": [
-    "At least one harmless command is observed executing on the actual phone.",
-    "A return result is independently bound to the same request or mission id.",
-    "No protected secret is exposed in public transport or evidence.",
-    "A failed route falls back without corrupting proven state.",
-    "High-impact gates remain fail-closed.",
-    "After a reboot or disconnect, recovery behavior and required local re-authorization are explicit."
+    "Play Protect does not hard-block the SAFE CORE installation for the prior Accessibility reason.",
+    "The app installs and opens on the actual phone.",
+    "User can press تشغيل حكيم الآمن / فحص الآن and observe immediate local status.",
+    "The staged FREE PUBLIC mission opens the allowed ChatGPT URL without requesting sensitive permission.",
+    "A sanitized result is observed or the user supplies direct visual evidence bound to the same mission.",
+    "No secret, paid credit, high-impact remote action or permission escalation occurs."
   ],
-  "current_bottleneck": "Actual phone-side execution evidence is still missing for the free local browser bridge and the private command/return transport; the registered Remote Desktop Commander device is offline. The browser bridge now gives immediate visible local feedback so a manual check cannot fail silently.",
-  "next_highest_safe_action": "Update/activate the existing Hakim browser bridge on the phone, tap the visible manual check, and let the already-staged harmless mission run; accept field PASS only when a request-bound sanitized HAKIM_BRIDGE_RESULT returns. Reconnect an authorized local device endpoint when available, but do not block the free browser route on it.",
-  "external_sources": [
-    "https://developer.android.com/reference/android/accessibilityservice/AccessibilityService",
-    "https://developer.android.com/media/platform/av-capture",
-    "https://github.com/RikkaApps/Shizuku-API/blob/master/rish/README.md",
-    "https://github.com/termux/termux-api"
-  ]
+  "current_bottleneck": "Actual installation and harmless mission execution of HAKIM Android SAFE CORE 0.2.0 on the user's phone; host build and independent gates pass, but FIELD PASS is not claimed yet.",
+  "next_highest_safe_action": "Install the newly built HAKIM Android SAFE CORE APK, open it, press تشغيل حكيم الآمن and then فحص الآن. If Android/Play Protect presents any message, treat that actual screen as evidence and repair the root cause rather than bypassing protection."
 }
