@@ -29,9 +29,15 @@ const ids=cp.tools.tools.map(t=>t.id); eq(new Set(ids).size,ids.length); eq(cp.t
 for(const x of ['working','episodic','semantic','procedural','evidence','artifact','failures','rollback','bridge_health','user_contract']) ok(cp.memory.layers.some(y=>y.id===x),`missing memory ${x}`);
 for(const x of ['FAIL_CLOSED_ON_P0_OR_CRITICAL_UNKNOWN','PROVEN_SUCCESS_FROZEN_BY_DEFAULT','NO_SECRET_IN_PUBLIC_REPOSITORY','NO_FALSE_TOOL_OWNERSHIP','INTENT_TO_OUTCOME_WITHOUT_GOAL_DRIFT','RUNTIME_AUTHORITY_DISCOVERY_REQUIRED']) ok(cp.manifest.protected_invariants.includes(x),`missing invariant ${x}`);
 for(const x of ['NO_UNSUPPORTED_HIDDEN_INTENT','NO_CONSTRAINT_LOSS','NO_SUCCESS_CLAIM_WITHOUT_OBSERVABLE_ACCEPTANCE']) ok(cp.intent.anti_drift_checks.includes(x),`missing anti drift ${x}`);
-const pm=new Map(cp.platforms.platforms.map(p=>[p.id,p])); eq(pm.get('hakim_control_plane').mode,'ENFORCED_HOST_CONTROL_PLANE'); eq(pm.get('hakim_local_browser_bridge').mode,'STATIC_CI_PASS_FIELD_PARTIAL'); eq(pm.get('gemini_gems').mode,'RUNTIME_PROJECTION_ONLY_UNLESS_EXTERNAL_GATE_WIRED'); eq(pm.get('unintegrated_external_platform').mode,'PROPAGATION_NOT_ENFORCED');
+const pm=new Map(cp.platforms.platforms.map(p=>[p.id,p])); eq(pm.get('hakim_control_plane').mode,'ENFORCED_HOST_CONTROL_PLANE'); ok(['STATIC_CI_PASS_FIELD_PARTIAL','FIELD_SMOKE_PASS_SCOPE_LIMITED'].includes(pm.get('hakim_local_browser_bridge').mode)); eq(pm.get('gemini_gems').mode,'RUNTIME_PROJECTION_ONLY_UNLESS_EXTERNAL_GATE_WIRED'); eq(pm.get('unintegrated_external_platform').mode,'PROPAGATION_NOT_ENFORCED');
 
-const s=status(cp); eq(s.control_plane,'1.1.0'); eq(s.platform_registry,'1.5.0'); ok(s.next_action); ok(Array.isArray(s.bridges)); eq(s.release_state,'PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL');
+const s=status(cp); eq(s.control_plane,'1.1.0'); eq(s.platform_registry,'1.5.0'); ok(s.next_action); ok(Array.isArray(s.bridges)); ok(['PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL','PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS'].includes(s.release_state));
 const serialized=JSON.stringify(cp).toLowerCase(); for(const marker of ['password=','api_key=','session_cookie=','authorization: bearer ','recovery_code=']) eq(serialized.includes(marker),false);
 
-console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','field bridge remains partial']},null,2));
+const promoted=structuredClone(cp);
+promoted.platforms.platforms.find(x=>x.id==='hakim_local_browser_bridge').mode='FIELD_SMOKE_PASS_SCOPE_LIMITED';
+promoted.state.release_state='PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS';
+promoted.tools.tools.find(x=>x.id==='local_browser_agent').qualification.field_runtime='PASS_SMOKE_SCOPE_ONLY';
+eq(validateControlPlane(promoted).pass,true);
+
+console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','field bridge scope-limited progression']},null,2));
