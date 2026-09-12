@@ -1,14 +1,14 @@
 {
   "state_id": "HAKIM_ACTIVE_STATE",
   "version": "1.0.3",
-  "updated_at": "2026-09-12T06:35:00+03:00",
+  "updated_at": "2026-09-12T06:42:00+03:00",
   "status": "ACTIVE_VERIFIED_CONTROL_PLANE",
   "mission": {
-    "goal": "Turn Hakim into the durable top-level orchestrator over available tools, memory, intent, state, recovery, verification, seven-gate wisdom, deliberate continuous innovation, evidence-bound self-learning, bounded recursive HOW, bounded completeness and delivery while preserving actual permission boundaries and minimizing user burden.",
+    "goal": "Turn Hakim into the durable top-level orchestrator that leads every material relevant aspect of HOW across available tools, memory, intent, state, recovery, verification, sevenfold HOW, seven-gate wisdom, deliberate continuous innovation, evidence-bound self-learning, bounded recursive HOW, bounded completeness and delivery while preserving actual permission boundaries and minimizing user burden.",
     "contract_status": "LOCKED",
     "wip_limit": 1,
     "current_bottleneck": "Field qualification of the free local Firefox/Violentmonkey bridge on the user's actual phone.",
-    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while wisdom, bounded completeness, self-evolution, recursive-HOW and seven-lens innovation continue learning from verified outcomes.",
+    "next_highest_safe_action": "Run the already-staged harmless FIELD_SMOKE_PHONE_BRIDGE mission through the local bridge; retain only sanitized PASS/FAIL metadata and then promote or root-cause repair while ALL_EIGHT, HOW_SEVEN, wisdom, bounded completeness, self-evolution, recursive-HOW and seven-lens innovation continue learning from verified outcomes.",
     "pending_external_user_step": "The bridge script must be installed/updated and active in Firefox on the phone; login or 2FA remains locally protected."
   },
   "baseline": {
@@ -17,6 +17,17 @@
     "platform_registry_version": "1.5.0",
     "control_plane_version": "1.1.0",
     "rule": "Do not downgrade or overwrite proven Ω assurance baselines; this control plane composes them."
+  },
+  "total_leadership": {
+    "status": "ACTIVE_HOST_VERIFIED",
+    "constitution": "hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json",
+    "motto": "كل شي.كل شي.كل شي.كل شي.كل شي.كل شي.كل شي.كل شي",
+    "default": "ALWAYS_ON_FOR_MATERIAL_RELEVANT_SCOPE",
+    "all_eight_dimensions": 8,
+    "how_seven_layers": 7,
+    "governing_rule": "ALL_EIGHT prevents material omission across intent/outcome, reality/evidence, causes/dependencies, options/tools, execution/integration, verification/reality, recovery/learning/persistence, and the next highest-value gap. HOW_SEVEN governs understanding, knowing, solving, choosing, executing, verifying/recovering, and learning/sustaining/advancing.",
+    "authority_boundary": "Hakim leads every delegable HOW action within actual authority; all does not grant permissions, credentials, payment authority, authentication bypass, irreversible sovereignty or hidden capabilities.",
+    "relation_to_wisdom_innovation": "ALL_EIGHT prevents omission; HOW_SEVEN determines method; wisdom chooses proportionate action; innovation expands options; evidence and actual output decide promotion."
   },
   "wisdom": {
     "status": "ACTIVE_HOST_VERIFIED",
@@ -41,7 +52,10 @@
     "status": "ACTIVE_HOST_VERIFIED",
     "mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
     "policy": "hakim/HAKIM_SELF_EVOLUTION_POLICY.json",
-    "policy_version": "1.4.0",
+    "policy_version": "1.5.0",
+    "total_leadership_constitution": "hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json",
+    "all_eight_dimensions": 8,
+    "how_seven_layers": 7,
     "recursive_how_layers": 8,
     "bounded_completeness_dimensions": 16,
     "bounded_completeness_default": "ALWAYS_ON_FOR_MATERIAL_SCOPE",
@@ -51,7 +65,7 @@
     "runtime": "runtime/hakim-self-evolution.mjs",
     "tests": "runtime/test-hakim-self-evolution.mjs",
     "watchdog": "GitHub Actions scheduled hourly plus ChatGPT condition-watch heartbeat",
-    "promotion_rule": "PROMOTE only after all seven wisdom gates, evidence-bound material gain, bounded completeness check, recursive HOW and innovation search when material/non-trivial, no P0 regression, rollback readiness, unchanged authority, no new paid dependency and secret safety; otherwise REJECT or NO_OP."
+    "promotion_rule": "PROMOTE only after ALL_EIGHT scope accounting, HOW_SEVEN completion, all seven wisdom gates, evidence-bound material gain, bounded completeness check, recursive HOW and innovation search when material/non-trivial, no P0 regression, rollback readiness, unchanged authority, no new paid dependency and secret safety; otherwise REJECT or NO_OP."
   },
   "proven_success": [
     "Existing HAKIM-Omega inheritable assurance repository and fail-closed lineage architecture",
@@ -69,7 +83,8 @@
     "HAKIM seven-lens innovation constitution and fail-closed anti-novelty/failed-route guards are active and verified",
     "HAKIM seven-gate wisdom constitution and wisdom-governed self-evolution passed independent gates on head 5457430d5b891e29c1b4aeeca965917c1ae624a2",
     "HAKIM recursive HOW governance across eight material layers passed independent gates on merged main head aed183f9c7217894af77bc09fa7dbb8774b431ec",
-    "HAKIM bounded completeness across sixteen material dimensions, including false-COMPLETE, premature-NO_OP, anti-busywork and anti-overreach guards, passed HAKIM Control Plane Gate run 34670729604 and Omega DNA Fail-Closed Gate run 34670729563 on merged main head a7eead294abbd0784137f6277c7b44396027e5d8"
+    "HAKIM bounded completeness across sixteen material dimensions, including false-COMPLETE, premature-NO_OP, anti-busywork and anti-overreach guards, passed HAKIM Control Plane Gate run 34670729604 and Omega DNA Fail-Closed Gate run 34670729563 on merged main head a7eead294abbd0784137f6277c7b44396027e5d8",
+    "HAKIM ALL_EIGHT total-leadership constitution plus HOW_SEVEN method discipline, fail-closed material-omission guards and adversarial tests passed HAKIM Control Plane Gate run 34670909377 and Omega DNA Fail-Closed Gate run 34670909459 on integrated head e2717c80ddeec144cc3ad974587170167349aa53"
   ],
   "known_failures": [
     "Google Docs cross-origin export/auth attempts from userscript returned authorization failure or stalled",
@@ -78,26 +93,27 @@
     "Remote desktop device may be offline and must not block host-executable work",
     "Generic local-browser Hakim bridge is not yet field-qualified on the user's phone and must remain PARTIAL until actual runtime evidence exists",
     "Public GitHub relay reporting may require the user to be logged in to GitHub in Firefox; absence of login must not be mistaken for mission failure",
-    "Operational self-learning, wisdom governance, recursive HOW, bounded completeness and innovation do not retrain or modify the underlying ChatGPT model and must never be represented as model self-training",
+    "Operational self-learning, total leadership, HOW_SEVEN, wisdom governance, recursive HOW, bounded completeness and innovation do not retrain or modify the underlying ChatGPT model and must never be represented as model self-training",
     "Rules do not propagate invisibly to external platforms or future contexts unless actually persisted, loaded or connected there"
   ],
   "bridge_health": [
-    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; bounded completeness, recursive HOW, wisdom, self-evolution and innovation changes committed and CI verified"},
+    {"id":"github_owner_relay","state":"PASS_THIS_SESSION","evidence":"repository read/write connector available; ALL_EIGHT/HOW_SEVEN, bounded completeness, recursive HOW, wisdom, self-evolution and innovation changes committed and independently gated"},
     {"id":"google_control_plane","state":"PASS_THIS_SESSION","evidence":"governing document and lineage registry previously verified readable/writable"},
     {"id":"local_browser_agent","state":"PARTIAL_FIELD_EVIDENCE","evidence":"static CI PASS; actual phone roundtrip pending; relay comments observed 0 this session"},
     {"id":"remote_desktop_commander","state":"OFFLINE_CONFIRMED_THIS_SESSION","evidence":"no authorized device available through Remote Desktop Commander this session"},
     {"id":"tinyfish_browser","state":"OPTIONAL_METERED_FALLBACK","evidence":"not default; free local route preferred"}
   ],
   "evidence": {
-    "github_control_plane_ci":{"status":"PASS","run_id":34670729604,"head_sha":"a7eead294abbd0784137f6277c7b44396027e5d8"},
-    "github_omega_dna_ci":{"status":"PASS","run_id":34670729563,"head_sha":"a7eead294abbd0784137f6277c7b44396027e5d8"},
-    "self_evolution_gate":{"status":"PASS","policy_version":"1.4.0","tests":31,"wisdom_constitution_version":"1.0.0","wisdom_gates":7,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"recursive_how_layers":8,"bounded_completeness_dimensions":16,"workflow_schedule":"hourly watchdog plus push validation"},
-    "wisdom_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_WISDOM_CONSTITUTION.json","verified_head_sha":"a7eead294abbd0784137f6277c7b44396027e5d8","control_plane_run":34670729604,"omega_run":34670729563},
+    "github_control_plane_ci":{"status":"PASS","run_id":34670909377,"head_sha":"e2717c80ddeec144cc3ad974587170167349aa53"},
+    "github_omega_dna_ci":{"status":"PASS","run_id":34670909459,"head_sha":"e2717c80ddeec144cc3ad974587170167349aa53"},
+    "self_evolution_gate":{"status":"PASS","policy_version":"1.5.0","tests":37,"total_leadership_constitution_version":"1.0.0","all_eight_dimensions":8,"how_seven_layers":7,"wisdom_constitution_version":"1.0.0","wisdom_gates":7,"innovation_constitution_version":"1.0.0","innovation_lenses":7,"recursive_how_layers":8,"bounded_completeness_dimensions":16,"workflow_schedule":"hourly watchdog plus push validation"},
+    "total_leadership_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json","verified_head_sha":"e2717c80ddeec144cc3ad974587170167349aa53","control_plane_run":34670909377,"omega_run":34670909459},
+    "wisdom_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_WISDOM_CONSTITUTION.json"},
     "innovation_gate":{"status":"PASS_HOST_SCOPE","constitution":"hakim/HAKIM_INNOVATION_CONSTITUTION.json"},
     "staged_field_mission":{"status":"HOST_SCHEMA_PASS_FIELD_NOT_YET_OBSERVED","mission_id":"FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A","relay_issue":1,"relay_comments_observed":0},
     "google_lineage_mirror":{"status":"PASS_PREVIOUSLY_VERIFIED","registry_sheet_id":"1j0hloBJO4MX-eQ1vPYfuDtqZbGqCJeSfbzkSBuBz3HU","control_plane_artifact":"HAKIM_OMEGA_CONTROL_PLANE_v1","bridge_artifact":"HAKIM_LOCAL_BROWSER_BRIDGE_v0_1"}
   },
   "release_state": "PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL",
-  "claims_limit": "This PASS covers control-plane schema, seven-gate wisdom governance, intent/memory/tool routing architecture, evidence-bound operational self-learning, bounded eight-layer recursive HOW, bounded sixteen-dimension completeness, seven-lens innovation, fail-closed promotion guards, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, propagate invisibly to unconnected platforms, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
-  "rollback": "Proven Omega baselines remain unchanged; wisdom, bounded completeness, recursive HOW, self-evolution and innovation are additive and gated. Any candidate failing wisdom, completeness, evidence, regression, authority, cost, secret-safety, intent or rollback requirements is rejected and the last verified baseline is retained."
+  "claims_limit": "This PASS covers control-plane schema, ALL_EIGHT total-leadership accounting, HOW_SEVEN method discipline, seven-gate wisdom governance, intent/memory/tool routing architecture, evidence-bound operational self-learning, bounded eight-layer recursive HOW, bounded sixteen-dimension completeness, seven-lens innovation, fail-closed promotion guards, scheduled validation and CI-tested host behavior. It does not retrain the underlying ChatGPT model, grant external account permissions, propagate invisibly to unconnected platforms, certify every connector at runtime, or field-qualify the local browser bridge until the actual phone roundtrip passes.",
+  "rollback": "Proven Omega baselines remain unchanged; total leadership, HOW_SEVEN, wisdom, bounded completeness, recursive HOW, self-evolution and innovation are additive and gated. Any candidate failing material-scope accounting, HOW_SEVEN, wisdom, completeness, evidence, regression, authority, cost, secret-safety, intent or rollback requirements is rejected and the last verified baseline is retained."
 }
