@@ -9,7 +9,8 @@ import java.util.Set;
 public final class HakimPolicy {
     private HakimPolicy() {}
 
-    public static final String APP_VERSION = "٠٫١٫٠";
+    public static final String APP_VERSION = "٠٫٢٫٠";
+    public static final String MODE = "SAFE_CORE_NO_ACCESSIBILITY";
     public static final String MISSION_URL = "https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/hakim-next-android/hakim/HAKIM_ANDROID_MISSION.json";
     public static final String RELAY_ISSUE = "https://github.com/smileeyes1/HAKIM-Omega/issues/1";
     public static final String RELAY_INSTALL_URL = "https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/hakim-next-android/mobile-agent/hakim-android-report-relay.user.js";
@@ -38,9 +39,6 @@ public final class HakimPolicy {
     private static final Set<String> ALLOWED_CLASSIFICATION = new HashSet<>(Arrays.asList("PUBLIC", "INTERNAL_NON_SENSITIVE"));
     private static final Set<String> ALLOWED_HOSTS = new HashSet<>(Arrays.asList(
             "chatgpt.com", "www.chatgpt.com", "gemini.google.com", "github.com"
-    ));
-    private static final Set<String> ALLOWED_PACKAGES = new HashSet<>(Arrays.asList(
-            "org.mozilla.firefox", "com.android.chrome", "com.google.android.googlequicksearchbox"
     ));
 
     private static final String[] SECRET_MARKERS = {
@@ -86,10 +84,6 @@ public final class HakimPolicy {
 
     public static boolean isRelayInstallUrl(String value) {
         return RELAY_INSTALL_URL.equals(value);
-    }
-
-    public static boolean isAllowedPackage(String packageName) {
-        return packageName != null && ALLOWED_PACKAGES.contains(packageName);
     }
 
     public static String normalize(String value) {
