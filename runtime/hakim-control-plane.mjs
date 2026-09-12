@@ -74,12 +74,22 @@ export function validateControlPlane(cp = loadControlPlane()) {
   assert(state.baseline?.control_plane_version === manifest.version, 'state/control-plane version mismatch');
   assert(state.baseline?.platform_registry_version === platforms.registry_version, 'state/platform registry mismatch');
   assert(state.baseline?.rule?.includes('Do not downgrade'), 'baseline protection missing');
-  assert(['PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL','PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS'].includes(state.release_state), 'field boundary must remain explicit');
+  const explicitFieldStates = [
+    'PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_PARTIAL',
+    'PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_PASS',
+    'PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PENDING'
+  ];
+  assert(explicitFieldStates.includes(state.release_state), 'field boundary must remain explicit');
+  if (state.release_state === 'PASS_CONTROL_PLANE_HOST_SCOPE_ANDROID_SAFE_CORE_FIELD_PENDING') {
+    assert(state.evidence?.android_safe_core?.status === 'HOST_BUILD_AND_GATES_PASS_FIELD_PENDING', 'Android safe-core field-pending evidence missing');
+    assert(state.evidence?.android_safe_core?.accessibility === false, 'Android safe-core must remain no-accessibility');
+    assert(state.evidence?.android_safe_core?.cost_policy === 'FREE_OR_INCLUDED_ONLY', 'Android safe-core cost boundary changed');
+  }
 
   const raw = JSON.stringify(cp).toLowerCase();
   for (const forbidden of ['password=', 'api_key=', 'authorization: bearer ', 'session_cookie=', 'recovery_code=']) assert(!raw.includes(forbidden), `possible secret marker found: ${forbidden}`);
 
-  return {pass:true,control_plane_version:manifest.version,tool_count:tools.tools.length,memory_layers:memory.layers.length,intent_states:intent.intent_states.length,platform_count:platforms.platforms.length,field_bridge:pm.get('hakim_local_browser_bridge').mode};
+  return {pass:true,control_plane_version:manifest.version,tool_count:tools.tools.length,memory_layers:memory.layers.length,intent_states:intent.intent_states.length,platform_count:platforms.platforms.length,field_bridge:pm.get('hakim_local_browser_bridge').mode,release_state:state.release_state};
 }
 
 export function structureIntent(input = {}, cp = loadControlPlane()) {
