@@ -1,0 +1,23 @@
+{
+  "baseline_id": "HAKIM_ANDROID_SAFE_CORE",
+  "version": "0.2.0-debug",
+  "package": "ps.hakim.safe.debug",
+  "app_label": "حكيم الآمن",
+  "mode": "SAFE_CORE_NO_ACCESSIBILITY",
+  "permissions": ["android.permission.INTERNET"],
+  "forbidden_capabilities": [
+    "AccessibilityService",
+    "BIND_ACCESSIBILITY_SERVICE",
+    "screen_reading",
+    "hidden_typing",
+    "hidden_clicking",
+    "password_or_otp_handling",
+    "paid_or_metered_autonomous_execution"
+  ],
+  "allowed_remote_actions": ["OPEN_URL", "WAIT", "STATUS", "REPORT"],
+  "cost_policy": "FREE_OR_INCLUDED_ONLY",
+  "field_status": "FIELD_PENDING",
+  "field_rule": "Host build or CI success never equals actual-phone PASS. Promote only after install/open/safe mission evidence from the real phone.",
+  "play_protect_rule": "Never ask the user to disable or bypass Play Protect. The previous Accessibility-based candidate remains frozen after actual-phone block evidence.",
+  "rollback_rule": "Retain the last verified host baseline and reject any candidate that reintroduces sensitive permission, paid-credit dependency, false field PASS or weaker evidence boundary."
+}
