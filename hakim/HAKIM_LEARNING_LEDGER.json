@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
-  "version": "1.0.0",
-  "updated_at": "2026-09-12T06:16:00+03:00",
+  "version": "1.0.1",
+  "updated_at": "2026-09-12T06:27:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -65,6 +65,16 @@
       "lesson": "Innovation should widen causal search without creating unnecessary compatibility churn; additive overlays can preserve proven interfaces while still adding enforceable behavior.",
       "guard": "Before bumping a governing schema/version for an additive innovation, test whether the existing contract can safely carry the new overlay; require exact-head independent gates after integration.",
       "scope": "continuous innovation architecture"
+    },
+    {
+      "id": "L-20260912-007",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "Bounded recursive HOW governance was added across eight material layers with explicit stop conditions, fail-closed promotion guards, and adversarial tests; the merged main head passed both independent HAKIM and Omega gates.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "HAKIM Control Plane Gate run 34670378257 and Omega DNA Fail-Closed Gate run 34670378306 on merged main head aed183f9c7217894af77bc09fa7dbb8774b431ec",
+      "lesson": "Method improvement itself can be made systematic without causing infinite analysis when recursion is bounded by material value, information gain, proportionality, and explicit stop rules.",
+      "guard": "For material non-trivial changes, require recursive HOW coverage where it adds value, reject recursion without expected gain, and preserve actual-output evidence, wisdom gates, regression checks, authority limits, free-first constraints, and rollback.",
+      "scope": "bounded operational meta-improvement"
     }
   ]
 }
