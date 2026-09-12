@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
-  "version": "1.0.3",
-  "updated_at": "2026-09-12T06:40:00+03:00",
+  "version": "1.0.4",
+  "updated_at": "2026-09-12T06:55:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -95,6 +95,16 @@
       "lesson": "A broad 'lead everything' instruction becomes reliable only when translated into bounded material-scope coverage plus a concrete method discipline: ALL_EIGHT prevents omission, HOW_SEVEN controls method, wisdom governs judgment, innovation expands options, and evidence decides promotion.",
       "guard": "For material missions, require ALL_EIGHT accounting and HOW_SEVEN traceability before promotion; reject false completeness, hidden material omissions, busywork, authority expansion and unverified real-world claims.",
       "scope": "end-to-end total leadership governance"
+    },
+    {
+      "id": "L-20260912-010",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "A dedicated cross-layer governance-integrity validator was added and made a fail-closed prerequisite for self-evolution promotion. An intermediate head failed the HAKIM gate while governance references were temporarily inconsistent; after synchronizing policy, runtime, manifest, state and CI wiring, both independent gates passed on the integrated head.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "Intermediate HAKIM run 34671265105 failed on head 3e666b6292fdf2baddf517d513b9894478513ce6 while Omega remained successful; synchronized head d3d87f9b590eb6aa6463b618b5614a1c40e4a2d0 passed HAKIM run 34671289203 and Omega run 34671289205.",
+      "lesson": "A growing autonomous control plane needs a single independent consistency gate across constitutions, policy, state, runtime and CI; otherwise individually valid layers can drift apart during evolution.",
+      "guard": "Block promotion whenever any material governance binding is missing, stale, contradictory or unwired; preserve the last verified baseline, synchronize the layers, then require both independent gates on the integrated head.",
+      "scope": "cross-layer governance integrity and autonomous evolution hardening"
     }
   ]
 }
