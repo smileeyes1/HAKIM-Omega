@@ -17,6 +17,8 @@ on:
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
       - 'runtime/test-supreme-intent-contract.mjs'
+      - 'runtime/validate-supreme-intent-binding.mjs'
+      - 'runtime/test-supreme-intent-binding.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
       - 'runtime/validate-canonical-instance.mjs'
@@ -39,6 +41,8 @@ on:
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
       - 'runtime/test-supreme-intent-contract.mjs'
+      - 'runtime/validate-supreme-intent-binding.mjs'
+      - 'runtime/test-supreme-intent-binding.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
       - 'runtime/validate-canonical-instance.mjs'
@@ -80,6 +84,10 @@ jobs:
         run: node runtime/test-hakim-self-evolution.mjs
       - name: Validate durable supreme-intent interpretation contract
         run: node runtime/test-supreme-intent-contract.mjs
+      - name: Validate fail-closed supreme-intent root binding
+        run: node runtime/validate-supreme-intent-binding.mjs
+      - name: Run supreme-intent binding regression tests
+        run: node runtime/test-supreme-intent-binding.mjs
       - name: Validate cross-layer governance integrity
         run: node runtime/validate-governance-integrity.mjs
       - name: Run adversarial governance-integrity mutation tests

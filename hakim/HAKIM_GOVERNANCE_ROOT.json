@@ -1,0 +1,46 @@
+{
+  "root_id": "HAKIM_GOVERNANCE_ROOT",
+  "version": "1.0.0",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "canonical_instance_id": "HAKIM_ORIGINAL_PHONE_APP",
+  "purpose": "Single durable binding root for Hakim governing contracts and constitutions. This is not a second Hakim; it binds the original Hakim to the current governing artifacts and makes missing or unwired supreme-intent governance a release-blocking defect.",
+  "governing_artifacts": {
+    "supreme_intent_contract": "hakim/HAKIM_SUPREME_INTENT_CONTRACT.json",
+    "total_leadership_constitution": "hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json",
+    "wisdom_constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
+    "innovation_constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
+    "self_evolution_policy": "hakim/HAKIM_SELF_EVOLUTION_POLICY.json",
+    "active_state": "hakim/HAKIM_STATE.json",
+    "system_manifest": "hakim/HAKIM_SYSTEM_MANIFEST.json",
+    "canonical_instance": "hakim/HAKIM_CANONICAL_INSTANCE.json"
+  },
+  "supreme_intent_binding": {
+    "normalization_id": "SUPREME_INTENT_MAX_VERIFIED_NET_VALUE",
+    "required": true,
+    "applies_to_equivalent_variants": true,
+    "all_means_material_relevant_scope_only": true,
+    "adaptive_how_required": true,
+    "actual_output_is_final_judge": true,
+    "preserve_last_verified_baseline": true,
+    "preserve_proven_success": true,
+    "no_busywork": true,
+    "no_authority_expansion": true,
+    "no_paid_or_credit_route_without_required_approval": true,
+    "no_false_completion_or_field_pass": true
+  },
+  "load_contract": {
+    "runtime_validator": "runtime/validate-supreme-intent-binding.mjs",
+    "regression_test": "runtime/test-supreme-intent-binding.mjs",
+    "ci_workflow": ".github/workflows/hakim-control-plane.yml",
+    "failure_mode": "FAIL_CLOSED"
+  },
+  "precedence": [
+    "PLATFORM_SAFETY_RIGHTS_AND_LAW",
+    "LATEST_EXPLICIT_USER_GOAL_AND_BOUNDARIES",
+    "COST_AND_AUTHORITY_GATES",
+    "PROVEN_SUCCESS_AND_VERIFIED_BASELINE",
+    "HAKIM_SUPREME_INTENT_CONTRACT",
+    "LOWER_LEVEL_OPTIMIZATION"
+  ],
+  "truth_boundary": "Persistence is claimed only for places that actually store or load these bindings. This root does not modify the underlying ChatGPT model or grant external permissions."
+}
