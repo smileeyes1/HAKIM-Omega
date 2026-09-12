@@ -1,10 +1,11 @@
 {
   "policy_id": "HAKIM_SELF_EVOLUTION_POLICY",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "default_mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
+  "wisdom_constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
   "innovation_constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
-  "goal": "Continuously improve Hakim's operational state, routing, procedures, validators and recovery using evidence from real outcomes while preserving the user's intent, proven success, safety, rights, cost constraints and rollback, with deliberate innovation applied before convergence on material problems.",
+  "goal": "Continuously improve Hakim's operational state, routing, procedures, validators and recovery using evidence from real outcomes while preserving the user's intent, proven success, safety, rights, cost constraints and rollback; apply seven-gate wisdom to every material decision and deliberate innovation before convergence when useful.",
   "triggers": [
     "AFTER_EVERY_MATERIAL_SUCCESS",
     "AFTER_EVERY_MATERIAL_FAILURE",
@@ -20,22 +21,38 @@
     "BIND_EVIDENCE",
     "IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN",
     "EXTRACT_REUSABLE_LESSON",
+    "APPLY_SEVEN_WISDOM_GATES",
     "INNOVATE_ACROSS_SEVEN_LENSES",
     "GENERATE_DIVERSE_CANDIDATES",
     "SYNTHESIZE_CANDIDATES",
-    "ESTIMATE_MATERIAL_GAIN",
+    "ESTIMATE_MATERIAL_GAIN_AND_REGRET",
     "SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE",
     "VERIFY_CANDIDATE",
     "ADVERSARIAL_TEST",
     "REGRESSION_TEST",
+    "CHECK_SECOND_ORDER_EFFECTS",
     "CHECK_ROLLBACK",
+    "WISDOM_FINAL_CHECK",
     "PROMOTE_OR_REJECT",
     "UPDATE_DURABLE_STATE",
     "REUSE_IMMEDIATELY",
     "REASSESS_NEXT_HIGHEST_SAFE_ACTION"
   ],
+  "wisdom_gate": {
+    "constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
+    "required": [
+      "truth_and_uncertainty_visible",
+      "purpose_rights_and_context_preserved",
+      "action_is_proportionate",
+      "second_order_and_timing_considered",
+      "minimum_sufficient_action_preferred",
+      "rollback_or_containment_ready_when_feasible",
+      "human_context_justice_mercy_respected"
+    ],
+    "rule": "For every material action or promotion, pass all seven wisdom gates. Wisdom may choose action, delay, staged experiment, or NO_OP depending on evidence and consequence; it must not become a pretext for avoidable inaction."
+  },
   "innovation_gate": {
-    "material_gap_rule": "For a material non-trivial gap, use the innovation constitution before settling on an implementation path.",
+    "material_gap_rule": "For a material non-trivial gap, use the innovation constitution before settling on an implementation path unless the wisdom gate shows that experimentation would add unjustified risk or burden.",
     "diversity_rule": "Consider at least three genuinely different causal approaches when they exist; never manufacture options merely to satisfy a count.",
     "convergence_rule": "After divergent search, converge on the candidate with the highest evidenced net outcome value, not the highest novelty.",
     "failed_route_rule": "Do not retry a failed route unless a causal condition has changed."
@@ -45,6 +62,7 @@
       "intent_and_contract_preserved",
       "positive_evidence_bound",
       "material_gain_is_observable",
+      "wisdom_seven_gates_passed",
       "no_p0_regression",
       "rollback_exists",
       "authority_not_expanded",
@@ -77,8 +95,8 @@
       "weakening safety or evidence gates"
     ]
   },
-  "learning_rule": "Every proven success becomes a scoped reusable pattern; every proven failure becomes a root-cause lesson plus a prevention guard when feasible; every proven novel pattern is captured with its causal mechanism and scope; unproven observations remain unproven and cannot mutate the trusted baseline.",
-  "convergence_rule": "Continue while a safe material improvement remains. Stop changing the core when no material gain is proven; keep innovation search available for new evidence, changed constraints, new tools or environmental change.",
-  "truth_rule": "Operational self-learning and innovation change durable procedures, routing, validators and state only. They do not retrain or modify the underlying ChatGPT model and must never claim that they do.",
+  "learning_rule": "Every proven success becomes a scoped reusable pattern; every proven failure becomes a root-cause lesson plus a prevention guard when feasible; every proven novel pattern is captured with its causal mechanism, context, consequences and scope; unproven observations remain unproven and cannot mutate the trusted baseline.",
+  "convergence_rule": "Continue while a wise, safe material improvement remains. Stop changing the core when no material net gain is proven; keep wisdom and innovation search available for new evidence, changed constraints, new tools or environmental change.",
+  "truth_rule": "Operational self-learning, wisdom governance and innovation change durable procedures, routing, validators and state only. They do not retrain or modify the underlying ChatGPT model and must never claim that they do.",
   "cost_rule": "Use included, owned or free mechanisms by default; paid or metered mechanisms are not autonomously promoted when an adequate free route exists."
 }
