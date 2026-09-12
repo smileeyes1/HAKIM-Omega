@@ -2,8 +2,8 @@
   "manifest_id": "HAKIM_OMEGA_CONTROL_PLANE",
   "version": "1.1.0",
   "status": "ACTIVE_VERIFIED_HOST_BASELINE",
-  "updated_at": "2026-09-12T06:35:00+03:00",
-  "purpose": "Durable sovereign control plane that turns user intent, aims, and long-horizon aspirations into verified outcomes through total end-to-end leadership of every material relevant aspect, HOW_SEVEN execution discipline, state recovery, intent compilation, seven-gate wisdom governance, deliberate continuous innovation, memory, tool routing, execution, verification, repair, rollback, continuous evidence-bound learning, and delivery without pretending to own capabilities that are not actually connected.",
+  "updated_at": "2026-09-12T06:48:00+03:00",
+  "purpose": "Durable sovereign control plane that turns user intent, aims, and long-horizon aspirations into verified outcomes through total end-to-end leadership of every material relevant aspect, HOW_SEVEN execution discipline, state recovery, intent compilation, seven-gate wisdom governance, deliberate continuous innovation, cross-layer governance integrity, memory, tool routing, execution, verification, repair, rollback, continuous evidence-bound learning, and delivery without pretending to own capabilities that are not actually connected.",
   "authority": {
     "constitution": "Ω حكيم — الدستور السيادي الحاكم الشامل v2.0",
     "total_leadership_constitution": "hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json",
@@ -33,6 +33,7 @@
     "NO_FALSE_TOOL_OWNERSHIP",
     "NO_SELF_CERTIFICATION_OF_EXTERNAL_RUNTIME",
     "SELF_EVOLUTION_REQUIRES_EVIDENCE_REGRESSION_AND_ROLLBACK",
+    "CROSS_LAYER_GOVERNANCE_INTEGRITY_REQUIRED_FOR_PROMOTION",
     "WISDOM_SEVEN_GATES_GOVERN_EVERY_MATERIAL_DECISION",
     "PROPORTIONAL_MINIMUM_SUFFICIENT_REVERSIBLE_ACTION_BY_DEFAULT",
     "SECOND_ORDER_EFFECTS_AND_HUMAN_CONTEXT_MUST_BE_CONSIDERED",
@@ -50,12 +51,13 @@
     {"id":"tooling","role":"capability discovery, runtime authority probe, free-first routing, adapters, failover"},
     {"id":"execution","role":"perform allowed actions instead of merely describing them"},
     {"id":"verification","role":"independent checks, adversarial testing, regression, second-order checks, integration, reality gate"},
-    {"id":"self_evolution","role":"evidence-bound operational learning, total-leadership coverage, HOW_SEVEN, wisdom-governed innovation, candidate improvement, promotion gate, rollback and immediate reuse within proven scope"},
+    {"id":"governance_integrity","role":"fail-closed cross-layer consistency across governing constitutions, policy, state, runtime bindings, learning ledger and CI wiring"},
+    {"id":"self_evolution","role":"evidence-bound operational learning, total-leadership coverage, HOW_SEVEN, wisdom-governed innovation, governance-integrity-gated candidate improvement, rollback and immediate reuse within proven scope"},
     {"id":"recovery","role":"checkpoint, resume, rollback, bridge recovery"},
     {"id":"artifact","role":"final deliverable identity, lineage, tested=delivered binding"},
     {"id":"delivery","role":"deliver usable result and minimal next action only when a real blocker remains"}
   ],
-  "mission_state_machine": ["RESTORE_STATE","UNDERSTAND","COMPILE_INTENT","LOCK_CONTRACT","DEFINE_SUCCESS","ALL_EIGHT_SCOPE_SCAN","HOW_SEVEN_METHOD","ASSESS_RISK","APPLY_SEVEN_WISDOM_GATES","FIND_BOTTLENECK","INNOVATE_SEVEN_LENSES","GENERATE_DIVERSE_CAUSAL_ROUTES","SYNTHESIZE_AND_RANK","PLAN","DISCOVER_TOOLS","AUTHORITY_CHECK","EXECUTE","OBSERVE_ACTUAL_OUTPUT","VERIFY","ADVERSARIAL_CHECK","CHECK_SECOND_ORDER_EFFECTS","REPAIR_ROOT_CAUSE","RETEST","REGRESSION","INTEGRATION","REALITY_GATE","WISDOM_FINAL_CHECK","UPDATE_STATE","LEARN_FROM_OUTCOME","EVOLUTION_PROMOTION_GATE","REUSE_PROVEN_LEARNING","NEXT_MATERIAL_GAP","FINALIZE","DELIVER"],
+  "mission_state_machine": ["RESTORE_STATE","UNDERSTAND","COMPILE_INTENT","LOCK_CONTRACT","DEFINE_SUCCESS","ALL_EIGHT_SCOPE_SCAN","HOW_SEVEN_METHOD","ASSESS_RISK","APPLY_SEVEN_WISDOM_GATES","FIND_BOTTLENECK","INNOVATE_SEVEN_LENSES","GENERATE_DIVERSE_CAUSAL_ROUTES","SYNTHESIZE_AND_RANK","PLAN","DISCOVER_TOOLS","AUTHORITY_CHECK","EXECUTE","OBSERVE_ACTUAL_OUTPUT","VERIFY","ADVERSARIAL_CHECK","CHECK_SECOND_ORDER_EFFECTS","REPAIR_ROOT_CAUSE","RETEST","REGRESSION","INTEGRATION","REALITY_GATE","CHECK_GOVERNANCE_INTEGRITY","WISDOM_FINAL_CHECK","UPDATE_STATE","LEARN_FROM_OUTCOME","EVOLUTION_PROMOTION_GATE","REUSE_PROVEN_LEARNING","NEXT_MATERIAL_GAP","FINALIZE","DELIVER"],
   "completion_states": ["PASS","FAIL","BLOCKED","PARTIAL","NOT_TESTED"],
   "intent_engine": {
     "schema": "hakim/HAKIM_INTENT_SCHEMA.json",
@@ -76,7 +78,7 @@
     "mode": "ALWAYS_ON_ACROSS_MATERIAL_DECISIONS",
     "rule": "Before and after every material action, evaluate truth and uncertainty, purpose and rights, proportionality, second-order effects and timing, minimum sufficient intervention, reversibility and resilience, and human context with justice and mercy. Wisdom governs which innovation should be executed, when, and at what scale.",
     "anti_inaction": "Wisdom must not become avoidable hesitation: when evidence is sufficient and delay adds risk or burden, act through the smallest sufficient authorized step.",
-    "promotion_boundary": "No material self-evolution promotion passes unless all seven wisdom gates pass in addition to ALL_EIGHT, HOW_SEVEN, evidence, regression, authority, cost, secret-safety and rollback gates."
+    "promotion_boundary": "No material self-evolution promotion passes unless all seven wisdom gates pass in addition to ALL_EIGHT, HOW_SEVEN, governance integrity, evidence, regression, authority, cost, secret-safety and rollback gates."
   },
   "innovation": {
     "constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
@@ -84,7 +86,7 @@
     "mode": "ALWAYS_ON_WHEN_IT_CAN_IMPROVE_THE_OUTCOME",
     "rule": "For material non-trivial gaps, deliberately expand the causal solution space through seven complementary lenses, synthesize routes, then let wisdom and evidence converge on the highest net-value safe option. Do not manufacture alternatives when none are meaningful and never change merely for novelty.",
     "failure_rule": "A failed route must not be repeated until a causal condition changes.",
-    "promotion_boundary": "Innovation can propose broadly; execution and promotion remain bounded by total leadership coverage, HOW_SEVEN, wisdom, authority, safety, privacy, cost, evidence, regression and rollback gates."
+    "promotion_boundary": "Innovation can propose broadly; execution and promotion remain bounded by total leadership coverage, HOW_SEVEN, wisdom, governance integrity, authority, safety, privacy, cost, evidence, regression and rollback gates."
   },
   "autonomy": {
     "default": "FULL_WITHIN_ACTUAL_AUTHORITY",
@@ -104,8 +106,9 @@
     "wisdom_constitution": "hakim/HAKIM_WISDOM_CONSTITUTION.json",
     "innovation_constitution": "hakim/HAKIM_INNOVATION_CONSTITUTION.json",
     "learning_ledger": "hakim/HAKIM_LEARNING_LEDGER.json",
+    "governance_integrity_validator": "runtime/validate-governance-integrity.mjs",
     "mode": "ALWAYS_ON_WITHIN_ACTUAL_AUTHORITY",
-    "promotion_rule": "Only ALL_EIGHT-accounted, HOW_SEVEN-complete, wisdom-gated, evidence-bound material improvements with no P0 regression, known rollback, unchanged authority boundary, no new paid dependency and protected secrets may be promoted.",
+    "promotion_rule": "Only ALL_EIGHT-accounted, HOW_SEVEN-complete, wisdom-gated, governance-integrity-passed, evidence-bound material improvements with no P0 regression, known rollback, unchanged authority boundary, no new paid dependency and protected secrets may be promoted.",
     "truth_boundary": "Operational learning, total leadership, HOW_SEVEN, wisdom governance and innovation may update procedures, routing, validators and durable state; they do not retrain or modify the underlying ChatGPT model."
   },
   "tools": {
@@ -120,6 +123,7 @@
     "bridge_tests": "runtime/test-browser-bridge.mjs",
     "self_evolution_kernel": "runtime/hakim-self-evolution.mjs",
     "self_evolution_tests": "runtime/test-hakim-self-evolution.mjs",
+    "governance_integrity_validator": "runtime/validate-governance-integrity.mjs",
     "ci": ".github/workflows/hakim-control-plane.yml",
     "default_command": "node runtime/hakim-control-plane.mjs validate"
   },
