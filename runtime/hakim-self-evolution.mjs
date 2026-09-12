@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { validateGovernanceIntegrity } from './validate-governance-integrity.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const load = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
@@ -60,7 +61,7 @@ export function validateEvolution(x = loadEvolution()) {
   assert(Array.isArray(innovation.seven_lenses) && innovation.seven_lenses.length === 7, 'innovation must preserve seven lenses');
   assert(new Set(innovation.seven_lenses.map(x => x.id)).size === 7, 'innovation lens ids must be unique');
 
-  for (const phase of ['BIND_EVIDENCE','APPLY_ALL_EIGHT_SCOPE','APPLY_HOW_SEVEN','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','MAP_ALL_MATERIAL_GAPS','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','EXECUTE_HIGHEST_SAFE_AUTHORIZED_ACTION','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','CHECK_MATERIAL_GAP_CLOSURE','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS','NO_OP_ONLY_IF_NO_SAFE_AUTHORIZED_MATERIAL_GAIN_REMAINS']) {
+  for (const phase of ['BIND_EVIDENCE','APPLY_ALL_EIGHT_SCOPE','APPLY_HOW_SEVEN','ASK_RECURSIVE_HOW_AT_CURRENT_LAYER','IDENTIFY_ROOT_CAUSE_OR_SUCCESS_PATTERN','MAP_ALL_MATERIAL_GAPS','APPLY_SEVEN_WISDOM_GATES','INNOVATE_ACROSS_SEVEN_LENSES','GENERATE_DIVERSE_CANDIDATES','SYNTHESIZE_CANDIDATES','SELECT_HIGHEST_NET_VALUE_SAFE_CANDIDATE','EXECUTE_HIGHEST_SAFE_AUTHORIZED_ACTION','VERIFY_CANDIDATE','ADVERSARIAL_TEST','REGRESSION_TEST','CHECK_SECOND_ORDER_EFFECTS','CHECK_ROLLBACK','CHECK_MATERIAL_GAP_CLOSURE','CHECK_GOVERNANCE_INTEGRITY','WISDOM_FINAL_CHECK','PROMOTE_OR_REJECT','REUSE_IMMEDIATELY','RECURSE_HOW_ONLY_IF_MATERIAL_VALUE_REMAINS','NO_OP_ONLY_IF_NO_SAFE_AUTHORIZED_MATERIAL_GAIN_REMAINS']) {
     assert(policy.cycle.includes(phase), `missing evolution phase: ${phase}`);
   }
 
@@ -69,6 +70,8 @@ export function validateEvolution(x = loadEvolution()) {
   assert(policy.how_seven?.default === 'ALWAYS_ON_FOR_MATERIAL_ACTIONS', 'HOW_SEVEN must be active for material actions');
   assert(Array.isArray(policy.how_seven?.layers) && policy.how_seven.layers.length === 7, 'policy HOW_SEVEN must preserve seven layers');
   assert(policy.how_seven.stop_rule?.includes('linked to learning plus the next material gap'), 'HOW_SEVEN completion guard missing');
+  assert(policy.governance_integrity?.validator === 'runtime/validate-governance-integrity.mjs', 'governance integrity validator not bound');
+  assert(policy.governance_integrity?.default === 'FAIL_CLOSED', 'governance integrity must fail closed');
 
   assert(policy.wisdom_gate?.required?.length === 7, 'self-evolution must require seven wisdom gates');
   assert(policy.recursive_how?.default === 'ALWAYS_ON_WHEN_MATERIAL', 'recursive HOW must be material-by-default');
@@ -92,7 +95,7 @@ export function validateEvolution(x = loadEvolution()) {
   assert(policy.bounded_completeness.stop_rule?.includes('NO_OP only when no safe authorized material gain remains now'), 'bounded completeness NO_OP rule missing');
 
   const required = new Set(policy.promotion_gate.required);
-  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','all_eight_scope_checked','how_seven_completed','wisdom_seven_gates_passed','bounded_completeness_checked','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
+  for (const r of ['intent_and_contract_preserved','positive_evidence_bound','material_gain_is_observable','all_eight_scope_checked','how_seven_completed','wisdom_seven_gates_passed','bounded_completeness_checked','governance_integrity_passed','no_p0_regression','rollback_exists','authority_not_expanded','no_new_paid_dependency','secrets_not_persisted']) {
     assert(required.has(r), `missing promotion requirement: ${r}`);
   }
   assert(innovation.minimum_diversity_rule?.includes('three genuinely different causal approaches'), 'innovation diversity rule missing');
@@ -110,6 +113,10 @@ export function validateEvolution(x = loadEvolution()) {
     assert(!raw.includes(forbidden), `possible secret marker found: ${forbidden}`);
   }
   assert(state.baseline?.rule?.includes('Do not downgrade'), 'trusted baseline protection missing');
+
+  const governance = validateGovernanceIntegrity();
+  assert(governance.pass === true, 'cross-layer governance integrity failed');
+
   return {
     pass: true,
     policy_version: policy.version,
@@ -122,6 +129,7 @@ export function validateEvolution(x = loadEvolution()) {
     innovation_lenses: innovation.seven_lenses.length,
     recursive_how_layers: policy.recursive_how.layers.length,
     completeness_dimensions: policy.bounded_completeness.dimensions.length,
+    governance_integrity: governance.pass,
     lessons: ledger.entries.length,
     baseline_protected: true
   };
@@ -137,6 +145,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
     'how_seven_completed',
     'wisdom_seven_gates_passed',
     'bounded_completeness_checked',
+    'governance_integrity_passed',
     'no_p0_regression',
     'rollback_exists',
     'authority_not_expanded',
@@ -164,7 +173,7 @@ export function evaluateCandidate(candidate = {}, x = loadEvolution()) {
   return {
     decision: failed.length ? 'REJECT' : 'PROMOTE_CANDIDATE',
     failed: [...new Set(failed)],
-    rule: 'ALL_EIGHT prevents omission; HOW_SEVEN determines method; wisdom governs judgment; innovation expands options; recursive HOW deepens only while valuable; bounded completeness closes safe authorized material gaps; promotion still requires evidence, tests, actual-output verification and every governing gate.'
+    rule: 'ALL_EIGHT prevents omission; HOW_SEVEN determines method; wisdom governs judgment; innovation expands options; recursive HOW deepens only while valuable; bounded completeness closes safe authorized material gaps; cross-layer governance integrity must pass; promotion still requires evidence, tests, actual-output verification and every governing gate.'
   };
 }
 
