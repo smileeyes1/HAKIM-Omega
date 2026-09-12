@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'hakim/**'
+      - 'platforms/platform-registry.json'
       - 'mobile-agent/hakim-omega-local-bridge.user.js'
       - 'runtime/hakim-control-plane.mjs'
       - 'runtime/test-hakim-control-plane.mjs'
@@ -12,6 +13,7 @@ on:
   pull_request:
     paths:
       - 'hakim/**'
+      - 'platforms/platform-registry.json'
       - 'mobile-agent/hakim-omega-local-bridge.user.js'
       - 'runtime/hakim-control-plane.mjs'
       - 'runtime/test-hakim-control-plane.mjs'
