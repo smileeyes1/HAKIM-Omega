@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         حكيم Ω — الجسر المحلي المجاني
 // @namespace    hakim-omega-local-bridge
-// @version      0.1.0
+// @version      0.1.1
 // @description  جسر محلي آمن على Firefox/Violentmonkey يلتقط مهام حكيم غير السرية من GitHub وينفذها على نطاقات مسموحة مع حالة مستمرة وتقارير منقحة.
 // @match        https://gemini.google.com/*
 // @match        https://github.com/*
@@ -27,7 +27,7 @@
 
 (() => {
   'use strict';
-  const VERSION='٠٫١٫٠';
+  const VERSION='٠٫١٫١';
   const ROOT='hakim-omega-local-bridge';
   const K='hakim_omega_bridge_';
   const MISSION_URL='https://raw.githubusercontent.com/smileeyes1/HAKIM-Omega/main/hakim/REMOTE_MISSION.json';
@@ -66,8 +66,25 @@
   async function runMission(m,resume=false){if(get('running',false))return;set('running',true);set('active_mission',m);let i=resume?(get('action_index',0)||0):0;if(!resume)set('action_index',0);try{for(;i<m.actions.length;i++){if(get('paused',false))throw Error('PAUSED_BY_USER');const a=m.actions[i];set('action_index',i);const r=await executeAction(m,a,i);if(r?.navigated){set('running',false);return}set('last_step',{i,type:a.type,at:now(),meta:r||{}});set('action_index',i+1)}const rep=reportBase(m,'PASS',m.actions.length,'COMPLETE','');set('last_completed_mission_id',m.mission_id);set('last_report',rep);set('running',false);status('اكتملت المهمة محليًا');await sendReport(rep)}catch(e){const rep=reportBase(m,'FAIL',i,m.actions[i]?.type||'',sanitizedError(e));set('last_report',rep);set('running',false);status('توقف آمن: '+sanitizedError(e));log('فشل: '+sanitizedError(e),'bad');await sendReport(rep)}}
   async function sendReport(rep){set('pending_report',rep);if(location.hostname==='github.com'&&location.pathname==='/smileeyes1/HAKIM-Omega/issues/1'){await postPendingReport();return}location.href=RELAY_URL+'?hakim_report=1'}
   async function postPendingReport(){const rep=get('pending_report',null);if(!rep)return;const box=await waitFor(()=>{const sels=['textarea[name="comment[body]"]','#new_comment_field','textarea[placeholder*="comment" i]','[contenteditable="true"][role="textbox"]'];for(const s of sels){const e=document.querySelector(s);if(visible(e))return e}return null},15000);if(!box){status('يلزم تسجيل الدخول إلى GitHub مرة واحدة لإرسال تقرير الجسر');return}const body='HAKIM_BRIDGE_RESULT\n```json\n'+JSON.stringify(rep,null,2)+'\n```';setValue(box,body);const submit=await waitFor(()=>{const candidates=[...document.querySelectorAll('button[type="submit"],button')].filter(visible);return candidates.find(b=>/comment|submit|تعليق|إرسال/.test(txt(b))&&!b.disabled)},10000);if(!submit){status('تعذر العثور على زر إرسال تقرير GitHub');return}submit.click();del('pending_report');status('أُرسل تقرير الحالة المنقح');try{history.replaceState(null,'',RELAY_URL)}catch{}}
-  async function poll(){if(!get('enabled',false)||get('running',false))return;try{const m=await fetchMission();const v=validateMission(m);if(v.idle)return;const last=get('last_completed_mission_id','');const active=get('active_mission',null);if(active?.mission_id===m.mission_id&&(get('action_index',0)||0)>0){await runMission(m,true);return}if(m.mission_id===last)return;set('paused',false);await runMission(m,false)}catch(e){status('الجسر جاهز — تعذر جلب مهمة: '+sanitizedError(e))}}
-  function panel(){if(document.getElementById(ROOT))return;const r=document.createElement('section');r.id=ROOT;r.dir='rtl';r.innerHTML=`<style>#${ROOT}{position:fixed;z-index:2147483647;right:10px;bottom:10px;width:min(92vw,410px);background:#fff;color:#111;border:1px solid #bbb;border-radius:16px;padding:11px;box-shadow:0 8px 28px #0003;font-family:system-ui;direction:rtl;text-align:right}#${ROOT} button{padding:8px 11px;margin:3px;border:0;border-radius:10px;background:#eee;font-weight:700}#${ROOT} .go{background:#111;color:#fff}#hakim-bridge-status{background:#f4f4f4;padding:7px;border-radius:9px;margin:7px 0}#hakim-bridge-log{max-height:110px;overflow:auto;font-size:11px;border-top:1px solid #ddd;margin-top:6px;padding-top:5px}.bad{color:#a40000}</style><b>حكيم Ω — الجسر المحلي المجاني ${VERSION}</b><div id="hakim-bridge-status">${get('status','متوقف محليًا')}</div><button class="go" id="hakim-bridge-on">تفعيل</button><button id="hakim-bridge-off">إيقاف</button><button id="hakim-bridge-check">فحص الآن</button><button id="hakim-bridge-report">آخر تقرير</button><div id="hakim-bridge-log"></div>`;document.body.appendChild(r);document.querySelector('#hakim-bridge-on').onclick=()=>{set('enabled',true);set('paused',false);status('مفعّل — ينتظر مهمة غير سرية');poll()};document.querySelector('#hakim-bridge-off').onclick=()=>{set('enabled',false);set('paused',true);status('متوقف محليًا')};document.querySelector('#hakim-bridge-check').onclick=poll;document.querySelector('#hakim-bridge-report').onclick=()=>{const x=get('last_report',null);alert(x?JSON.stringify(x,null,2):'لا يوجد تقرير بعد')}}
-  function boot(){panel();if(location.hostname==='github.com'&&location.pathname==='/smileeyes1/HAKIM-Omega/issues/1'&&get('pending_report',null))setTimeout(postPendingReport,1200);const active=get('active_mission',null);if(get('enabled',false)&&active&&get('action_index',0)>0&&!get('running',false))setTimeout(()=>runMission(active,true),1200);setInterval(poll,POLL_MS);setTimeout(poll,1500)}
+  async function poll(manual=false){
+    if(get('running',false)){if(manual)status('هناك مهمة قيد التنفيذ الآن');return}
+    if(!get('enabled',false)){if(manual)status('الجسر متوقف — اضغط «تفعيل» أولًا');return}
+    if(manual){status('جارٍ الفحص الآن…');log('بدأ فحص يدوي')}
+    try{
+      const m=await fetchMission();
+      const v=validateMission(m);
+      set('last_check_at',now());
+      if(v.idle){if(manual){status('تم الفحص — لا توجد مهمة جديدة، الجسر يعمل');log('الفحص ناجح — لا توجد مهمة جديدة')}return}
+      const last=get('last_completed_mission_id','');
+      const active=get('active_mission',null);
+      if(active?.mission_id===m.mission_id&&(get('action_index',0)||0)>0){if(manual)status('تم العثور على مهمة غير مكتملة — جارٍ الاستئناف');await runMission(m,true);return}
+      if(m.mission_id===last){if(manual){status('تم الفحص — آخر مهمة منفذة بالفعل');log('لا توجد مهمة جديدة بعد آخر نجاح')}return}
+      set('paused',false);
+      if(manual)status('تم العثور على مهمة جديدة — بدء التنفيذ');
+      await runMission(m,false)
+    }catch(e){status('الجسر جاهز — تعذر جلب مهمة: '+sanitizedError(e));log('فشل الفحص: '+sanitizedError(e),'bad')}
+  }
+  function panel(){if(document.getElementById(ROOT))return;const r=document.createElement('section');r.id=ROOT;r.dir='rtl';r.innerHTML=`<style>#${ROOT}{position:fixed;z-index:2147483647;right:10px;bottom:10px;width:min(92vw,410px);background:#fff;color:#111;border:1px solid #bbb;border-radius:16px;padding:11px;box-shadow:0 8px 28px #0003;font-family:system-ui;direction:rtl;text-align:right}#${ROOT} button{padding:8px 11px;margin:3px;border:0;border-radius:10px;background:#eee;font-weight:700;transition:transform .08s ease,opacity .08s ease}#${ROOT} button:active{transform:scale(.96);opacity:.72}#${ROOT} .go{background:#111;color:#fff}#hakim-bridge-status{background:#f4f4f4;padding:8px;border-radius:9px;margin:7px 0;min-height:1.5em}#hakim-bridge-log{max-height:110px;overflow:auto;font-size:11px;border-top:1px solid #ddd;margin-top:6px;padding-top:5px}.bad{color:#a40000}</style><b>حكيم Ω — الجسر المحلي المجاني ${VERSION}</b><div id="hakim-bridge-status" aria-live="polite">${get('status','متوقف محليًا')}</div><button class="go" id="hakim-bridge-on">تفعيل</button><button id="hakim-bridge-off">إيقاف</button><button id="hakim-bridge-check">فحص الآن</button><button id="hakim-bridge-report">آخر تقرير</button><div id="hakim-bridge-log"></div>`;document.body.appendChild(r);document.querySelector('#hakim-bridge-on').onclick=()=>{set('enabled',true);set('paused',false);status('مفعّل — جارٍ فحص الاتصال الآن');log('تم تفعيل الجسر محليًا');poll(true)};document.querySelector('#hakim-bridge-off').onclick=()=>{set('enabled',false);set('paused',true);status('متوقف محليًا');log('تم إيقاف الجسر محليًا')};document.querySelector('#hakim-bridge-check').onclick=()=>poll(true);document.querySelector('#hakim-bridge-report').onclick=()=>{status('عرض آخر تقرير محلي');const x=get('last_report',null);alert(x?JSON.stringify(x,null,2):'لا يوجد تقرير بعد')}}
+  function boot(){panel();if(location.hostname==='github.com'&&location.pathname==='/smileeyes1/HAKIM-Omega/issues/1'&&get('pending_report',null))setTimeout(postPendingReport,1200);const active=get('active_mission',null);if(get('enabled',false)&&active&&get('action_index',0)>0&&!get('running',false))setTimeout(()=>runMission(active,true),1200);setInterval(()=>poll(false),POLL_MS);setTimeout(()=>poll(false),1500)}
   const mo=new MutationObserver(panel);mo.observe(document.documentElement,{childList:true,subtree:true});boot();
 })();
