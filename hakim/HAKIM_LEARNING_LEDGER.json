@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
-  "version": "1.0.4",
-  "updated_at": "2026-09-12T06:55:00+03:00",
+  "version": "1.0.5",
+  "updated_at": "2026-09-12T07:01:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -105,6 +105,17 @@
       "lesson": "A growing autonomous control plane needs a single independent consistency gate across constitutions, policy, state, runtime and CI; otherwise individually valid layers can drift apart during evolution.",
       "guard": "Block promotion whenever any material governance binding is missing, stale, contradictory or unwired; preserve the last verified baseline, synchronize the layers, then require both independent gates on the integrated head.",
       "scope": "cross-layer governance integrity and autonomous evolution hardening"
+    },
+    {
+      "id": "L-20260912-011",
+      "kind": "FAILURE_LESSON",
+      "observation": "The first governance-integrity mutation suite exposed a false-positive weakness: checking whether a governing filename appeared anywhere in the self-evolution runtime could still pass after the actual load binding was replaced, because the same filename remained in unrelated assertions.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "HAKIM run 34671441292 failed at the adversarial mutation 'self-evolution runtime governing load removed' on head eeef156b5fd286cc84f9a554c4309f82e8ac4861; after replacing broad substring presence checks with exact runtime load/import/call binding checks, HAKIM run 34671479245 and Omega run 34671479241 succeeded on head c1cc2bb34b6d9181561b1801cb141e8f6fb45cf5.",
+      "root_cause": "A broad text-presence assertion was weaker than the execution binding it was intended to prove.",
+      "lesson": "Governance integrity must validate the exact executable binding or causal relationship, not merely the presence of a related identifier somewhere in source text.",
+      "guard": "Use exact binding checks plus adversarial mutation tests for critical governance wiring; mutation tests themselves are mandatory in CI and learning-ledger counts are cross-checked against active state.",
+      "scope": "governance validator strength and false-positive prevention"
     }
   ]
 }
