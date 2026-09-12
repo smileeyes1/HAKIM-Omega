@@ -30,5 +30,9 @@ mustReject('promotion gate weakened', g => { g.policy.promotion_gate.required = 
 mustReject('workflow governance step removed', g => { g.workflow = g.workflow.replace(/\n      - name: Validate cross-layer governance integrity\n        run: node runtime\/validate-governance-integrity\.mjs\n?/, '\n'); });
 mustReject('self-evolution runtime governing load removed', g => { g.evolutionRuntime = g.evolutionRuntime.replace("load('hakim/HAKIM_WISDOM_CONSTITUTION.json')", "load('hakim/WRONG.json')"); });
 mustReject('learning ledger emptied', g => { g.ledger.entries = []; });
+mustReject('WAW-LIMA-HAYYA loop removed', g => { delete g.total.waw_lima_hayya_loop; });
+mustReject('WAW-LIMA-HAYYA question removed', g => { g.total.waw_lima_hayya_loop.questions.pop(); });
+mustReject('WAW-LIMA-HAYYA action order weakened', g => { g.total.waw_lima_hayya_loop.action_sequence = ['ADOPT_BEST_PROVEN_ROUTE','HAYYA_EXECUTE_NOW']; });
+mustReject('WAW-LIMA-HAYYA material promotion binding removed', g => { g.evolutionRuntime = g.evolutionRuntime.replace("candidate.waw_lima_hayya_completed !== true", "false"); });
 
-console.log(JSON.stringify({ pass: true, tests: 18, baseline, mutation_rejections: 17 }, null, 2));
+console.log(JSON.stringify({ pass: true, tests: 22, baseline, mutation_rejections: 21 }, null, 2));
