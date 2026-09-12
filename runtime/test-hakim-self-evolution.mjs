@@ -10,6 +10,7 @@ assert(v.wisdom_gates === 7, 'seven wisdom gates not active');
 assert(v.innovation_lenses === 7, 'seven innovation lenses not active');
 assert(v.recursive_how_layers === 8, 'internal recursive HOW layers not active');
 assert(v.completeness_dimensions >= 16, 'bounded completeness dimensions not active');
+assert(v.governance_integrity === true, 'cross-layer governance integrity not active');
 
 const good = {
   intent_and_contract_preserved: true,
@@ -19,6 +20,7 @@ const good = {
   how_seven_completed: true,
   wisdom_seven_gates_passed: true,
   bounded_completeness_checked: true,
+  governance_integrity_passed: true,
   no_p0_regression: true,
   rollback_exists: true,
   authority_not_expanded: true,
@@ -54,7 +56,7 @@ assert(evaluateCandidate({ ...good, no_new_paid_dependency: false }).decision ==
 
 console.log(JSON.stringify({
   pass: true,
-  tests: 37,
+  tests: 39,
   policy: v.policy_version,
   total_leadership: v.total_leadership_version,
   all_eight_dimensions: v.all_eight_dimensions,
@@ -65,5 +67,6 @@ console.log(JSON.stringify({
   innovation_lenses: v.innovation_lenses,
   recursive_how_layers: v.recursive_how_layers,
   completeness_dimensions: v.completeness_dimensions,
+  governance_integrity: v.governance_integrity,
   lessons: v.lessons
 }, null, 2));
