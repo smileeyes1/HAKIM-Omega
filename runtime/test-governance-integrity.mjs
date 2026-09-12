@@ -23,6 +23,7 @@ mustReject('wisdom gate count drift', g => { g.state.wisdom.seven_gates = 6; });
 mustReject('innovation lens count drift', g => { g.state.innovation.seven_lenses = 6; });
 mustReject('bounded completeness count drift', g => { g.state.self_evolution.bounded_completeness_dimensions = 15; });
 mustReject('recursive HOW count drift', g => { g.state.self_evolution.recursive_how_layers = 7; });
+mustReject('learning ledger state count drift', g => { g.state.evidence.self_evolution_gate.learning_entries += 1; });
 mustReject('protected invariant removed', g => { g.manifest.protected_invariants = g.manifest.protected_invariants.filter(x => x !== 'HOW_SEVEN_GOVERNS_MATERIAL_EXECUTION_METHOD'); });
 mustReject('policy cycle phase removed', g => { g.policy.cycle = g.policy.cycle.filter(x => x !== 'CHECK_GOVERNANCE_INTEGRITY'); });
 mustReject('promotion gate weakened', g => { g.policy.promotion_gate.required = g.policy.promotion_gate.required.filter(x => x !== 'governance_integrity_passed'); });
@@ -30,4 +31,4 @@ mustReject('workflow governance step removed', g => { g.workflow = g.workflow.re
 mustReject('self-evolution runtime governing load removed', g => { g.evolutionRuntime = g.evolutionRuntime.replace("load('hakim/HAKIM_WISDOM_CONSTITUTION.json')", "load('hakim/WRONG.json')"); });
 mustReject('learning ledger emptied', g => { g.ledger.entries = []; });
 
-console.log(JSON.stringify({ pass: true, tests: 17, baseline, mutation_rejections: 16 }, null, 2));
+console.log(JSON.stringify({ pass: true, tests: 18, baseline, mutation_rejections: 17 }, null, 2));
