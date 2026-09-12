@@ -16,6 +16,7 @@ on:
       - 'runtime/test-phone-control-layer.mjs'
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
+      - 'runtime/validate-governance-integrity.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   pull_request:
@@ -33,6 +34,7 @@ on:
       - 'runtime/test-phone-control-layer.mjs'
       - 'runtime/hakim-self-evolution.mjs'
       - 'runtime/test-hakim-self-evolution.mjs'
+      - 'runtime/validate-governance-integrity.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   schedule:
@@ -68,3 +70,5 @@ jobs:
         run: node runtime/hakim-self-evolution.mjs validate
       - name: Run adversarial self-evolution promotion tests
         run: node runtime/test-hakim-self-evolution.mjs
+      - name: Validate cross-layer governance integrity
+        run: node runtime/validate-governance-integrity.mjs
