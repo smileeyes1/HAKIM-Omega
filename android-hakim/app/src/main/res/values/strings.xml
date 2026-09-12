@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">حكيم</string>
+    <string name="accessibility_desc">يسمح لحكيم بتنفيذ مهام محلية آمنة ومحدودة داخل التطبيقات المسموح بها فقط. لا يقرأ كلمات المرور أو رموز التحقق ولا ينفذ عمليات عالية الأثر تلقائيًا.</string>
+</resources>
