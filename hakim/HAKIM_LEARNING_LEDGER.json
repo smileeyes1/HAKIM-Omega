@@ -1,7 +1,7 @@
 {
   "ledger_id": "HAKIM_LEARNING_LEDGER",
   "version": "1.0.0",
-  "updated_at": "2026-09-12T06:03:00+03:00",
+  "updated_at": "2026-09-12T06:10:00+03:00",
   "entries": [
     {
       "id": "L-20260912-001",
@@ -45,6 +45,16 @@
       "lesson": "Preserve the last verified state and change the implementation path rather than retrying the same blocked mutation blindly.",
       "guard": "On mutation block, freeze trusted state, isolate the missing value, then use a causally different safe path.",
       "scope": "self-modification workflow"
+    },
+    {
+      "id": "L-20260912-005",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "The self-evolution engine and tests were valid before the governing manifest and active state explicitly referenced them; binding them into the governing layer then passed both HAKIM and Omega gates on the same head.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "HAKIM Control Plane Gate run 34669579069 and Omega DNA Fail-Closed Gate run 34669579075 on head f60c7d436834a0aa97bd11caa8ec73bca9e23545",
+      "lesson": "A tested capability is not fully governed merely because its files exist; every material control capability must also be reachable from the governing manifest/state and independently regression-tested.",
+      "guard": "For every new material control layer, verify three bindings before promotion: implementation exists, governing manifest/state reference it, and the exact integrated head passes independent gates.",
+      "scope": "governed self-evolution integration"
     }
   ]
 }
