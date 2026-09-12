@@ -18,6 +18,8 @@ on:
       - 'runtime/test-hakim-self-evolution.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
+      - 'runtime/validate-canonical-instance.mjs'
+      - 'runtime/test-canonical-instance.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   pull_request:
@@ -37,6 +39,8 @@ on:
       - 'runtime/test-hakim-self-evolution.mjs'
       - 'runtime/validate-governance-integrity.mjs'
       - 'runtime/test-governance-integrity.mjs'
+      - 'runtime/validate-canonical-instance.mjs'
+      - 'runtime/test-canonical-instance.mjs'
       - '.github/workflows/hakim-control-plane.yml'
       - '.github/workflows/hakim-field-bridge-ingest.yml'
   schedule:
@@ -76,3 +80,7 @@ jobs:
         run: node runtime/validate-governance-integrity.mjs
       - name: Run adversarial governance-integrity mutation tests
         run: node runtime/test-governance-integrity.mjs
+      - name: Validate sole canonical original Hakim identity
+        run: node runtime/validate-canonical-instance.mjs
+      - name: Run adversarial canonical-instance mutation tests
+        run: node runtime/test-canonical-instance.mjs
