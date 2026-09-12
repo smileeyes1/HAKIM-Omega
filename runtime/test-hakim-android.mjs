@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import path from 'node:path';
 
 const read = p => fs.readFileSync(p, 'utf8');
 const assert = (c, m) => { if (!c) throw new Error(m); };
@@ -29,7 +28,7 @@ assert(/MISSION_EXPIRED/.test(missionClient) && /MISSION_LIFETIME_TOO_LONG/.test
 assert(/HIGH_IMPACT_REMOTE_BLOCKED/.test(missionClient), 'remote high-impact block missing');
 assert(/SECRET_MARKER_BLOCKED/.test(missionClient), 'secret mission block missing');
 assert(/FOREGROUND_PACKAGE_BLOCKED/.test(service), 'foreground package gate missing');
-assert(/isPassword\(\)/.test(service) && /SECRET/.test(service), 'secret-field defense missing');
+assert(/isPassword\(\)/.test(service) && /containsSecretMarker/.test(service), 'secret-field defense missing');
 assert(/Base64\.URL_SAFE/.test(service) && /HAKIM_ANDROID/.test(service), 'sanitized Android report binding missing');
 assert(!/WebView/.test(activity), 'embedded WebView must not replace external trusted login surfaces');
 assert(/تثبيت قناة التقرير المجانية/.test(activity), 'free report relay installer missing');
