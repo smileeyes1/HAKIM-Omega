@@ -102,13 +102,19 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
   assert(workflow.includes('node runtime/validate-governance-integrity.mjs'), 'workflow does not run governance integrity gate');
   assert(workflow.includes('node runtime/test-governance-integrity.mjs'), 'workflow does not run governance integrity mutation tests');
 
-  for (const ref of [
-    'HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json',
-    'HAKIM_WISDOM_CONSTITUTION.json',
-    'HAKIM_INNOVATION_CONSTITUTION.json',
-    'HAKIM_SELF_EVOLUTION_POLICY.json',
-    'HAKIM_LEARNING_LEDGER.json'
-  ]) assert(evolutionRuntime.includes(ref), `self-evolution runtime does not load ${ref}`);
+  const runtimeLoads = [
+    "policy: load('hakim/HAKIM_SELF_EVOLUTION_POLICY.json')",
+    "total: load('hakim/HAKIM_TOTAL_LEADERSHIP_CONSTITUTION.json')",
+    "wisdom: load('hakim/HAKIM_WISDOM_CONSTITUTION.json')",
+    "innovation: load('hakim/HAKIM_INNOVATION_CONSTITUTION.json')",
+    "ledger: load('hakim/HAKIM_LEARNING_LEDGER.json')",
+    "state: load('hakim/HAKIM_STATE.json')"
+  ];
+  for (const binding of runtimeLoads) {
+    assert(evolutionRuntime.includes(binding), `self-evolution runtime exact load binding missing: ${binding}`);
+  }
+  assert(evolutionRuntime.includes("import { validateGovernanceIntegrity } from './validate-governance-integrity.mjs'"), 'self-evolution runtime governance validator import missing');
+  assert(evolutionRuntime.includes('const governance = validateGovernanceIntegrity();'), 'self-evolution runtime governance validation call missing');
 
   assert(controlRuntime.includes("manifest.version === '1.1.0'"), 'control-plane compatibility guard missing');
   assert(Array.isArray(ledger.entries) && ledger.entries.length > 0, 'learning ledger empty');
@@ -130,6 +136,7 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     recursive_how_layers: policy.recursive_how.layers.length,
     learning_entries: ledger.entries.length,
     cross_layer_bindings: true,
+    exact_runtime_bindings: true,
     workflow_gate_bound: true,
     mutation_test_bound: true
   };
