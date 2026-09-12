@@ -4,7 +4,6 @@ import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.BaseBundle;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,14 +48,12 @@ public final class HakimAccessibilityService extends AccessibilityService {
         super.onServiceConnected();
         instance = this;
         setStatus("خدمة حكيم المحلية متصلة");
-        if (isEnabledByUser()) {
-            handler.postDelayed(() -> pollNow("بدء"), 600);
-        }
+        if (isEnabledByUser()) handler.postDelayed(() -> pollNow("بدء"), 600);
     }
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        // التنفيذ لا يعتمد على جمع محتوى خاص من الأحداث؛ نقرأ شجرة الواجهة فقط أثناء فعل مصرح ومحدود.
+        // لا نجمع محتوى الأحداث. نقرأ شجرة الواجهة فقط أثناء فعل محدود ومصرح به.
     }
 
     @Override
@@ -300,7 +297,8 @@ public final class HakimAccessibilityService extends AccessibilityService {
 
     private String sanitize(String value) {
         if (value == null || value.trim().isEmpty()) return "UNKNOWN";
-        return value.replaceAll("https?://\\S+", "[رابط]").replaceAll("[\\r\\n]+", " ").substring(0, Math.min(160, value.length()));
+        String safe = value.replaceAll("https?://\\S+", "[رابط]").replaceAll("[\\r\\n]+", " ").trim();
+        return safe.substring(0, Math.min(160, safe.length()));
     }
 
     private String eastern(int n) {
