@@ -22,7 +22,7 @@ const scheduled=planMission('scheduled_or_conditional'); eq(scheduled.route[0].i
 const image=planMission('image_creation'); eq(image.route[0].id,'chatgpt_image_generation');
 const artifact=planMission('artifact_creation'); eq(artifact.route[0].id,'chatgpt_artifact_runtime');
 const discover=planMission('tool_discovery'); eq(discover.route[0].id,'plugin_directory');
-const repo=planMission('repo_or_code'); eq(repo.route[0].id,'github_owner_relay');
+const repo=planMission('repo_or_code'); eq(repo.route[0].id,'chatgpt_reasoning'); ok(repo.route.some(x=>x.id==='github_owner_relay')); eq(repo.route.find(x=>x.id==='github_owner_relay').default_enabled,false);
 const persist=planMission('persistent_artifact'); ok(persist.route.some(x=>x.id==='chatgpt_files_library')); ok(persist.route.some(x=>x.id==='github_owner_relay')); ok(persist.route.some(x=>x.id==='google_control_plane'));
 
 const ids=cp.tools.tools.map(t=>t.id); eq(new Set(ids).size,ids.length); eq(cp.tools.tools.find(t=>t.id==='tinyfish_browser').default_enabled,false); eq(cp.tools.tools.find(t=>t.id==='local_browser_agent').default_enabled,true);
@@ -53,4 +53,4 @@ promoted.state.release_state='PASS_CONTROL_PLANE_HOST_SCOPE_FIELD_BRIDGE_SMOKE_P
 promoted.tools.tools.find(x=>x.id==='local_browser_agent').qualification.field_runtime='PASS_SMOKE_SCOPE_ONLY';
 eq(validateControlPlane(promoted).pass,true);
 
-console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','explicit Android safe-core field-pending boundary','false Android field PASS rejection']},null,2));
+console.log(JSON.stringify({pass:true,assertions:n,tool_count:v.tool_count,memory_layers:v.memory_layers,intent_states:v.intent_states,platform_count:v.platform_count,checked:['intent anti-drift','runtime authority boundary','free-first routing','metered fallback','repo route remains available but cost-unknown connector is not forced first','native capability routes','fail-closed unavailable/unknown routes','memory layers','platform propagation boundaries','secret markers','baseline protection','explicit Android safe-core field-pending boundary','false Android field PASS rejection']},null,2));
