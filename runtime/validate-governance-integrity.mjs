@@ -69,6 +69,24 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
   assert(state.self_evolution?.bounded_completeness_dimensions === policy.bounded_completeness?.dimensions?.length, 'bounded completeness count drift');
   assert(state.self_evolution?.recursive_how_layers === policy.recursive_how?.layers?.length, 'recursive HOW count drift');
 
+  const loop = total.waw_lima_hayya_loop;
+  assert(loop && typeof loop === 'object', 'WAW-LIMA-HAYYA loop missing');
+  assert(loop.default === 'ALWAYS_ON_EVERY_INTERACTION_PROPORTIONATE', 'WAW-LIMA-HAYYA default must be always-on and proportionate');
+  assert(Array.isArray(loop.questions) && loop.questions.length === 6, 'WAW-LIMA-HAYYA must preserve six question stages');
+  const loopIds = ['Q1_WAW_REMAINDER','Q2_WAW_ALTERNATIVES','Q3_WAW_EFFECTS','Q4_LIMA_ROOT_CAUSE','Q5_WAW_NEXT_AND_PROOF','Q6_WAW_PERSISTENCE'];
+  assert(new Set(loop.questions.map(x => x.id)).size === 6, 'WAW-LIMA-HAYYA question ids must be unique');
+  for (const id of loopIds) assert(loop.questions.some(x => x.id === id), `WAW-LIMA-HAYYA question missing: ${id}`);
+  assert(JSON.stringify(loop.action_sequence) === JSON.stringify(['ADOPT_BEST_PROVEN_ROUTE','REPAIR_ROOT_CAUSE','COMPLETE_MATERIAL_SAFE_GAPS','HAYYA_EXECUTE_NOW']), 'WAW-LIMA-HAYYA action sequence drift');
+  assert(loop.interaction_rule?.includes('كل تفاعل'), 'WAW-LIMA-HAYYA every-interaction rule missing');
+  assert(loop.interaction_rule?.includes('دورة واحدة خفيفة'), 'WAW-LIMA-HAYYA proportional lightweight pass missing');
+  assert(loop.recursion_rule?.includes('انعدام المكسب المادي'), 'WAW-LIMA-HAYYA convergence stop rule missing');
+  assert(loop.failure_rule?.includes('لا تُعده بلا تغيير سببي'), 'WAW-LIMA-HAYYA failed-route causal-change guard missing');
+  assert(loop.authority_rule?.includes('لا توسع'), 'WAW-LIMA-HAYYA authority boundary missing');
+  assert(loop.visibility_rule?.includes('التفكير الداخلي الخام'), 'WAW-LIMA-HAYYA chain-of-thought visibility boundary missing');
+  assert(total.operating_rule?.includes('For every interaction'), 'total leadership does not invoke WAW-LIMA-HAYYA for every interaction');
+  assert(total.interaction_with_wisdom_and_innovation?.order?.includes('WAW_LIMA_HAYYA'), 'WAW-LIMA-HAYYA not wired into governing order');
+  assert(total.persistence?.automation?.includes('WAW-LIMA-HAYYA'), 'WAW-LIMA-HAYYA automation persistence binding missing');
+
   const invariantPairs = [
     ['ALL_EIGHT_MATERIAL_RELEVANT_SCOPE_MUST_BE_ACCOUNTED_FOR', 'APPLY_ALL_EIGHT_SCOPE'],
     ['HOW_SEVEN_GOVERNS_MATERIAL_EXECUTION_METHOD', 'APPLY_HOW_SEVEN'],
@@ -121,6 +139,8 @@ export function validateGovernanceIntegrity(g = loadGovernance()) {
     policy_version: policy.version,
     all_eight: total.all_eight.length,
     how_seven: total.how_seven.length,
+    waw_lima_hayya_questions: loop.questions.length,
+    waw_lima_hayya_actions: loop.action_sequence.length,
     wisdom_gates: wisdom.seven_gates.length,
     innovation_lenses: innovation.seven_lenses.length,
     completeness_dimensions: policy.bounded_completeness.dimensions.length,
