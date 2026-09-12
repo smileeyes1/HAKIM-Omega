@@ -9,11 +9,13 @@ const missionClientPath = 'android-hakim/app/src/main/java/ps/hakim/omega/Missio
 const activityPath = 'android-hakim/app/src/main/java/ps/hakim/omega/MainActivity.java';
 const servicePath = 'android-hakim/app/src/main/java/ps/hakim/omega/HakimAccessibilityService.java';
 const accessPath = 'android-hakim/app/src/main/res/xml/accessibility_service_config.xml';
+const buildPath = 'android-hakim/app/build.gradle';
 
 const manifest = read(manifestPath);
 const policy = read(policyPath);
 const missionClient = read(missionClientPath);
 const activity = read(activityPath);
+const build = read(buildPath);
 const relay = read('mobile-agent/hakim-android-report-relay.user.js');
 const mission = JSON.parse(read('hakim/HAKIM_ANDROID_MISSION.json'));
 
@@ -22,9 +24,14 @@ assert(/android:usesCleartextTraffic="false"/.test(manifest), 'cleartext traffic
 assert(/android\.permission\.INTERNET/.test(manifest), 'internet permission missing');
 assert(!/READ_CONTACTS|READ_SMS|RECORD_AUDIO|CAMERA|ACCESS_FINE_LOCATION|MANAGE_EXTERNAL_STORAGE/.test(manifest), 'unexpected dangerous permission');
 assert(!/BIND_ACCESSIBILITY_SERVICE|AccessibilityService/.test(manifest), 'safe core must not expose accessibility service');
+assert(/android:label="حكيم الآمن"/.test(manifest), 'safe-core app label drifted');
 assert(!fs.existsSync(servicePath), 'accessibility service source must be absent from safe core');
 assert(!fs.existsSync(accessPath), 'accessibility configuration must be absent from safe core');
 
+assert(/applicationId 'ps\.hakim\.safe'/.test(build), 'safe-core package identity drifted');
+assert(/versionCode 2/.test(build), 'safe-core versionCode drifted');
+assert(/versionName '0\.2\.0'/.test(build), 'safe-core Gradle version drifted');
+assert(/APP_VERSION = "٠٫٢٫٠"/.test(policy), 'policy/app version drifted');
 assert(/SAFE_CORE_NO_ACCESSIBILITY/.test(policy), 'safe-core mode missing');
 assert(/"FREE", "INCLUDED"/.test(policy), 'free/included cost allowlist missing');
 assert(!/ALLOWED_COST[^\n]*METERED/.test(policy), 'metered cost became auto-allowed');
@@ -57,9 +64,9 @@ assert(/hakim_android_result/.test(relay), 'Android relay fragment binding missi
 assert(/SOURCE_BLOCKED/.test(relay) && /REPORT_SECRET_BLOCKED/.test(relay), 'relay fail-closed validation missing');
 assert(/HAKIM_ANDROID_RESULT/.test(relay), 'relay evidence marker missing');
 
-const all = [manifest, policy, missionClient, activity, relay, JSON.stringify(mission)].join('\n').toLowerCase();
+const all = [manifest, build, policy, missionClient, activity, relay, JSON.stringify(mission)].join('\n').toLowerCase();
 for (const marker of ['password=', 'api_key=', 'authorization: bearer ', 'session_cookie=', 'recovery_code=', 'hook.eu1.make.com/', 'ntfy.sh/hakim-cmd-']) {
   assert(!all.includes(marker), `possible secret/private endpoint persisted: ${marker}`);
 }
 
-console.log(JSON.stringify({pass:true, gate:'HAKIM_ANDROID_SAFE_CORE_FAIL_CLOSED', mode:'NO_ACCESSIBILITY', mission:mission.mission_id, actions:mission.actions.length}, null, 2));
+console.log(JSON.stringify({pass:true, gate:'HAKIM_ANDROID_SAFE_CORE_FAIL_CLOSED', mode:'NO_ACCESSIBILITY', package:'ps.hakim.safe.debug', version:'0.2.0-debug', mission:mission.mission_id, actions:mission.actions.length}, null, 2));
