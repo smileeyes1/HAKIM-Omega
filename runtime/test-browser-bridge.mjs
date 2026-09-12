@@ -37,6 +37,10 @@ if(mission.enabled){
   assert.ok(mission.actions.length>0);
   assert.ok(Date.parse(mission.expires_at)>Date.parse(mission.created_at));
   for(const h of mission.allowed_hosts||[]) assert.ok(policy.allowed_hosts.includes(h),`active mission host not allowed: ${h}`);
+}else if(mission.completed_by_evidence){
+  assert.notEqual(mission.mission_id,'IDLE');
+  assert.ok(mission.actions.length>0);
+  assert.equal(mission.completed_by_evidence,'hakim/FIELD_BRIDGE_EVIDENCE.json');
 }else{
   assert.ok(mission.mission_id==='IDLE'||mission.actions.length===0);
 }
@@ -45,4 +49,4 @@ const metas=[...script.matchAll(/^\/\/ @match\s+https:\/\/([^/]+)\//gm)].map(x=>
 for(const host of metas) assert.ok(policy.allowed_hosts.includes(host),`metadata host not in policy: ${host}`);
 for(const token of policy.forbidden_field_tokens) assert.ok(script.includes(token),`secret token not embedded in runtime guard: ${token}`);
 
-console.log(JSON.stringify({pass:true,assertions:30,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':'IDLE_FAIL_SAFE'},null,2));
+console.log(JSON.stringify({pass:true,assertions:30,metadata_hosts:metas.length,policy_hosts:policy.allowed_hosts.length,remote_mission:mission.enabled?'ACTIVE_SCHEMA_VALID':mission.completed_by_evidence?'COMPLETED_EVIDENCE_BOUND':'IDLE_FAIL_SAFE'},null,2));
