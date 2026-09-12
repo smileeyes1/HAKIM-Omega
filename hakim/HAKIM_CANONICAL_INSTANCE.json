@@ -26,7 +26,17 @@
     "state": "FIELD_BINDING_PENDING",
     "field_pass": false,
     "proof_required": "request-bound evidence from the original Hakim on the actual phone",
-    "ci_or_send_is_not_field_proof": true
+    "ci_or_send_is_not_field_proof": true,
+    "latest_phone_observation": {
+      "observed_at_local": "2026-09-12T06:55:00+03:00",
+      "source": "USER_SUPPLIED_SCREENSHOT_OF_ORIGINAL_HAKIM",
+      "app_visible": true,
+      "status_text": "حكيم يعمل — جار الاتصال",
+      "window_permissions": "5/5",
+      "connection_state": "CONNECTING_NOT_FIELD_PASS",
+      "field_classification": "PARTIAL_FIELD_OBSERVED",
+      "privacy": "SANITIZED_NO_SECRET_NO_REQUEST_ID_STORED"
+    }
   },
   "protected_boundaries": [
     "NO_NEW_PERMISSIONS_FROM_IDENTITY_BINDING",
