@@ -16,22 +16,30 @@ function expectReject(name, mutate) {
 }
 
 assert.equal(validateCanonicalInstance(base).pass, true);
+expectReject('schema downgraded', d => { d.schema_version = 1; });
 expectReject('single instance disabled', d => { d.single_instance = false; });
 expectReject('canonical id replaced', d => { d.canonical_instance_id = 'HAKIM_REPLACEMENT'; });
 expectReject('frontend replaced', d => { d.frontend.kind = 'NEW_AGENT'; });
+expectReject('package changed', d => { d.frontend.package = 'ps.hakim.clone'; });
 expectReject('replacement allowed', d => { d.frontend.replacement_allowed = true; });
 expectReject('clone allowed', d => { d.frontend.clone_allowed = true; });
 expectReject('parallel Hakim allowed', d => { d.frontend.parallel_hakim_allowed = true; });
+expectReject('signer fingerprint removed', d => { delete d.field_signing_identity.certificate_sha256; });
+expectReject('wrong signer guard disabled', d => { d.field_signing_identity.wrong_signer_fail_closed = false; });
+expectReject('private key public repo guard disabled', d => { d.field_signing_identity.do_not_store_private_key_in_public_repo = false; });
 expectReject('repo promoted to frontend', d => { d.support_components.find(x => x.id === 'smileeyes1/HAKIM-Omega').role = 'CANONICAL_FRONTEND'; });
+expectReject('companion promoted from reference', d => { d.support_components.find(x => x.id === 'smileeyes1/SovereignAssistant/android/hakim-companion').role = 'BACKEND_ONLY'; });
 expectReject('support component promoted to parallel frontend', d => { d.support_components[1].role = 'FRONTEND_PARALLEL'; });
 expectReject('false field pass state', d => { d.field_binding.state = 'FIELD_PASS'; d.field_binding.field_pass = false; });
 expectReject('field pass without evidence', d => { d.field_binding.state = 'FIELD_PASS'; d.field_binding.field_pass = true; delete d.field_binding.evidence_id; });
 expectReject('CI treated as field proof', d => { d.field_binding.ci_or_send_is_not_field_proof = false; });
 expectReject('parallel identity guard removed', d => { d.protected_boundaries = d.protected_boundaries.filter(x => x !== 'NO_PARALLEL_HAKIM_IDENTITY'); });
 expectReject('field claim guard removed', d => { d.protected_boundaries = d.protected_boundaries.filter(x => x !== 'NO_FALSE_FIELD_CLAIMS'); });
+expectReject('wrong signer boundary removed', d => { d.protected_boundaries = d.protected_boundaries.filter(x => x !== 'NO_WRONG_SIGNER_FOR_PS_HAKIM_STABLE'); });
+expectReject('silent uninstall boundary removed', d => { d.protected_boundaries = d.protected_boundaries.filter(x => x !== 'NO_UNINSTALL_OR_CLEAR_DATA_AS_SILENT_SIGNING_WORKAROUND'); });
 
 if (failures.length) {
   console.error(JSON.stringify({pass:false,unexpected_accepts:failures}, null, 2));
   process.exit(1);
 }
-console.log(JSON.stringify({pass:true,baseline_accepts:1,mutation_rejections:13}, null, 2));
+console.log(JSON.stringify({pass:true,baseline_accepts:1,mutation_rejections:21}, null, 2));
