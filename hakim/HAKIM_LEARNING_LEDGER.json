@@ -1,0 +1,50 @@
+{
+  "ledger_id": "HAKIM_LEARNING_LEDGER",
+  "version": "1.0.0",
+  "updated_at": "2026-09-12T06:03:00+03:00",
+  "entries": [
+    {
+      "id": "L-20260912-001",
+      "kind": "FAILURE_LESSON",
+      "observation": "A registered Remote Desktop Commander endpoint can exist while being offline.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "runtime device probe",
+      "root_cause": "device endpoint not currently connected",
+      "lesson": "Do not block host-executable work on an offline device route.",
+      "guard": "Probe device reachability before routing local terminal work and fall back without changing the goal.",
+      "scope": "device execution routing"
+    },
+    {
+      "id": "L-20260912-002",
+      "kind": "FAILURE_LESSON",
+      "observation": "A successful Make/HTTP send proves transport delivery from the host side but not execution on the phone.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "Make execution plus receiver inspection",
+      "root_cause": "transport acknowledgment is weaker than end-to-end runtime evidence",
+      "lesson": "Separate SEND_PASS from PHONE_EXECUTION_PASS.",
+      "guard": "Require request-bound phone return evidence before promoting phone execution state.",
+      "scope": "phone command transport"
+    },
+    {
+      "id": "L-20260912-003",
+      "kind": "SUCCESS_PATTERN",
+      "observation": "The host control plane and newly added phone-control policy passed repository CI while preserving existing baselines.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "GitHub Actions success on gated control-plane head",
+      "lesson": "Extend around frozen proven baselines and bind new behavior to independent regression gates instead of rewriting trusted core state.",
+      "guard": "Require regression coverage for every new control layer.",
+      "scope": "control-plane evolution"
+    },
+    {
+      "id": "L-20260912-004",
+      "kind": "FAILURE_LESSON",
+      "observation": "A repository write can be blocked by a safety gate even when the intended improvement is otherwise valid.",
+      "status": "PROVEN_THIS_SESSION",
+      "evidence": "blocked create-file attempt",
+      "root_cause": "write action could not be safety-classified",
+      "lesson": "Preserve the last verified state and change the implementation path rather than retrying the same blocked mutation blindly.",
+      "guard": "On mutation block, freeze trusted state, isolate the missing value, then use a causally different safe path.",
+      "scope": "self-modification workflow"
+    }
+  ]
+}
