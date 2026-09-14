@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
   "enabled": true,
-  "mission_id": "FIELD_SMOKE_PHONE_BRIDGE_2026_09_12_A",
-  "created_at": "2026-09-12T02:20:00+03:00",
-  "expires_at": "2026-09-13T02:20:00+03:00",
+  "mission_id": "FIELD_SMOKE_PHONE_BRIDGE_2026_09_15_A",
+  "created_at": "2026-09-15T01:24:00+03:00",
+  "expires_at": "2026-09-17T03:00:00+03:00",
   "data_classification": "PUBLIC",
   "goal": "Prove the free Hakim local-browser roundtrip on the user's phone without accessing private data.",
   "requires_local_confirmation": false,
