@@ -1,0 +1,32 @@
+{
+  "status_id": "HAKIM_FIELD_BRIDGE_STATUS",
+  "updated_at": "2026-09-15T06:04:00+03:00",
+  "status": "FIELD_PARTIAL_NOT_YET_PASS",
+  "current_mission_id": "FIELD_SMOKE_PHONE_BRIDGE_2026_09_15_A",
+  "browser_bridge_version": "0.1.4",
+  "host_gates": "PENDING_CURRENT_HEAD_VALIDATION",
+  "actual_phone_roundtrip": "NOT_OBSERVED_YET",
+  "github_relay_result": "NO_HAKIM_BRIDGE_RESULT_OBSERVED",
+  "remote_desktop_commander": "NO_DEVICE_AVAILABLE_2026_09_15",
+  "make_return_channel": {
+    "state": "RECEIVER_ACTIVE_PREVIOUSLY_OBSERVED",
+    "latest_observed_delivery_at": "2026-09-13T14:41:37.775Z",
+    "latest_observed_supervisor_state": "adb_offline",
+    "previous_observed_supervisor_state": "adb_device",
+    "claim_limit": "Return-path observations do not prove current phone execution."
+  },
+  "security": {
+    "legacy_public_senders": "KEEP_INACTIVE",
+    "secret_autofill": "BLOCKED",
+    "high_impact_actions": "LOCAL_CONFIRMATION_REQUIRED",
+    "manual_stop": "PRESERVED"
+  },
+  "improvement_now": {
+    "first_run_auto_arm": true,
+    "foreground_focus_poll": true,
+    "visibility_resume_poll": true,
+    "hourly_low_resource_heartbeat": true,
+    "dense_background_polling": false
+  },
+  "release_rule": "Do not mark FIELD_PASS until a sanitized request-bound result from the actual phone is observed."
+}
