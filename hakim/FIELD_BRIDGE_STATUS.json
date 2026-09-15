@@ -1,10 +1,15 @@
 {
   "status_id": "HAKIM_FIELD_BRIDGE_STATUS",
-  "updated_at": "2026-09-15T06:04:00+03:00",
-  "status": "FIELD_PARTIAL_NOT_YET_PASS",
+  "updated_at": "2026-09-15T06:05:00+03:00",
+  "status": "HOST_PASS_FIELD_PARTIAL_NOT_YET_PASS",
   "current_mission_id": "FIELD_SMOKE_PHONE_BRIDGE_2026_09_15_A",
   "browser_bridge_version": "0.1.4",
-  "host_gates": "PENDING_CURRENT_HEAD_VALIDATION",
+  "host_gates": {
+    "status": "PASS",
+    "control_plane_run": 34923506510,
+    "omega_dna_run": 34923506595,
+    "head_sha": "980994d6065e17f84e2c45d1a9aa0e6e8e401fcf"
+  },
   "actual_phone_roundtrip": "NOT_OBSERVED_YET",
   "github_relay_result": "NO_HAKIM_BRIDGE_RESULT_OBSERVED",
   "remote_desktop_commander": "NO_DEVICE_AVAILABLE_2026_09_15",
