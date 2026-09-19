@@ -1,0 +1,77 @@
+{
+  "policy_id": "PALESTINIAN_ARABIC_STUDENT_WORKSPACE_V1",
+  "policy_version": "1.0.0",
+  "status": "FROZEN_DEFAULT",
+  "scope": "student_facing_arabic_materials_when_profile_palestinian_arabic_student_applies",
+  "authority": "student_eye_actual_delivered_output",
+  "directionality": {
+    "document": "RTL_NATIVE",
+    "first_visual_element": "RIGHT",
+    "tables_and_grids": "RIGHT_TO_LEFT",
+    "eastern_arabic_digits_student_facing": true,
+    "math_rule": "semantic_order_must_match_student_eye",
+    "example": "٤ + ٣ = □"
+  },
+  "workspace": {
+    "protected_zone": true,
+    "zero_overlap": true,
+    "zero_unintended_touch": true,
+    "zero_clip": true,
+    "expand_pages_instead_of_compressing_workspace": true,
+    "minimum_clearance_mm": 3,
+    "classes": {
+      "single_digit_answer": {
+        "min_width_mm": 16,
+        "min_height_mm": 14
+      },
+      "expression_answer": {
+        "min_width_mm": 28,
+        "min_height_mm": 14
+      },
+      "short_written_answer": {
+        "min_width_mm": 55,
+        "min_height_mm": 20
+      },
+      "worked_solution": {
+        "min_width_mm": 120,
+        "min_height_mm": 30
+      }
+    }
+  },
+  "release_evidence_required": [
+    "ACTUAL_OUTPUT_VISUAL_CHECK",
+    "GEOMETRY_NO_OVERLAP",
+    "GEOMETRY_NO_UNINTENDED_TOUCH",
+    "GEOMETRY_NO_CLIP",
+    "MINIMUM_SIZE_PASS",
+    "CLEARANCE_PASS",
+    "RTL_NATIVE_PASS",
+    "EASTERN_DIGITS_PASS",
+    "KNOWN_FAILURE_INJECTION_DETECTED",
+    "TESTED_ARTIFACT_EQUALS_DELIVERED"
+  ],
+  "failure_codes": [
+    "STUDENT_WORKSPACE_EVIDENCE_MISSING",
+    "STUDENT_WORKSPACE_OVERLAP",
+    "STUDENT_WORKSPACE_TOUCH",
+    "STUDENT_WORKSPACE_CLIP",
+    "STUDENT_WORKSPACE_TOO_SMALL",
+    "STUDENT_WORKSPACE_CLEARANCE_FAIL",
+    "STUDENT_WORKSPACE_RTL_FAIL",
+    "STUDENT_WORKSPACE_DIGITS_FAIL",
+    "STUDENT_WORKSPACE_KNOWN_FAILURE_NOT_DETECTED",
+    "STUDENT_WORKSPACE_ACTUAL_OUTPUT_NOT_TESTED"
+  ],
+  "change_control": {
+    "default": "FROZEN",
+    "regression_policy": "NO_REGRESSION",
+    "modification_requires": [
+      "explicit_new_version",
+      "actual_output_retest",
+      "known_failure_injection",
+      "regression_pass",
+      "new_sha256"
+    ],
+    "previous_proven_success_remains_recoverable": true
+  }
+}
