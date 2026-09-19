@@ -14,6 +14,14 @@ if (actualGenomeHash !== expectedGenomeHash) failures.push('GENOME_HASH_MISMATCH
 if (genome.genome_id !== 'OMEGA_INHERITABLE_ASSURANCE_DNA') failures.push('GENOME_ID_INVALID');
 if (genome.inheritance?.mode !== 'fail_closed') failures.push('DNA_NOT_FAIL_CLOSED');
 if (!Array.isArray(genome.protected_invariants) || genome.protected_invariants.length < 5) failures.push('PROTECTED_INVARIANTS_INCOMPLETE');
+const mono=genome.profiles?.monotonic_upgrade;
+if(!mono?.policy_ref||!fs.existsSync(path.join(root,mono.policy_ref))){
+  failures.push('MONOTONIC_POLICY_MISSING');
+}else{
+  const p=fs.readFileSync(path.join(root,mono.policy_ref));
+  const ph=crypto.createHash('sha256').update(p).digest('hex');
+  if(ph!==mono.policy_sha256) failures.push('MONOTONIC_POLICY_HASH_MISMATCH');
+}
 
 function walk(dir) {
   let out = [];
@@ -50,4 +58,4 @@ if (failures.length) {
   console.error(JSON.stringify({status:'NO_GO', failures, genome_sha256:actualGenomeHash, sidecars:sidecars.length}, null, 2));
   process.exit(1);
 }
-console.log(JSON.stringify({status:'PASS', genome_sha256:actualGenomeHash, sidecars:sidecars.length}, null, 2));
+console.log(JSON.stringify({status:'PASS', genome_sha256:actualGenomeHash, sidecars:sidecars.length, monotonic_policy_sha256:mono.policy_sha256}, null, 2));
