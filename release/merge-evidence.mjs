@@ -8,6 +8,10 @@ if(!Array.isArray(e.evidence_ids)||e.evidence_ids.length===0) throw new Error('M
 if(e.tested_artifact_sha256!==s.artifact_sha256) throw new Error('TESTED_DELIVERED_MISMATCH');
 const forbidden=new Set(['PHYSICAL_ANDROID_QUALIFIED','PHYSICAL_PRINTER_QUALIFIED','HARDWARE_BACKED_TRUST','ORGANIZATIONALLY_INDEPENDENT_IVV','FIELD_PROVEN','AVIATION_NUCLEAR_EQUIVALENT','ZERO_DEFECT']);
 for(const c of (e.claims||[])) if(forbidden.has(c)&&e.scope!=='FIELD_AS_PROVEN') throw new Error('UNSUPPORTED_HIGH_CLAIM:'+c);
+if((s.applied_profiles||[]).includes('monotonic_upgrade')){
+  if(!e.change_assurance) throw new Error('MONOTONIC_CHANGE_ASSURANCE_MISSING');
+  s.change_assurance=e.change_assurance;
+}
 s.evidence_refs=e.evidence_ids;
 s.gate.result='PASS';
 s.gate.scope=e.scope||'HOST_ONLY';

@@ -1,0 +1,104 @@
+{
+  "policy_id": "OMEGA_MONOTONIC_IMPACT_ASSURANCE_V1",
+  "policy_version": "1.0.0",
+  "status": "FROZEN_DEFAULT",
+  "purpose": "Preserve proven success while revalidating only the smallest sufficient impact scope before promotion.",
+  "core_law": "WHOLE_PASS_IS_NOT_INHERITED; EVIDENCE_MAY_BE_REUSED_ONLY_WHEN_ITS_SCOPE_IS_PROVEN_UNAFFECTED.",
+  "states": [
+    "PROVEN_BASELINE",
+    "CANDIDATE_UNPROVEN",
+    "NO_GO",
+    "PROMOTABLE",
+    "PROMOTED_FROZEN"
+  ],
+  "rules": {
+    "baseline_must_remain_recoverable": true,
+    "baseline_hash_must_be_pinned": true,
+    "change_descriptor_must_be_hashed": true,
+    "impact_analysis_must_be_complete": true,
+    "unknown_impact_remaining": "NO_GO",
+    "direct_changes_expand_to_transitive_impact_closure": true,
+    "evidence_for_impacted_invariants": "INVALIDATE_UNTIL_REPROVEN",
+    "evidence_for_proven_unaffected_invariants": "PRESERVE_WITH_BASELINE_AND_SCOPE_BINDING",
+    "minimum_sufficient_testing": true,
+    "regression_closure_required": true,
+    "known_failure_injection_required_when_verifier_or_guard_changes": true,
+    "promotion_requires_all_impacted_invariants_covered_by_passed_tests": true,
+    "promotion_requires_no_protected_invariant_regression": true,
+    "promotion_never_deletes_previous_baseline": true
+  },
+  "impact_domains": {
+    "content_semantics": [
+      "curriculum",
+      "language",
+      "math_semantics"
+    ],
+    "layout_geometry": [
+      "student_eye",
+      "overlap",
+      "touch",
+      "clip",
+      "workspace",
+      "print_layout"
+    ],
+    "font_typography": [
+      "layout_geometry",
+      "clip",
+      "bidi_rendering"
+    ],
+    "rtl_directionality": [
+      "language",
+      "table_order",
+      "math_display",
+      "bidi_rendering"
+    ],
+    "math_representation": [
+      "math_semantics",
+      "math_display",
+      "student_eye"
+    ],
+    "renderer_or_pdf_engine": [
+      "layout_geometry",
+      "font_typography",
+      "rtl_directionality",
+      "digits",
+      "print_layout"
+    ],
+    "verification_logic": [
+      "all_invariants_guarded_by_changed_verifier"
+    ]
+  },
+  "transition_evidence": {
+    "required_fields": [
+      "baseline_id",
+      "baseline_sha256",
+      "change_id",
+      "change_sha256",
+      "directly_changed_invariants",
+      "impacted_invariants",
+      "preserved_evidence",
+      "invalidated_evidence",
+      "required_tests",
+      "executed_tests",
+      "unknown_impact_remaining",
+      "regression_pass",
+      "no_protected_invariant_regressed",
+      "baseline_recoverable",
+      "impact_analysis_sha256",
+      "transition_evidence_sha256",
+      "promotion_decision"
+    ],
+    "promotion_decision": "PASS_ONLY_WHEN_ALL_GATES_PASS"
+  },
+  "change_control": {
+    "default": "FROZEN",
+    "policy_change_requires": [
+      "explicit_new_policy_version",
+      "dna_version_bump",
+      "policy_sha256_update",
+      "self_test_positive_and_negative",
+      "full_ci_pass",
+      "new_recovery_baseline"
+    ]
+  }
+}

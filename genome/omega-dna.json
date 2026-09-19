@@ -1,6 +1,6 @@
 {
   "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
-  "genome_version": "1.1.0",
+  "genome_version": "1.2.0",
   "status": "ACTIVE_HOST_DEFAULT",
   "authority": {
     "canonical_spec": "OMEGA_CANONICAL_GOVERNING_BASELINE_FREEZE_SPEC_v1",
@@ -17,7 +17,8 @@
     "require_applied_profiles": true,
     "require_gate_result": true,
     "unknown_or_unproven": "NO_RELEASE",
-    "field_claims_from_host_evidence": "FORBIDDEN"
+    "field_claims_from_host_evidence": "FORBIDDEN",
+    "successor_evidence_rule": "REUSE_ONLY_IF_SCOPE_PROVEN_UNAFFECTED"
   },
   "protected_invariants": [
     "PREVENT_FIRST",
@@ -31,6 +32,13 @@
     "PROMPT_COMPLIANCE_NOT_EXECUTABLE_ENFORCEMENT",
     "TESTED_ARTIFACT_EQUALS_DELIVERED_ARTIFACT",
     "NO_THEORETICAL_EXPANSION_WITHOUT_TRIGGER",
+    "MONOTONIC_ASSURANCE",
+    "IMPACT_SCOPED_REVALIDATION",
+    "UNAFFECTED_PROVEN_EVIDENCE_PRESERVED",
+    "AFFECTED_EVIDENCE_INVALIDATED_UNTIL_REPROVEN",
+    "UNKNOWN_IMPACT_FAILS_CLOSED",
+    "PROMOTION_REQUIRES_NO_REGRESSION",
+    "BASELINE_RECOVERABLE_BEFORE_PROMOTION",
     "STUDENT_WORKSPACE_PROTECTED_ZONE",
     "ZERO_STUDENT_WORKSPACE_OVERLAP",
     "ZERO_UNINTENDED_STUDENT_WORKSPACE_TOUCH",
@@ -40,6 +48,21 @@
     "KNOWN_FAILURE_MUST_BE_DETECTED_BEFORE_RELEASE"
   ],
   "profiles": {
+    "monotonic_upgrade": {
+      "activate_when_applicable": true,
+      "activation_rule": "artifact_replaces_supersedes_or_promotes_over_a_proven_baseline",
+      "policy_ref": "genome/monotonic-impact-assurance-policy.json",
+      "invariants": [
+        "MONOTONIC_ASSURANCE",
+        "IMPACT_SCOPED_REVALIDATION",
+        "UNAFFECTED_PROVEN_EVIDENCE_PRESERVED",
+        "AFFECTED_EVIDENCE_INVALIDATED_UNTIL_REPROVEN",
+        "UNKNOWN_IMPACT_FAILS_CLOSED",
+        "PROMOTION_REQUIRES_NO_REGRESSION",
+        "BASELINE_RECOVERABLE_BEFORE_PROMOTION"
+      ],
+      "policy_sha256": "6509b6d6f7bbf6729359b132282cbb4fcf898cc51dd1bfa6238b0a237eca050c"
+    },
     "palestinian_arabic_student": {
       "activate_when_applicable": true,
       "policy_ref": "genome/palestinian-student-workspace-policy.json",
@@ -59,7 +82,7 @@
       ]
     }
   },
-  "runtime_directive": "RECOVER_CANONICAL_AND_DNA -> LOCK_CONTRACT -> INHERIT_APPLICABLE_PROFILE -> EXECUTE_E2E -> VERIFY_ACTUAL_OUTPUT -> PROVE_STUDENT_WORKSPACE_GEOMETRY_WHEN_APPLICABLE -> INJECT_KNOWN_FAILURE -> ATTACH_LINEAGE_SIDECAR -> FAIL_CLOSED_ON_P0 -> RELEASE_WITH_EVIDENCE",
+  "runtime_directive": "RECOVER_CANONICAL_AND_DNA -> LOCK_CONTRACT -> PRESERVE_PROVEN_BASELINE -> CLASSIFY_CHANGE -> COMPUTE_IMPACT_CLOSURE -> REUSE_ONLY_UNAFFECTED_EVIDENCE -> INVALIDATE_AFFECTED_EVIDENCE -> RUN_MINIMUM_SUFFICIENT_IMPACT_TESTS -> RUN_REQUIRED_REGRESSION_CLOSURE -> INJECT_KNOWN_FAILURE_WHEN_GUARD_LOGIC_CHANGES -> VERIFY_ACTUAL_OUTPUT -> PROMOTE_ONLY_WITH_ZERO_UNKNOWN_P0_AND_NO_REGRESSION -> FREEZE_HASH_RECOVERY -> RELEASE_WITH_EVIDENCE",
   "claims_forbidden_without_specific_evidence": [
     "PHYSICAL_ANDROID_QUALIFIED",
     "PHYSICAL_PRINTER_QUALIFIED",

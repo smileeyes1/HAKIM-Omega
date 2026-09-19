@@ -1,7 +1,7 @@
 const OMEGA_DNA = Object.freeze({
   genomeId: 'OMEGA_INHERITABLE_ASSURANCE_DNA',
-  genomeVersion: '1.1.0',
-  genomeSha256: 'aedbec1d0adb29863436283534e2cba7d581d6fc04ba431ea21690a888f0e70d',
+  genomeVersion: '1.2.0',
+  genomeSha256: 'f5a1385897686b232d13f9ee6713031badf637e1401cfdacd0dfc50b491cfddb',
   mainSignedHead: 'v0.8.0/sequence8',
   hostAssuranceHead: 'v0.9H.1',
   failClosed: true,
@@ -54,6 +54,37 @@ function omegaStampDriveFile(fileId, artifactId, parentId, appliedProfiles) {
   var folder = parents.hasNext() ? parents.next() : DriveApp.getRootFolder();
   var sidecar = folder.createFile(file.getName() + '.omega.json', JSON.stringify(lineage, null, 2), MimeType.PLAIN_TEXT);
   return {sidecarFileId: sidecar.getId(), lineage: lineage};
+}
+
+function omegaValidateMonotonicChange_(lineage) {
+  var failures = [];
+  var a = lineage && lineage.change_assurance;
+  var hex64 = /^[0-9a-f]{64}$/;
+  if (!a) return ['CHANGE_ASSURANCE_MISSING'];
+  if (a.policy_id !== 'OMEGA_MONOTONIC_IMPACT_ASSURANCE_V1' || a.policy_version !== '1.0.0') failures.push('CHANGE_ASSURANCE_POLICY_MISMATCH');
+  if (!a.baseline_id || !hex64.test(a.baseline_sha256 || '')) failures.push('BASELINE_BINDING_INVALID');
+  if (!a.change_id || !hex64.test(a.change_sha256 || '')) failures.push('CHANGE_BINDING_INVALID');
+  if (a.impact_analysis_complete !== true) failures.push('IMPACT_ANALYSIS_INCOMPLETE');
+  if (a.unknown_impact_remaining !== false) failures.push('UNKNOWN_IMPACT_REMAINING');
+  if (a.regression_pass !== true) failures.push('REGRESSION_NOT_PASS');
+  if (a.no_protected_invariant_regressed !== true) failures.push('PROTECTED_INVARIANT_REGRESSION');
+  if (a.baseline_recoverable !== true) failures.push('BASELINE_NOT_RECOVERABLE');
+  if (a.promotion_decision !== 'PASS') failures.push('PROMOTION_NOT_PASS');
+  var impacted = new Set(a.impacted_invariants || []);
+  (a.directly_changed_invariants || []).forEach(function(inv){ if (!impacted.has(inv)) failures.push('DIRECT_CHANGE_OUTSIDE_IMPACT_CLOSURE:' + inv); });
+  (a.preserved_evidence || []).forEach(function(p){
+    if (p.baseline_artifact_sha256 !== a.baseline_sha256) failures.push('PRESERVED_EVIDENCE_BASELINE_MISMATCH');
+    if (impacted.has(p.invariant)) failures.push('EVIDENCE_REUSE_ON_IMPACTED_INVARIANT:' + p.invariant);
+  });
+  var passed = new Set((a.executed_tests || []).filter(function(t){return t && t.result === 'PASS';}).map(function(t){return t.id;}));
+  var covered = new Set();
+  (a.required_tests || []).forEach(function(t){
+    if (!t || !t.id || !passed.has(t.id)) failures.push('REQUIRED_IMPACT_TEST_NOT_PASS:' + (t && t.id || 'MISSING'));
+    (t && t.covers || []).forEach(function(inv){covered.add(inv);});
+  });
+  impacted.forEach(function(inv){ if (!covered.has(inv)) failures.push('IMPACT_INVARIANT_UNCOVERED:' + inv); });
+  if (a.verification_logic_changed === true && a.known_failure_injection_detected !== true) failures.push('KNOWN_FAILURE_INJECTION_NOT_DETECTED');
+  return failures;
 }
 
 function omegaValidateLineageObject(lineage, expectedArtifactSha256) {

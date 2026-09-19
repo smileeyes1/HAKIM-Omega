@@ -5,8 +5,8 @@
   "artifact_type": "REPLACE_WITH_TYPE",
   "dna": {
     "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
-    "genome_version": "1.1.0",
-    "genome_sha256": "aedbec1d0adb29863436283534e2cba7d581d6fc04ba431ea21690a888f0e70d"
+    "genome_version": "1.2.0",
+    "genome_sha256": "f5a1385897686b232d13f9ee6713031badf637e1401cfdacd0dfc50b491cfddb"
   },
   "parent": {
     "kind": "contract_or_artifact",
@@ -20,6 +20,32 @@
     "result": "UNPROVEN",
     "scope": "HOST_ONLY_OR_FIELD_AS_PROVEN",
     "tested_equals_delivered": false
+  },
+  "change_assurance": {
+    "note": "Required when applied_profiles includes monotonic_upgrade.",
+    "policy_id": "OMEGA_MONOTONIC_IMPACT_ASSURANCE_V1",
+    "policy_version": "1.0.0",
+    "baseline_id": "REQUIRED_FOR_SUCCESSOR",
+    "baseline_sha256": "REPLACE_WITH_64_HEX_SHA256",
+    "change_id": "REQUIRED_FOR_SUCCESSOR",
+    "change_sha256": "REPLACE_WITH_64_HEX_SHA256",
+    "impact_analysis_complete": false,
+    "directly_changed_invariants": [],
+    "impacted_invariants": [],
+    "preserved_evidence": [],
+    "invalidated_evidence": [],
+    "required_tests": [],
+    "executed_tests": [],
+    "unknown_impact_remaining": true,
+    "regression_pass": false,
+    "no_protected_invariant_regressed": false,
+    "baseline_recoverable": false,
+    "impact_analysis_sha256": "REPLACE_WITH_64_HEX_SHA256",
+    "transition_evidence_sha256": "REPLACE_WITH_64_HEX_SHA256",
+    "test_scope_rationale_ref": "",
+    "verification_logic_changed": false,
+    "known_failure_injection_detected": false,
+    "promotion_decision": "UNPROVEN"
   },
   "student_workspace": {
     "note": "Required only when applied_profiles includes palestinian_arabic_student",
