@@ -5,8 +5,8 @@
   "artifact_type": "REPLACE_WITH_TYPE",
   "dna": {
     "genome_id": "OMEGA_INHERITABLE_ASSURANCE_DNA",
-    "genome_version": "1.0.0",
-    "genome_sha256": "1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312"
+    "genome_version": "1.1.0",
+    "genome_sha256": "aedbec1d0adb29863436283534e2cba7d581d6fc04ba431ea21690a888f0e70d"
   },
   "parent": {
     "kind": "contract_or_artifact",
@@ -20,6 +20,25 @@
     "result": "UNPROVEN",
     "scope": "HOST_ONLY_OR_FIELD_AS_PROVEN",
     "tested_equals_delivered": false
+  },
+  "student_workspace": {
+    "note": "Required only when applied_profiles includes palestinian_arabic_student",
+    "policy_id": "PALESTINIAN_ARABIC_STUDENT_WORKSPACE_V1",
+    "policy_version": "1.0.0",
+    "actual_output_tested": false,
+    "no_overlap": false,
+    "no_unintended_touch": false,
+    "no_clip": false,
+    "min_size_pass": false,
+    "clearance_pass": false,
+    "rtl_native": false,
+    "eastern_arabic_digits": false,
+    "known_failure_injection_detected": false,
+    "geometry_evidence_sha256": "REPLACE_WITH_64_HEX_SHA256",
+    "visual_evidence_refs": [],
+    "minimum_clearance_mm": 0,
+    "minimum_digit_box_width_mm": 0,
+    "minimum_digit_box_height_mm": 0
   },
   "claims": [],
   "limitations": []
