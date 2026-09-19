@@ -19,6 +19,8 @@ jobs:
         run: node runtime/validate-dna.mjs
       - name: Execute student workspace fail-closed self-test
         run: node gate/test-student-workspace-guard.mjs
+      - name: Execute monotonic impact assurance self-test
+        run: node gate/test-monotonic-impact-assurance.mjs
       - name: Verify Google / Apps Script / Gemini adapter inheritance
         run: node runtime/validate-google-adapter.mjs
       - name: Execute Google Project Bootstrap runtime qualification
