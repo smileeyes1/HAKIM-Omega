@@ -1,7 +1,7 @@
 const OMEGA_DNA = Object.freeze({
   genomeId: 'OMEGA_INHERITABLE_ASSURANCE_DNA',
-  genomeVersion: '1.0.0',
-  genomeSha256: '1e5dfdf7816bb83368b94a7c04e94833c0a27775417f638dcc4c4eeeb5bae312',
+  genomeVersion: '1.1.0',
+  genomeSha256: 'aedbec1d0adb29863436283534e2cba7d581d6fc04ba431ea21690a888f0e70d',
   mainSignedHead: 'v0.8.0/sequence8',
   hostAssuranceHead: 'v0.9H.1',
   failClosed: true,
