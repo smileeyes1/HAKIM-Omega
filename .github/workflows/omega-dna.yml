@@ -17,6 +17,8 @@ jobs:
           node-version: '22'
       - name: Verify Omega DNA and all lineage sidecars
         run: node runtime/validate-dna.mjs
+      - name: Execute student workspace fail-closed self-test
+        run: node gate/test-student-workspace-guard.mjs
       - name: Verify Google / Apps Script / Gemini adapter inheritance
         run: node runtime/validate-google-adapter.mjs
       - name: Execute Google Project Bootstrap runtime qualification

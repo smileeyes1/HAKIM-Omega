@@ -14,6 +14,7 @@ const genomeHash=crypto.createHash('sha256').update(genomeBytes).digest('hex');
 const artifactHash=crypto.createHash('sha256').update(fs.readFileSync(artifact)).digest('hex');
 const m=JSON.parse(fs.readFileSync(sidecar,'utf8'));
 const fail=[];
+const hex64=/^[0-9a-f]{64}$/;
 if(m.dna?.genome_id!==genome.genome_id) fail.push('GENOME_ID_MISMATCH');
 if(m.dna?.genome_version!==genome.genome_version) fail.push('GENOME_VERSION_MISMATCH');
 if(m.dna?.genome_sha256!==genomeHash) fail.push('GENOME_HASH_MISMATCH');
@@ -25,5 +26,28 @@ if(m.gate?.result!=='PASS') fail.push('GATE_NOT_PASS');
 if(m.gate?.tested_equals_delivered!==true) fail.push('TESTED_DELIVERED_NOT_PROVEN');
 const forbidden=new Set(genome.claims_forbidden_without_specific_evidence||[]);
 for(const c of (m.claims||[])) if(forbidden.has(c)&&m.gate?.scope!=='FIELD_AS_PROVEN') fail.push(`FORBIDDEN_CLAIM:${c}`);
+
+const studentProfile=Array.isArray(m.applied_profiles) && m.applied_profiles.includes('palestinian_arabic_student');
+if(studentProfile){
+  const w=m.student_workspace;
+  if(!w){
+    fail.push('STUDENT_WORKSPACE_EVIDENCE_MISSING');
+  } else {
+    if(w.policy_id!=='PALESTINIAN_ARABIC_STUDENT_WORKSPACE_V1' || w.policy_version!=='1.0.0') fail.push('STUDENT_WORKSPACE_POLICY_MISMATCH');
+    if(w.actual_output_tested!==true) fail.push('STUDENT_WORKSPACE_ACTUAL_OUTPUT_NOT_TESTED');
+    if(w.no_overlap!==true) fail.push('STUDENT_WORKSPACE_OVERLAP');
+    if(w.no_unintended_touch!==true) fail.push('STUDENT_WORKSPACE_TOUCH');
+    if(w.no_clip!==true) fail.push('STUDENT_WORKSPACE_CLIP');
+    if(w.min_size_pass!==true) fail.push('STUDENT_WORKSPACE_TOO_SMALL');
+    if(w.clearance_pass!==true) fail.push('STUDENT_WORKSPACE_CLEARANCE_FAIL');
+    if(w.rtl_native!==true) fail.push('STUDENT_WORKSPACE_RTL_FAIL');
+    if(w.eastern_arabic_digits!==true) fail.push('STUDENT_WORKSPACE_DIGITS_FAIL');
+    if(w.known_failure_injection_detected!==true) fail.push('STUDENT_WORKSPACE_KNOWN_FAILURE_NOT_DETECTED');
+    if(!hex64.test(w.geometry_evidence_sha256||'')) fail.push('STUDENT_WORKSPACE_GEOMETRY_EVIDENCE_INVALID');
+    if(!Array.isArray(w.visual_evidence_refs)||w.visual_evidence_refs.length===0) fail.push('STUDENT_WORKSPACE_VISUAL_EVIDENCE_MISSING');
+    if(Number(w.minimum_clearance_mm)<3) fail.push('STUDENT_WORKSPACE_CLEARANCE_FAIL');
+    if(Number(w.minimum_digit_box_width_mm)<16 || Number(w.minimum_digit_box_height_mm)<14) fail.push('STUDENT_WORKSPACE_TOO_SMALL');
+  }
+}
 if(fail.length){console.error(JSON.stringify({status:'NO_GO',failures:fail},null,2));process.exit(1)}
 console.log(JSON.stringify({status:'PASS',artifact_sha256:artifactHash,genome_sha256:genomeHash},null,2));
