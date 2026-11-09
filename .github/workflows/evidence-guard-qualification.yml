@@ -19,8 +19,11 @@ jobs:
           node --check gate/evidence-guard.mjs
           node --check gate/verify.mjs
           node --check gate/test-evidence-guard.mjs
+          node --check gate/test-evidence-guard-extra.mjs
       - name: Run evidence guard negative and positive tests
-        run: node gate/test-evidence-guard.mjs
+        run: |
+          node gate/test-evidence-guard.mjs
+          node gate/test-evidence-guard-extra.mjs
       - name: Run existing student workspace regression
         run: node gate/test-student-workspace-guard.mjs
       - name: Run existing DNA validation
