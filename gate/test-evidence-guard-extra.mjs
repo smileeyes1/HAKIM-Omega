@@ -19,5 +19,15 @@ try {
   fs.mkdirSync(path.join(root,'folder'));
   check('directory',{path:'folder',sha256:sha});
   check('bad digest',{path:'link',sha256:'bad'});
-  console.log('PASS',passed,'/ 3');
+  check('absolute path',{path:outside,sha256:sha});
+  check('backslash path',{path:'folder\\\\proof.txt',sha256:sha});
+  check('root path',{path:'.',sha256:sha});
+  check('empty path',{path:'',sha256:sha});
+  check('parent traversal',{path:'../outside',sha256:sha});
+  fs.mkdirSync(path.join(root,'nested'));
+  fs.writeFileSync(path.join(root,'nested','proof.txt'),'sensitive');
+  const ok=validateEvidence(root,[{path:'nested/proof.txt',sha256:sha}]);
+  if(ok.length) throw Error('nested valid evidence rejected: '+ok.join(','));
+  console.log('nested valid evidence accepted'); passed++;
+  console.log('PASS',passed,'/ 9');
 } finally { fs.rmSync(base,{recursive:true,force:true}); }
