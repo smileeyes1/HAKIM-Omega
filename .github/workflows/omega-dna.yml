@@ -17,6 +17,12 @@ jobs:
           node-version: '22'
       - name: Verify Omega DNA and all lineage sidecars
         run: node runtime/validate-dna.mjs
+      - name: Qualify evidence guard and malicious evidence cases
+        run: |
+          node --check gate/evidence-guard.mjs
+          node --check gate/verify.mjs
+          node gate/test-evidence-guard.mjs
+          node gate/test-evidence-guard-extra.mjs
       - name: Execute student workspace fail-closed self-test
         run: node gate/test-student-workspace-guard.mjs
       - name: Execute monotonic impact assurance self-test
