@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { validateEvidence } from './evidence-guard.mjs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
@@ -27,6 +28,18 @@ if(m.gate?.tested_equals_delivered!==true) fail.push('TESTED_DELIVERED_NOT_PROVE
 const forbidden=new Set(genome.claims_forbidden_without_specific_evidence||[]);
 for(const c of (m.claims||[])) if(forbidden.has(c)&&m.gate?.scope!=='FIELD_AS_PROVEN') fail.push(`FORBIDDEN_CLAIM:${c}`);
 
+// Optional evidence integrity manifest: verify bytes when a producer supplies hashes.
+// Existing sidecars remain compatible; absence is NOT proof of evidence integrity.
+if (m.evidence_integrity) {
+  if (typeof m.evidence_integrity.root !== 'string' || !m.evidence_integrity.root.trim()) {
+    fail.push('EVIDENCE_INTEGRITY_ROOT_MISSING');
+  } else {
+    try {
+      const evidenceRoot=path.resolve(path.dirname(sidecar),m.evidence_integrity.root);
+      fail.push(...validateEvidence(evidenceRoot,m.evidence_integrity.entries));
+    } catch { fail.push('EVIDENCE_INTEGRITY_CHECK_FAILED'); }
+  }
+}
 const monotonicProfile=Array.isArray(m.applied_profiles) && m.applied_profiles.includes('monotonic_upgrade');
 if(monotonicProfile){
   const a=m.change_assurance;

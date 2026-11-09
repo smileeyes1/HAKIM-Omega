@@ -1,0 +1,30 @@
+name: Evidence guard branch qualification
+on:
+  push:
+    branches:
+      - test/evidence-integrity-guard-20261109
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check syntax
+        run: |
+          node --check gate/evidence-guard.mjs
+          node --check gate/verify.mjs
+          node --check gate/test-evidence-guard.mjs
+          node --check gate/test-evidence-guard-extra.mjs
+      - name: Run evidence guard negative and positive tests
+        run: |
+          node gate/test-evidence-guard.mjs
+          node gate/test-evidence-guard-extra.mjs
+      - name: Run existing student workspace regression
+        run: node gate/test-student-workspace-guard.mjs
+      - name: Run existing DNA validation
+        run: node runtime/validate-dna.mjs
